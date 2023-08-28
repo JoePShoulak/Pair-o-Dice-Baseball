@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace FibDev
+namespace FibDev.Editor
 {
     public class GetSceneViewerPosition
     {
