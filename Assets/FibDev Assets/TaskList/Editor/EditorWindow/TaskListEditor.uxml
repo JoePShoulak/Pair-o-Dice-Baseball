@@ -1,0 +1,31 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/FibDev%20Assets/TaskList/Editor/EditorWindow/TaskListEditor.uss?fileID=7433441132597879392&amp;guid=0ee08980085c70d42b62536d6e92c279&amp;type=3#TaskListEditor" />
+    <uie:Toolbar name="toolbar">
+        <uie:ToolbarSearchField focusable="true" name="searchField" style="flex-grow: 1;" />
+        <uie:ToolbarToggle focusable="false" value="true" name="formatToggle" text="%" style="align-items: center; justify-content: center; width: auto; min-width: auto; flex-direction: row; flex-shrink: 0; flex-grow: 0;" />
+    </uie:Toolbar>
+    <ui:VisualElement name="loadingTasks" class="section" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-shrink: 1;">
+        <ui:Label tabindex="-1" text="Load Saved Tasks" display-tooltip-when-elided="true" name="loadTasksHeader" class="header" />
+        <uie:ObjectField label="Saved TaskList" name="savedTasksObjectField" type="FibDev.Tasks.TaskListSO, Assembly-CSharp-Editor" />
+        <ui:Button text="Load TaskList" display-tooltip-when-elided="true" name="loadTasksButton" class="bigButton" />
+    </ui:VisualElement>
+    <ui:VisualElement name="addingTasks" class="section" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0);">
+        <ui:Label tabindex="-1" text="Add New Task" display-tooltip-when-elided="true" name="addTasksHeader" class="header" />
+        <ui:VisualElement name="horizontalGroup" class="horizontalGroup">
+            <ui:TextField picking-mode="Ignore" value="New Task" name="taskText" style="flex-grow: 1; flex-shrink: 1;" />
+            <ui:Button text="Add" display-tooltip-when-elided="true" name="addTaskButton" style="background-color: rgb(52, 120, 65); height: 30px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="displayingTasks" class="section expandable" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: auto; -unity-text-outline-width: 0; -unity-text-outline-color: rgba(0, 0, 0, 0);">
+        <ui:Label tabindex="-1" text="Current Tasks" display-tooltip-when-elided="true" name="displayingTasksHeader" class="header" />
+        <ui:ScrollView name="taskList" style="flex-grow: 1; min-height: 250px; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; justify-content: flex-start; flex-basis: auto;" />
+        <ui:Button text="Save Progress" display-tooltip-when-elided="true" name="saveProgressButton" class="bigButton" />
+    </ui:VisualElement>
+    <ui:VisualElement name="trackingTasks" class="section" style="flex-shrink: 1;">
+        <ui:Label tabindex="-1" text="Tasks Progress" display-tooltip-when-elided="true" name="trackingTasksHeader" class="header" />
+        <ui:ProgressBar value="1" title="100%" name="taskProgressBar" high-value="1" style="flex-grow: 0; height: auto;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="notificationArea" class="section" style="flex-shrink: 1;">
+        <ui:Label tabindex="-1" display-tooltip-when-elided="true" name="notificationLabel" text="Load a TaskList to begin" style="-unity-text-align: upper-center; color: rgb(152, 152, 152);" />
+    </ui:VisualElement>
+</ui:UXML>

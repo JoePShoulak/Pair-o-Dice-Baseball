@@ -15,5 +15,10 @@ namespace FibDev.UI
 
             Instance = this;
         }
+
+        private void Start()
+        {
+            mainMenu.SetActive(true);
+        }
     }
 }
