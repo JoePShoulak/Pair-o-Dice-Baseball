@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using FibDev.Core;
+
 namespace FibDev.UI
 {
     public class MainMenuUI : MonoBehaviour

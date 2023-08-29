@@ -1,7 +1,8 @@
-using InnerDriveStudios.DiceCreator;
 using UnityEngine;
 
-namespace FibDev
+using InnerDriveStudios.DiceCreator;
+
+namespace FibDev.Dice
 {
     [RequireComponent(typeof(DieCollection))]
     public class RollProcessor : MonoBehaviour

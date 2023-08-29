@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FibDev
+namespace FibDev.Core
 {
     public class CameraMovement : MonoBehaviour
     {

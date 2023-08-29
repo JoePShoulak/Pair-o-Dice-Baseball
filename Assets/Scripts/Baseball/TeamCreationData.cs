@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FibDev
+namespace FibDev.Baseball
 {
     public struct TeamCreationData
     {
