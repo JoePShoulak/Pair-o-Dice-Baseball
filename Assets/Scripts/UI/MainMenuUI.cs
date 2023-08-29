@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FibDev.UI
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenuUI : MonoBehaviour
     {
         private CameraMovement cam; // Cached
         [SerializeField] private GameObject teamSelectUI;
