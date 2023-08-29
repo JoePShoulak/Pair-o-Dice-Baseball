@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static FibDev.Baseball.BaseballPlays;
 
 namespace FibDev.Baseball
 {
@@ -12,37 +13,18 @@ namespace FibDev.Baseball
             Visiting
         }
 
-        private enum BaseLocation
-        {
-            first,
-            second,
-            third,
-            home
-        }
-
-        [Serializable]
-        private struct Base
-        {
-            public BaseLocation location;
-            public bool runnerOn;
-
-            public Base(BaseLocation _location)
-            {
-                location = _location;
-                runnerOn = false;
-            }
-        }
-
         // Serialized for debugging
         [SerializeField] private int inning;
         [SerializeField] private Team battingTeam;
         [SerializeField] private int outs;
+        [SerializeField] private Bases bases;
+        [SerializeField] private int visitingScore;
+        [SerializeField] private int homeScore;
 
-        [SerializeField] private List<Base> bases = new()
+        public Bases GetBases()
         {
-            new Base(BaseLocation.first), new Base(BaseLocation.second),
-            new Base(BaseLocation.third), new Base(BaseLocation.home)
-        };
+            return bases;
+        }
 
         private void Start()
         {
@@ -54,11 +36,15 @@ namespace FibDev.Baseball
             battingTeam = Team.Visiting;
             inning = 1;
             outs = 0;
+            bases.Reset();
+            homeScore = 0;
+            visitingScore = 0;
         }
 
         private void AdvanceInning()
         {
             outs = 0;
+            bases.Reset();
 
             if (battingTeam == Team.Visiting)
             {
@@ -70,54 +56,72 @@ namespace FibDev.Baseball
             inning++;
         }
 
-        private BaseballEvent.Event RandomEvent()
+        private Play RandomPlay()
         {
-            var options = new List<BaseballEvent.Event> { BaseballEvent.Single, BaseballEvent.Strikeout };
+            var options = new List<Play> { Play.Single, Play.Strikeout };
 
             return options[new System.Random().Next(0, options.Count)];
         }
 
-        public void NextEvent()
+        public void NextPlay()
         {
-            Debug.Log(bEvent.name);
-            // LogEvent(bEvent);
-            // LogState();
-            
-            var bEvent = RandomEvent();
+            var bPlay = RandomPlay();
+            Debug.Log(bPlay.name);
+            // LogPlay(bPlay);
 
-            foreach (var bAction in bEvent.actions)
-            {
-                HandleAction(bAction);
-            }
-            
-            if (bEvent.type == BaseballEvent.EventType.Out)
+            foreach (var bAction in bPlay.actions) HandleAction(bAction);
+
+            if (bPlay.type == PlayType.Out)
             {
                 outs++;
                 if (outs >= 3) AdvanceInning();
             }
         }
 
-        private void HandleAction(BaseballAction.Action bAction)
+        private void HandleAction(BaseballPlays.Action bAction)
         {
-            switch (bA)
+            switch (bAction)
             {
-                
+                case BaseballPlays.Action.Baseman3rdRunsHome:
+                    if (!bases.third.runnerOn) break;
+                    bases.third.runnerOn = false;
+                    ScoreRun();
+                    break;
+                case BaseballPlays.Action.Baseman2ndRunsThird:
+                    if (!bases.second.runnerOn) break;
+                    bases.second.runnerOn = false;
+                    bases.third.runnerOn = true;
+                    break;
+                case BaseballPlays.Action.Baseman1stRunsSecond:
+                    if (!bases.first.runnerOn) break;
+                    bases.first.runnerOn = false;
+                    bases.second.runnerOn = true;
+                    break;
+                case BaseballPlays.Action.BatterRunsFirst:
+                    bases.first.runnerOn = true;
+                    break;
+                case BaseballPlays.Action.BatterHitBall:
+                    break;
+                case BaseballPlays.Action.BatterMissBall:
+                    break;
+                case BaseballPlays.Action.PitcherThrowStrike:
+                    break;
+                case BaseballPlays.Action.Cleanup:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(bAction), bAction, null);
             }
         }
 
-        private void LogEvent(BaseballEvent.Event _event)
+        private void ScoreRun()
         {
-            foreach (var bAction in _event.actions)
-            {
-                Debug.Log(bAction.description);
-            }
+            if (battingTeam == Team.Home) homeScore++;
+            else if (battingTeam == Team.Visiting) visitingScore++;
         }
 
-        private void LogState()
-        {
-            Debug.Log($"Batting Team: {battingTeam}");
-            Debug.Log($"Inning: {inning}");
-            Debug.Log($"Outs: {outs}");
-        }
+        // private void LogPlay(Play _event)
+        // {
+        //     foreach (var bAction in _event.actions) Debug.Log(bAction);
+        // }
     }
 }

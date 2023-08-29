@@ -14,7 +14,8 @@ namespace FibDev.Editor
 
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Reset State")) script.ResetState();
-            if (GUILayout.Button("Next Event")) script.NextEvent();
+            if (GUILayout.Button("Next Play")) script.NextPlay();
+            // if (GUILayout.Button("Debug")) Debug.Log(script.GetBases().first.runnerOn);
             GUILayout.EndHorizontal();
         }
     }
