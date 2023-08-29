@@ -4,11 +4,12 @@ namespace FibDev
 {
     public class CameraMovement : MonoBehaviour
     {
+        [SerializeField] private float lerpDuration = 2.0f;
+        [Header("Target Transforms")]
         public Transform start;
         public Transform stadium;
         public Transform dice;
         public Transform notebook;
-        [SerializeField] private float lerpDuration = 2.0f;
 
         private Vector3 lerpStartPos;
         private Quaternion lerpStartRot;

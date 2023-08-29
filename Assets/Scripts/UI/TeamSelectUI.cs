@@ -23,6 +23,8 @@ namespace FibDev.UI
 
             var selection = new List<TeamCreationData>() { homeData, visitingData };
             OnTeamsSelected?.Invoke(selection);
+
+            gameObject.SetActive(false);
         }
 
         private void LogTeamData(TeamCreationData data)

@@ -1,3 +1,4 @@
+using FibDev.UI;
 using UnityEngine;
 
 namespace FibDev
@@ -5,16 +6,20 @@ namespace FibDev
     public class Debugger : MonoBehaviour
     {
         [SerializeField] private CameraMovement cam;
-        [SerializeField] private GameObject MainMenuUI;
-        [SerializeField] private GameObject teamSelectUI;
+        private OverlayManager _overlay; // Cached
+
+        private void Start()
+        {
+            _overlay = OverlayManager.Instance;
+        }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 cam.LerpTo(cam.start, 2f);
-                MainMenuUI.SetActive(true);
-                teamSelectUI.SetActive(false);
+                _overlay.mainMenu.SetActive(true);
+                _overlay.teamSelect.SetActive(false);
             }
         }
     }

@@ -1563,11 +1563,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6742730311b923488eb18de78bf8713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lerpDuration: 2
   start: {fileID: 857908990}
   stadium: {fileID: 1275541828}
   dice: {fileID: 1000878495}
   notebook: {fileID: 1706047059}
-  lerpDuration: 2
 --- !u!4 &1000878495 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8866540636331363115, guid: bb0f0f0c52efa1d4eb485b4ddc616c36, type: 3}
@@ -1925,13 +1925,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 118221998}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 118222004}
+        m_TargetAssemblyTypeName: FibDev.UI.TeamSelect, Assembly-CSharp
+        m_MethodName: SelectTeams
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2005,8 +2005,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 963194229}
-  MainMenuUI: {fileID: 257733185}
-  teamSelectUI: {fileID: 118221998}
 --- !u!4 &1223679262
 Transform:
   m_ObjectHideFlags: 0
@@ -2171,6 +2169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1321178843}
+  - component: {fileID: 1321178844}
   m_Layer: 0
   m_Name: Overlay UI
   m_TagString: Untagged
@@ -2195,6 +2194,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1321178844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321178842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0477725e3d61c134a8ba9f835ce77f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenu: {fileID: 257733185}
+  teamSelect: {fileID: 118221998}
 --- !u!1 &1341913184
 GameObject:
   m_ObjectHideFlags: 0
