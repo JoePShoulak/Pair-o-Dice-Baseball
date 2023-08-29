@@ -22,7 +22,7 @@ namespace FibDev
 
         private int GetD100Roll(DieCollection dieCollection)
         {
-            return GetDieRoll(dieCollection, 0)*10 + GetDieRoll(dieCollection, 1);
+            return GetDieRoll(dieCollection, 0) + GetDieRoll(dieCollection, 1) * 10;
         }
 
         private void ProcessResult(ARollable pObj)
