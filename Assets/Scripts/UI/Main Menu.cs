@@ -12,7 +12,7 @@ namespace FibDev.UI
 
         public void Play()
         {
-            cam.LerpTo(cam.stadium, 2f);
+            cam.LerpTo(cam.dice, 2f);
             gameObject.SetActive(false);
         }
     }
