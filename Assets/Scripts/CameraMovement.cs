@@ -18,6 +18,8 @@ namespace FibDev
 
         private void Update()
         {
+            
+            
             if (target == null) return;
 
             var lerpTime = (Time.time - lerpStartTime) / lerpDuration;
