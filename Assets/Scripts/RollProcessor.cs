@@ -12,7 +12,7 @@ namespace FibDev
         {
             _dieCollection = GetComponent<DieCollection>();
 
-            _dieCollection.OnRollEnd += DieCollectionOnOnRollEnd;
+            _dieCollection.OnRollEnd += ProcessResult;
         }
 
         private int GetDieRoll(DieCollection dieCollection, int index)
@@ -25,7 +25,7 @@ namespace FibDev
             return GetDieRoll(dieCollection, 0)*10 + GetDieRoll(dieCollection, 1);
         }
 
-        private void DieCollectionOnOnRollEnd(ARollable pObj)
+        private void ProcessResult(ARollable pObj)
         {
             var result = GetD100Roll(_dieCollection);
             Debug.Log(result);

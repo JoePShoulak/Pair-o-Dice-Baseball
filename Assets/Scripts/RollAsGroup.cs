@@ -9,21 +9,7 @@ namespace FibDev
         private void Start()
         {
             var dieCollection = GetComponent<DieCollection>();
-
-            dieCollection.OnChildRollBegin += DieCollectionOnOnChildRollBegin;
-        }
-
-        private void DieCollectionOnOnChildRollBegin(DieCollection collection, ARollable rollable)
-        {
-            RollAllDiceInCollection(collection);
-        }
-
-        private void RollAllDiceInCollection(DieCollection collection)
-        {
-            foreach (var rollable in collection.GetComponentsInChildren<ARollable>())
-            {
-                if (!rollable.isRolling) rollable.Roll();
-            }
+            dieCollection.OnChildRollBegin += (collection, _) => collection.Roll();
         }
     }
 }

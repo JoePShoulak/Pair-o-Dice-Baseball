@@ -15,5 +15,11 @@ namespace FibDev.UI
             cam.LerpTo(cam.dice, 2f);
             gameObject.SetActive(false);
         }
+        
+        public void Scores()
+        {
+            cam.LerpTo(cam.notebook, 2f);
+            gameObject.SetActive(false);
+        }
     }
 }

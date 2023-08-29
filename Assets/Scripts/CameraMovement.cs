@@ -7,6 +7,7 @@ namespace FibDev
         public Transform start;
         public Transform stadium;
         public Transform dice;
+        public Transform notebook;
         [SerializeField] private float lerpDuration = 2.0f;
 
         private Vector3 lerpStartPos;
