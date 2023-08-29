@@ -19,8 +19,7 @@ namespace FibDev
 
         private void Start()
         {
-            transform.position = start.position;
-            transform.rotation = start.rotation;
+            MoveTo(start);
         }
 
         private void Update()
@@ -46,5 +45,11 @@ namespace FibDev
             lerpStartTime = Time.time;
             lerpDuration = duration;
         }
+
+        public void MoveTo(Transform _target)
+        {
+            transform.position = _target.position;
+            transform.rotation = _target.rotation;
+        } 
     }
 }
