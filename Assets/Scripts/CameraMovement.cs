@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace FibDev
@@ -16,10 +17,14 @@ namespace FibDev
         private float lerpStartTime;
         private Transform target;
 
+        private void Start()
+        {
+            transform.position = start.position;
+            transform.rotation = start.rotation;
+        }
+
         private void Update()
         {
-            
-            
             if (target == null) return;
 
             var lerpTime = (Time.time - lerpStartTime) / lerpDuration;
