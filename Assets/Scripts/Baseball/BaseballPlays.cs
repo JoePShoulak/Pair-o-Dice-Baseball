@@ -55,7 +55,6 @@ namespace FibDev.Baseball
                 .Add(BaseballAction.BatterRunsFirst)
                 .Build();
 
-            // TODO: Fully Implement
             public static readonly Play Error = new PlayBuilder()
                 .A(PlayType.Hit).Named("Error")
                 .BatterHitBall()
@@ -69,14 +68,12 @@ namespace FibDev.Baseball
                 .BatterMissesBall()
                 .Build();
 
-            // TODO: Fully Implement
             public static readonly Play FlyOut = new PlayBuilder()
                 .An(PlayType.Out).Named("Fly Out")
                 .BatterHitBall()
                 .Add(BaseballAction.FielderCatchesBall)
                 .Build();
 
-            // TODO: Fully Implement
             public static readonly Play FlyOutPlus = new PlayBuilder()
                 .An(PlayType.Out).Named("Fly Out Plus")
                 .BatterHitBall()
@@ -84,28 +81,24 @@ namespace FibDev.Baseball
                 .Add(BaseballAction.Baseman3rdRunsHome)
                 .Build();
 
-            // TODO: Fully Implement
             public static readonly Play PopOut = new PlayBuilder()
                 .An(PlayType.Out).Named("Pop Out")
                 .BatterHitBall()
                 .Add(BaseballAction.FielderCatchesBall)
                 .Build();
 
-            // TODO: Fully Implement
             public static readonly Play LineOut = new PlayBuilder()
                 .An(PlayType.Out).Named("Line Out")
                 .BatterHitBall()
                 .Add(BaseballAction.FielderCatchesBall)
                 .Build();
 
-            // TODO: Fully Implement
             public static readonly Play FoulOut = new PlayBuilder()
                 .An(PlayType.Out).Named("Foul Out")
                 .BatterHitBall()
                 .Add(BaseballAction.FielderCatchesBall)
                 .Build();
 
-            // TODO: Fully Implement
             public static readonly Play GroundOut = new PlayBuilder()
                 .An(PlayType.Out).Named("Ground Out")
                 .BatterHitBall()
@@ -114,8 +107,6 @@ namespace FibDev.Baseball
                 .BasemenAdvance(1, false)
                 .Build();
 
-
-            // TODO: Fully Implement
             public static readonly Play GroundOut2 = new PlayBuilder()
                 .An(PlayType.Out).Named("Ground Out")
                 .BatterHitBall()
@@ -125,7 +116,30 @@ namespace FibDev.Baseball
                 .BasemenAdvance(1, false)
                 .Build();
 
-            // TODO: Implement Walk & HitByPitch, GroundOut(2)
+            public static Play Random()
+            {
+                var options = new List<Play>
+                {
+                    Single,
+                    Double,
+                    Triple,
+                    HomeRun,
+                    Error,
+                    Walk,
+                    HitByPitch,
+
+                    StrikeOut,
+                    FlyOut,
+                    FlyOutPlus,
+                    PopOut,
+                    LineOut,
+                    FoulOut,
+                    GroundOut,
+                    GroundOut2
+                };
+
+                return options[new System.Random().Next(0, options.Count)];
+            }
         }
     }
 }

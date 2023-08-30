@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using static FibDev.Baseball.BaseballPlays;
 
@@ -21,13 +20,6 @@ namespace FibDev.Baseball
         [SerializeField] private int visitingScore;
         [SerializeField] private int homeScore;
         public bool gameEnded;
-        [SerializeField] private bool homeWon;
-        [SerializeField] private bool visitingWon;
-
-        public Bases GetBases()
-        {
-            return bases;
-        }
 
         private void Start()
         {
@@ -36,15 +28,15 @@ namespace FibDev.Baseball
 
         public void ResetState() // for debug
         {
+            bases.Reset();
             battingTeam = Team.Visiting;
+            
             inning = 1;
             outs = 0;
-            bases.Reset();
             homeScore = 0;
             visitingScore = 0;
+            
             gameEnded = false;
-            homeWon = false;
-            visitingWon = false;
         }
 
         private void AdvanceInning()
@@ -62,30 +54,9 @@ namespace FibDev.Baseball
             inning++;
         }
 
-        private Play RandomPlay()
-        {
-            var options = new List<Play>
-            {
-                Play.Single,
-                Play.Double,
-                Play.Triple,
-                Play.HomeRun,
-                Play.Error,
-
-                Play.StrikeOut,
-                Play.FlyOut,
-                Play.FlyOutPlus,
-                Play.PopOut,
-                Play.LineOut,
-                Play.FoulOut
-            };
-
-            return options[new System.Random().Next(0, options.Count)];
-        }
-
         public void NextPlay()
         {
-            var bPlay = RandomPlay();
+            var bPlay = Play.Random();
             Debug.Log(bPlay.name);
             // LogPlay(bPlay);
 
@@ -105,12 +76,12 @@ namespace FibDev.Baseball
             if (battingTeam == Team.Home && inning > 8 && homeScore > visitingScore)
             {
                 gameEnded = true;
-                homeWon = true;
+                Debug.Log("Home Won!");
             }
             else if (battingTeam == Team.Visiting && inning > 9 && visitingScore > homeScore)
             {
                 gameEnded = true;
-                visitingWon = true;
+                Debug.Log("Visiting Won!");
             }
         }
 
@@ -136,6 +107,7 @@ namespace FibDev.Baseball
                 case BaseballAction.BatterRunsFirst:
                     bases.first.runnerOn = true;
                     break;
+                // TODO: Need to implement alllllllll of this
                 case BaseballAction.BatterHitBall:
                     break;
                 case BaseballAction.BatterMissBall:
