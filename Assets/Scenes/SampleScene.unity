@@ -2664,20 +2664,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bab03494f842cb43bd29ef9ab4a73f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inning: 10
+  inning: 9
   battingTeam: 0
-  outs: 2
+  outs: 1
   bases:
     first:
-      runnerOn: 1
+      runnerOn: 0
     second:
-      runnerOn: 1
+      runnerOn: 0
     third:
-      runnerOn: 1
+      runnerOn: 0
     home:
       runnerOn: 0
-  visitingScore: 5
-  homeScore: 5
+  visitingScore: 16
+  homeScore: 17
+  gameEnded: 1
 --- !u!4 &1674934044
 Transform:
   m_ObjectHideFlags: 0
