@@ -20,6 +20,9 @@ namespace FibDev.Baseball
         [SerializeField] private Bases bases;
         [SerializeField] private int visitingScore;
         [SerializeField] private int homeScore;
+        public bool gameEnded;
+        [SerializeField] private bool homeWon;
+        [SerializeField] private bool visitingWon;
 
         public Bases GetBases()
         {
@@ -39,6 +42,9 @@ namespace FibDev.Baseball
             bases.Reset();
             homeScore = 0;
             visitingScore = 0;
+            gameEnded = false;
+            homeWon = false;
+            visitingWon = false;
         }
 
         private void AdvanceInning()
@@ -58,7 +64,21 @@ namespace FibDev.Baseball
 
         private Play RandomPlay()
         {
-            var options = new List<Play> { Play.Single, Play.Strikeout };
+            var options = new List<Play>
+            {
+                Play.Single,
+                Play.Double,
+                Play.Triple,
+                Play.HomeRun,
+                Play.Error,
+
+                Play.StrikeOut,
+                Play.FlyOut,
+                Play.FlyOutPlus,
+                Play.PopOut,
+                Play.LineOut,
+                Play.FoulOut
+            };
 
             return options[new System.Random().Next(0, options.Count)];
         }
@@ -76,37 +96,69 @@ namespace FibDev.Baseball
                 outs++;
                 if (outs >= 3) AdvanceInning();
             }
+
+            CheckForGameEnded();
         }
 
-        private void HandleAction(BaseballPlays.Action bAction)
+        private void CheckForGameEnded()
+        {
+            if (battingTeam == Team.Home && inning > 8 && homeScore > visitingScore)
+            {
+                gameEnded = true;
+                homeWon = true;
+            }
+            else if (battingTeam == Team.Visiting && inning > 9 && visitingScore > homeScore)
+            {
+                gameEnded = true;
+                visitingWon = true;
+            }
+        }
+
+        private void HandleAction(BaseballAction bAction)
         {
             switch (bAction)
             {
-                case BaseballPlays.Action.Baseman3rdRunsHome:
+                case BaseballAction.Baseman3rdRunsHome:
                     if (!bases.third.runnerOn) break;
                     bases.third.runnerOn = false;
                     ScoreRun();
                     break;
-                case BaseballPlays.Action.Baseman2ndRunsThird:
+                case BaseballAction.Baseman2ndRunsThird:
                     if (!bases.second.runnerOn) break;
                     bases.second.runnerOn = false;
                     bases.third.runnerOn = true;
                     break;
-                case BaseballPlays.Action.Baseman1stRunsSecond:
+                case BaseballAction.Baseman1stRunsSecond:
                     if (!bases.first.runnerOn) break;
                     bases.first.runnerOn = false;
                     bases.second.runnerOn = true;
                     break;
-                case BaseballPlays.Action.BatterRunsFirst:
+                case BaseballAction.BatterRunsFirst:
                     bases.first.runnerOn = true;
                     break;
-                case BaseballPlays.Action.BatterHitBall:
+                case BaseballAction.BatterHitBall:
                     break;
-                case BaseballPlays.Action.BatterMissBall:
+                case BaseballAction.BatterMissBall:
                     break;
-                case BaseballPlays.Action.PitcherThrowStrike:
+                case BaseballAction.PitcherThrowStrike:
                     break;
-                case BaseballPlays.Action.Cleanup:
+                case BaseballAction.Cleanup:
+                    break;
+                case BaseballAction.PitcherThrowsBall:
+                    break;
+                case BaseballAction.PitcherHitsPlayer:
+                    break;
+                case BaseballAction.BasemenAdvanceIfForced:
+                    break;
+                case BaseballAction.FielderCatchesBall:
+                    break;
+                case BaseballAction.FielderCollectsBall:
+                    break;
+                case BaseballAction.FielderBobblesBall:
+                    break;
+                case BaseballAction.OutAtFirst:
+                    break;
+                case BaseballAction.OutAtSecond:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(bAction), bAction, null);

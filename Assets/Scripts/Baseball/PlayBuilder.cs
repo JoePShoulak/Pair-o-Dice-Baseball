@@ -26,37 +26,61 @@ namespace FibDev.Baseball
             return this;
         }
 
+        public PlayBuilder Add(BaseballAction pBBaseballAction)
+        {
+            play.actions.Add(pBBaseballAction);
+
+            return this;
+        }
+
         /* == BATTER == */
         public PlayBuilder BatterHitBall()
         {
-            play.actions.Add(Action.PitcherThrowStrike);
-            play.actions.Add(Action.BatterHitBall);
+            play.actions.Add(BaseballAction.PitcherThrowStrike);
+            play.actions.Add(BaseballAction.BatterHitBall);
+
+            return this;
+        }
+        
+        public PlayBuilder BatterTakesBall()
+        {
+            play.actions.Add(BaseballAction.PitcherThrowsBall);
+
+            return this;
+        }   
+        
+        public PlayBuilder BatterGetsHit()
+        {
+            play.actions.Add(BaseballAction.PitcherHitsPlayer);
 
             return this;
         }
 
         public PlayBuilder BatterMissesBall()
         {
-            play.actions.Add(Action.PitcherThrowStrike);
-            play.actions.Add(Action.BatterMissBall);
+            play.actions.Add(BaseballAction.PitcherThrowStrike);
+            play.actions.Add(BaseballAction.BatterMissBall);
 
             return this;
         }
 
         /* == BASEMEN == */
-        public PlayBuilder BasemenAdvance()
+        public PlayBuilder BasemenAdvance(int times = 1, bool hit = true)
         {
-            play.actions.Add(Action.Baseman3rdRunsHome);
-            play.actions.Add(Action.Baseman2ndRunsThird);
-            play.actions.Add(Action.Baseman1stRunsSecond);
-            play.actions.Add(Action.BatterRunsFirst);
+            for (var i = 0; i < times; i++)
+            {
+                play.actions.Add(BaseballAction.Baseman3rdRunsHome);
+                play.actions.Add(BaseballAction.Baseman2ndRunsThird);
+                play.actions.Add(BaseballAction.Baseman1stRunsSecond);
+                if (i==0 && hit) play.actions.Add(BaseballAction.BatterRunsFirst);
+            }
 
             return this;
         }
 
         public Play Build()
         {
-            play.actions.Add(Action.Cleanup);
+            play.actions.Add(BaseballAction.Cleanup);
 
             return play;
         }
