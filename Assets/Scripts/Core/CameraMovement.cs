@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace FibDev.Core
@@ -13,6 +14,7 @@ namespace FibDev.Core
 
         private Vector3 lerpStartPos;
         private Quaternion lerpStartRot;
+        private Action callbackAction;
 
         private float lerpStartTime;
         private Transform target;
@@ -33,11 +35,16 @@ namespace FibDev.Core
             transform.position = lerpedPosition;
             transform.rotation = lerpedRotation;
 
-            if (lerpTime > 1.0f) target = null;
+            if (lerpTime > 1.0f)
+            {
+                callbackAction?.Invoke();
+                callbackAction = null;
+                target = null;
+            }
         }
 
         // TODO: Add a callback so we can toggle UIs and stuff once we get to our destination
-        public void LerpTo(Transform _target, float duration)
+        public void LerpTo(Transform _target, float duration, Action cb = null)
         {
             lerpStartPos = transform.position;
             lerpStartRot = transform.rotation;
@@ -45,6 +52,7 @@ namespace FibDev.Core
             target = _target;
             lerpStartTime = Time.time;
             lerpDuration = duration;
+            callbackAction = cb;
         }
 
         public void MoveTo(Transform _target)

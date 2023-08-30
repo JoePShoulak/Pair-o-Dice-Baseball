@@ -7,28 +7,27 @@ namespace FibDev.Dice
     [RequireComponent(typeof(DieCollection))]
     public class RollProcessor : MonoBehaviour
     {
-        private DieCollection _dieCollection;
+        private DieCollection _dice;
 
         private void Start()
         {
-            _dieCollection = GetComponent<DieCollection>();
-
-            _dieCollection.OnRollEnd += ProcessResult;
+            _dice = GetComponent<DieCollection>();
+            _dice.OnRollEnd += ProcessResult;
         }
 
-        private int GetDieRoll(DieCollection dieCollection, int index)
+        private int GetDieRoll(DieCollection dice, int index)
         {
-            return dieCollection.Get(index).GetRollResult().Value();
+            return dice.Get(index).GetRollResult().Value();
         }
 
-        private int GetD100Roll(DieCollection dieCollection)
+        private int GetD100Roll(DieCollection dice)
         {
-            return GetDieRoll(dieCollection, 0) + GetDieRoll(dieCollection, 1) * 10;
+            return GetDieRoll(dice, 0) + GetDieRoll(dice, 1) * 10;
         }
 
-        private void ProcessResult(ARollable pObj)
+        private void ProcessResult(ARollable _)
         {
-            var result = GetD100Roll(_dieCollection);
+            var result = GetD100Roll(_dice);
             Debug.Log(result);
         }
     }

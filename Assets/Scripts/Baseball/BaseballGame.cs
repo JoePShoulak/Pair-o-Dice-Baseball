@@ -61,8 +61,8 @@ namespace FibDev.Baseball
 
             foreach (var bAction in bPlay.actions) HandleAction(bAction);
 
-            if (outs >= 3) AdvanceInning();
             CheckForGameEnded();
+            if (outs >= 3 && !gameEnded) AdvanceInning();
         }
 
         private void CheckForGameEnded()

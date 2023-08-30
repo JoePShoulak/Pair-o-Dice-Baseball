@@ -1,8 +1,8 @@
+using FibDev.Core;
+using FibDev.UI;
 using UnityEngine;
 
-using FibDev.UI;
-
-namespace FibDev.Core
+namespace FibDev
 {
     public class Debugger : MonoBehaviour
     {

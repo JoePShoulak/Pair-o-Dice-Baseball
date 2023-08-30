@@ -16,9 +16,8 @@ namespace FibDev.UI
 
         public void Play()
         {
-            cam.LerpTo(cam.stadium, 2f);
+            cam.LerpTo(cam.stadium, 2f, () => teamSelectUI.SetActive(true));
             gameObject.SetActive(false);
-            teamSelectUI.SetActive(true);
         }
 
         public void Scores()
