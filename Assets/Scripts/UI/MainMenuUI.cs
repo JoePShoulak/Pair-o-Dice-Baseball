@@ -16,20 +16,20 @@ namespace FibDev.UI
 
         public void Play()
         {
-            cam.LerpTo(cam.stadium, 2f, () => teamSelectUI.SetActive(true));
             gameObject.SetActive(false);
+            cam.LerpTo(cam.stadium, 2f, () => teamSelectUI.SetActive(true));
         }
 
         public void Scores()
         {
-            cam.LerpTo(cam.notebook, 2f);
             gameObject.SetActive(false);
+            cam.LerpTo(cam.notebook, 2f);
         }
 
         public void Dice()
         {
-            cam.LerpTo(cam.dice, 2f);
             gameObject.SetActive(false);
+            cam.LerpTo(cam.dice, 2f);
         }
     }
 }
