@@ -36,6 +36,7 @@ namespace FibDev.Core
             if (lerpTime > 1.0f) target = null;
         }
 
+        // TODO: Add a callback so we can toggle UIs and stuff once we get to our destination
         public void LerpTo(Transform _target, float duration)
         {
             lerpStartPos = transform.position;

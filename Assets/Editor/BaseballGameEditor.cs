@@ -1,6 +1,7 @@
-using FibDev.Baseball;
 using UnityEditor;
 using UnityEngine;
+
+using FibDev.Baseball;
 
 namespace FibDev.Editor
 {
@@ -16,10 +17,16 @@ namespace FibDev.Editor
             if (GUILayout.Button("Reset State")) script.ResetState();
             EditorGUI.BeginDisabledGroup(script.gameEnded);
             if (GUILayout.Button("Next Play")) script.NextPlay();
-            EditorGUI.EndDisabledGroup();
-            
-            // if (GUILayout.Button("Debug")) Debug.Log(script.GetBases().first.runnerOn);
             GUILayout.EndHorizontal();
+            if (GUILayout.Button("Play Entire Game"))
+            {
+                script.ResetState();
+                while (!script.gameEnded) script.NextPlay();
+            }
+
+            EditorGUI.EndDisabledGroup();
+
+            // if (GUILayout.Button("Debug")) Debug.Log(script.GetBases().first.runnerOn);
         }
     }
 }

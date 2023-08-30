@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static FibDev.Baseball.BaseballPlays;
 
 namespace FibDev.Baseball
 {
@@ -62,12 +61,7 @@ namespace FibDev.Baseball
 
             foreach (var bAction in bPlay.actions) HandleAction(bAction);
 
-            if (bPlay.type == PlayType.Out)
-            {
-                outs++;
-                if (outs >= 3) AdvanceInning();
-            }
-
+            if (outs >= 3) AdvanceInning();
             CheckForGameEnded();
         }
 
@@ -107,10 +101,11 @@ namespace FibDev.Baseball
                 case BaseballAction.BatterRunsFirst:
                     bases.first.runnerOn = true;
                     break;
-                // TODO: Need to implement alllllllll of this
+                // TODO: Need to implement all of this
                 case BaseballAction.BatterHitBall:
                     break;
                 case BaseballAction.BatterMissBall:
+                    outs++;
                     break;
                 case BaseballAction.PitcherThrowStrike:
                     break;
@@ -123,14 +118,15 @@ namespace FibDev.Baseball
                 case BaseballAction.BasemenAdvanceIfForced:
                     break;
                 case BaseballAction.FielderCatchesBall:
+                    outs++;
                     break;
                 case BaseballAction.FielderCollectsBall:
                     break;
                 case BaseballAction.FielderBobblesBall:
                     break;
-                case BaseballAction.OutAtFirst:
-                    break;
                 case BaseballAction.OutAtSecond:
+                    bases.second.runnerOn = false;
+                    outs++;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(bAction), bAction, null);

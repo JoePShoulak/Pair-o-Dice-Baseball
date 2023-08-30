@@ -1,24 +1,10 @@
-using static FibDev.Baseball.BaseballPlays;
-
 namespace FibDev.Baseball
 {
     public class PlayBuilder
     {
-        private Play play;
+        private readonly Play play = new();
 
         /* == GENERAL SETUP == */
-        public PlayBuilder A(PlayType _type)
-        {
-            play = new Play { type = _type };
-
-            return this;
-        }
-
-        public PlayBuilder An(PlayType _type)
-        {
-            return A(_type);
-        }
-
         public PlayBuilder Named(string _name)
         {
             play.name = _name;
@@ -77,12 +63,18 @@ namespace FibDev.Baseball
 
             return this;
         }
-
-        public Play Build()
+        
+        /* == BUILD == */
+        private Play Build()
         {
             play.actions.Add(BaseballAction.Cleanup);
 
             return play;
+        }
+
+        public static implicit operator Play(PlayBuilder builder)
+        {
+            return builder.Build();
         }
     }
 }

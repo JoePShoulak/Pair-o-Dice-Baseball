@@ -20,7 +20,6 @@ namespace FibDev.Baseball
         FielderCollectsBall,
         FielderBobblesBall,
         
-        OutAtFirst,
         OutAtSecond,
 
         Cleanup
