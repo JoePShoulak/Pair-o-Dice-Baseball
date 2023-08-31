@@ -20,8 +20,9 @@ namespace FibDev.Baseball
         }
 
         /* == BATTER == */
-        public PlayBuilder BatterHitBall()
+        public PlayBuilder BatterHitBall(bool isAHit = true)
         {
+            if (isAHit) play.actions.Add(Operation.RecordHit);
             play.actions.Add(Operation.PitcherThrowStrike);
             play.actions.Add(Operation.BatterHitBall);
 

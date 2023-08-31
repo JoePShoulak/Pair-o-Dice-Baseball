@@ -22,6 +22,7 @@ namespace FibDev.Baseball
         
         OutAtSecond,
 
-        Cleanup
+        Cleanup,
+        RecordHit
     }
 }

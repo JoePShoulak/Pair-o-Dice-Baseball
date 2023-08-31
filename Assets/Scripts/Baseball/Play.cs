@@ -37,7 +37,7 @@ namespace FibDev.Baseball
             .Add(Operation.BatterRunsFirst);
 
         private static readonly Play Error = A.Play.Named("Error")
-            .BatterHitBall()
+            .BatterHitBall(false)
             .Add(Operation.FielderBobblesBall)
             .BasemenAdvance();
 
