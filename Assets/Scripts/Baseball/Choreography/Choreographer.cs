@@ -13,9 +13,9 @@ namespace FibDev.Baseball.Choreography
         [SerializeField] private FieldPositions field;
         [SerializeField] private GameObject playerPrefab;
 
-        private List<Team> _teams;
-        private Team _homeTeam;
-        private Team _visitorTeam;
+        private List<Team> teams;
+        private Team homeTeam;
+        private Team visitorTeam;
 
         private Dictionary<Position, GameObject> _homeTeamGOs = new();
         private Dictionary<Position, GameObject> _visitorTeamGOs = new();
@@ -23,20 +23,20 @@ namespace FibDev.Baseball.Choreography
         private GameObject homePitcher;
         private GameObject visitorPitcher;
 
-        private Team GetTeam(TeamType type)
+        private Team GetTeam(TeamType pType)
         {
-            return _teams[0].type == type ? _teams[0] : _teams[1];
+            return teams[0].type == pType ? teams[0] : teams[1];
         }
 
-        public void SetupGame(List<Team> teams)
+        public void SetupGame(List<Team> pTeams)
         {
-            _teams = teams;
+            teams = pTeams;
 
-            _homeTeam = GetTeam(TeamType.Home);
-            _visitorTeam = GetTeam(TeamType.Visiting);
+            homeTeam = GetTeam(TeamType.Home);
+            visitorTeam = GetTeam(TeamType.Visiting);
 
-            CreateTeam(_homeTeam);
-            CreateTeam(_visitorTeam);
+            CreateTeam(homeTeam);
+            CreateTeam(visitorTeam);
         }
 
         private void CreateTeam(Team pTeam)
@@ -50,19 +50,19 @@ namespace FibDev.Baseball.Choreography
         private void CreatePlayer(Team pTeam, Position pPosition)
         {
             var dugout = pTeam.type == TeamType.Home ? homeDugout : visitorDugout;
-            var destination = (Transform)GetMonoProp(dugout, pPosition.ToString());
+            var destination = dugout.GetTransform(pPosition);
+            var playerStats = pTeam.GetPlayer(pPosition);
 
-            var playerStats = pTeam.Get(pPosition);
             var player = Instantiate(playerPrefab, destination.position, Quaternion.identity);
             player.GetComponent<Player>().SetStats(playerStats);
 
-            var teamDict = pTeam.type == TeamType.Home ? _homeTeamGOs : _visitorTeamGOs;
-            teamDict.Add(pPosition, player);
+            if (pTeam.type == TeamType.Home) _homeTeamGOs.Add(pPosition, player);
+            if (pTeam.type == TeamType.Visiting) _visitorTeamGOs.Add(pPosition, player);
         }
 
-        private static object GetMonoProp(MonoBehaviour obj, string propName)
+        public void PlaceTeamOnField(Team pTeam)
         {
-            return obj.GetType().GetField(propName)?.GetValue(obj);
+            
         }
     }
 }

@@ -231,20 +231,6 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "65f130315aab41db90e773e92bc57ee6"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "89ce944b8d17435485c3662ca840264c"
-                },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
                     "m_Id": "e0f26b68c1ad4ed98afab2d683e570af"
                 },
                 "m_SlotId": 0
@@ -1106,7 +1092,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Metallic",
     "m_StageCapability": 2,
-    "m_Value": 1.0,
+    "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }

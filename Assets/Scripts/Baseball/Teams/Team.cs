@@ -15,7 +15,7 @@ namespace FibDev.Baseball.Teams
 
         public Stats[] players;
 
-        public Stats Get(Position pPosition)
+        public Stats GetPlayer(Position pPosition)
         {
             foreach (var player in players)
             {
