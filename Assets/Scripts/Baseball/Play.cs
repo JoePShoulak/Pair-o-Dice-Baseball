@@ -7,7 +7,7 @@ namespace FibDev.Baseball
     public class Play
     {
         public string name = "";
-        public readonly List<BaseballAction> actions = new();
+        public readonly List<Operation> actions = new();
 
         /* == HITS == */
         private static readonly Play Single = A.Play.Named("Single")
@@ -28,17 +28,17 @@ namespace FibDev.Baseball
 
         private static readonly Play Walk = A.Play.Named("Walk")
             .BatterTakesBall()
-            .Add(BaseballAction.BasemenAdvanceIfForced)
-            .Add(BaseballAction.BatterRunsFirst);
+            .Add(Operation.BasemenAdvanceIfForced)
+            .Add(Operation.BatterRunsFirst);
 
         private static readonly Play HitByPitch = A.Play.Named("Hit By Pitch")
             .BatterGetsHit()
-            .Add(BaseballAction.BasemenAdvanceIfForced)
-            .Add(BaseballAction.BatterRunsFirst);
+            .Add(Operation.BasemenAdvanceIfForced)
+            .Add(Operation.BatterRunsFirst);
 
         private static readonly Play Error = A.Play.Named("Error")
             .BatterHitBall()
-            .Add(BaseballAction.FielderBobblesBall)
+            .Add(Operation.FielderBobblesBall)
             .BasemenAdvance();
 
         /* == OUTS == */
@@ -47,34 +47,34 @@ namespace FibDev.Baseball
 
         private static readonly Play FlyOut = A.Play.Named("Fly Out")
             .BatterHitBall()
-            .Add(BaseballAction.FielderCatchesBall);
+            .Add(Operation.FielderCatchesBall);
 
         private static readonly Play FlyOutPlus = A.Play.Named("Fly Out Plus")
             .BatterHitBall()
-            .Add(BaseballAction.FielderCatchesBall)
-            .Add(BaseballAction.Baseman3rdRunsHome);
+            .Add(Operation.FielderCatchesBall)
+            .Add(Operation.Baseman3rdRunsHome);
 
         private static readonly Play PopOut = A.Play.Named("Pop Out")
             .BatterHitBall()
-            .Add(BaseballAction.FielderCatchesBall);
+            .Add(Operation.FielderCatchesBall);
 
         private static readonly Play LineOut = A.Play.Named("Line Out")
             .BatterHitBall()
-            .Add(BaseballAction.FielderCatchesBall);
+            .Add(Operation.FielderCatchesBall);
 
         private static readonly Play FoulOut = A.Play.Named("Foul Out")
             .BatterHitBall()
-            .Add(BaseballAction.FielderCatchesBall);
+            .Add(Operation.FielderCatchesBall);
 
         private static readonly Play GroundOut = A.Play.Named("Ground Out")
             .BatterHitBall()
-            .Add(BaseballAction.FielderCollectsBall)
+            .Add(Operation.FielderCollectsBall)
             .BasemenAdvance(1, false);
 
         private static readonly Play GroundOut2 = A.Play.Named("Ground Out")
             .BatterHitBall()
-            .Add(BaseballAction.FielderCollectsBall)
-            .Add(BaseballAction.OutAtSecond)
+            .Add(Operation.FielderCollectsBall)
+            .Add(Operation.OutAtSecond)
             .BasemenAdvance(1, false);
 
         public static Play Random()

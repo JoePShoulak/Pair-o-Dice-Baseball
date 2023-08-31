@@ -14,9 +14,9 @@ namespace FibDev.UI
         [SerializeField] private ColorPicker primaryPicker;
         [SerializeField] private ColorPicker secondaryPicker;
 
-        public TeamCreationData GetData()
+        public Team GetData()
         {
-            return new TeamCreationData
+            return new Team
             {
                 city = cityField.text,
                 name = nameField.text,

@@ -12,9 +12,9 @@ namespace FibDev.Baseball
             return this;
         }
 
-        public PlayBuilder Add(BaseballAction pBBaseballAction)
+        public PlayBuilder Add(Operation pBOperation)
         {
-            play.actions.Add(pBBaseballAction);
+            play.actions.Add(pBOperation);
 
             return this;
         }
@@ -22,30 +22,30 @@ namespace FibDev.Baseball
         /* == BATTER == */
         public PlayBuilder BatterHitBall()
         {
-            play.actions.Add(BaseballAction.PitcherThrowStrike);
-            play.actions.Add(BaseballAction.BatterHitBall);
+            play.actions.Add(Operation.PitcherThrowStrike);
+            play.actions.Add(Operation.BatterHitBall);
 
             return this;
         }
         
         public PlayBuilder BatterTakesBall()
         {
-            play.actions.Add(BaseballAction.PitcherThrowsBall);
+            play.actions.Add(Operation.PitcherThrowsBall);
 
             return this;
         }   
         
         public PlayBuilder BatterGetsHit()
         {
-            play.actions.Add(BaseballAction.PitcherHitsPlayer);
+            play.actions.Add(Operation.PitcherHitsPlayer);
 
             return this;
         }
 
         public PlayBuilder BatterMissesBall()
         {
-            play.actions.Add(BaseballAction.PitcherThrowStrike);
-            play.actions.Add(BaseballAction.BatterMissBall);
+            play.actions.Add(Operation.PitcherThrowStrike);
+            play.actions.Add(Operation.BatterMissBall);
 
             return this;
         }
@@ -55,10 +55,10 @@ namespace FibDev.Baseball
         {
             for (var i = 0; i < times; i++)
             {
-                play.actions.Add(BaseballAction.Baseman3rdRunsHome);
-                play.actions.Add(BaseballAction.Baseman2ndRunsThird);
-                play.actions.Add(BaseballAction.Baseman1stRunsSecond);
-                if (i==0 && hit) play.actions.Add(BaseballAction.BatterRunsFirst);
+                play.actions.Add(Operation.Baseman3rdRunsHome);
+                play.actions.Add(Operation.Baseman2ndRunsThird);
+                play.actions.Add(Operation.Baseman1stRunsSecond);
+                if (i==0 && hit) play.actions.Add(Operation.BatterRunsFirst);
             }
 
             return this;
@@ -67,7 +67,7 @@ namespace FibDev.Baseball
         /* == BUILD == */
         private Play Build()
         {
-            play.actions.Add(BaseballAction.Cleanup);
+            play.actions.Add(Operation.Cleanup);
 
             return play;
         }

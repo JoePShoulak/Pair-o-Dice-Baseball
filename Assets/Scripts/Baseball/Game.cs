@@ -3,17 +3,12 @@ using UnityEngine;
 
 namespace FibDev.Baseball
 {
-    public class BaseballGame : MonoBehaviour
+    public class Game : MonoBehaviour
     {
-        private enum Team
-        {
-            Home,
-            Visiting
-        }
 
         // Serialized for debugging
         [SerializeField] private int inning;
-        [SerializeField] private Team battingTeam;
+        [SerializeField] private TeamType battingTeamType;
         [SerializeField] private int outs;
         [SerializeField] private Bases bases;
         [SerializeField] private int visitingScore;
@@ -28,7 +23,7 @@ namespace FibDev.Baseball
         public void ResetState() // for debug
         {
             bases.Reset();
-            battingTeam = Team.Visiting;
+            battingTeamType = TeamType.Visiting;
             
             inning = 1;
             outs = 0;
@@ -43,13 +38,13 @@ namespace FibDev.Baseball
             outs = 0;
             bases.Reset();
 
-            if (battingTeam == Team.Visiting)
+            if (battingTeamType == TeamType.Visiting)
             {
-                battingTeam = Team.Home;
+                battingTeamType = TeamType.Home;
                 return;
             }
 
-            battingTeam = Team.Visiting;
+            battingTeamType = TeamType.Visiting;
             inning++;
         }
 
@@ -67,64 +62,64 @@ namespace FibDev.Baseball
 
         private void CheckForGameEnded()
         {
-            if (battingTeam == Team.Home && inning > 8 && homeScore > visitingScore)
+            if (battingTeamType == TeamType.Home && inning > 8 && homeScore > visitingScore)
             {
                 gameEnded = true;
                 Debug.Log("Home Won!");
             }
-            else if (battingTeam == Team.Visiting && inning > 9 && visitingScore > homeScore)
+            else if (battingTeamType == TeamType.Visiting && inning > 9 && visitingScore > homeScore)
             {
                 gameEnded = true;
                 Debug.Log("Visiting Won!");
             }
         }
 
-        private void HandleAction(BaseballAction bAction)
+        private void HandleAction(Operation bAction)
         {
             switch (bAction)
             {
-                case BaseballAction.Baseman3rdRunsHome:
+                case Operation.Baseman3rdRunsHome:
                     if (!bases.third.runnerOn) break;
                     bases.third.runnerOn = false;
                     ScoreRun();
                     break;
-                case BaseballAction.Baseman2ndRunsThird:
+                case Operation.Baseman2ndRunsThird:
                     if (!bases.second.runnerOn) break;
                     bases.second.runnerOn = false;
                     bases.third.runnerOn = true;
                     break;
-                case BaseballAction.Baseman1stRunsSecond:
+                case Operation.Baseman1stRunsSecond:
                     if (!bases.first.runnerOn) break;
                     bases.first.runnerOn = false;
                     bases.second.runnerOn = true;
                     break;
-                case BaseballAction.BatterRunsFirst:
+                case Operation.BatterRunsFirst:
                     bases.first.runnerOn = true;
                     break;
                 // TODO: Need to implement all of this
-                case BaseballAction.BatterHitBall:
+                case Operation.BatterHitBall:
                     break;
-                case BaseballAction.BatterMissBall:
+                case Operation.BatterMissBall:
                     outs++;
                     break;
-                case BaseballAction.PitcherThrowStrike:
+                case Operation.PitcherThrowStrike:
                     break;
-                case BaseballAction.Cleanup:
+                case Operation.Cleanup:
                     break;
-                case BaseballAction.PitcherThrowsBall:
+                case Operation.PitcherThrowsBall:
                     break;
-                case BaseballAction.PitcherHitsPlayer:
+                case Operation.PitcherHitsPlayer:
                     break;
-                case BaseballAction.BasemenAdvanceIfForced:
+                case Operation.BasemenAdvanceIfForced:
                     break;
-                case BaseballAction.FielderCatchesBall:
+                case Operation.FielderCatchesBall:
                     outs++;
                     break;
-                case BaseballAction.FielderCollectsBall:
+                case Operation.FielderCollectsBall:
                     break;
-                case BaseballAction.FielderBobblesBall:
+                case Operation.FielderBobblesBall:
                     break;
-                case BaseballAction.OutAtSecond:
+                case Operation.OutAtSecond:
                     bases.second.runnerOn = false;
                     outs++;
                     break;
@@ -135,8 +130,8 @@ namespace FibDev.Baseball
 
         private void ScoreRun()
         {
-            if (battingTeam == Team.Home) homeScore++;
-            else if (battingTeam == Team.Visiting) visitingScore++;
+            if (battingTeamType == TeamType.Home) homeScore++;
+            else if (battingTeamType == TeamType.Visiting) visitingScore++;
         }
 
         // private void LogPlay(Play _event)

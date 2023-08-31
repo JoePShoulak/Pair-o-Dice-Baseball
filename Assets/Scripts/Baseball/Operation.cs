@@ -1,6 +1,6 @@
 namespace FibDev.Baseball
 {
-    public enum BaseballAction
+    public enum Operation
     {
         BatterHitBall,
         BatterMissBall,

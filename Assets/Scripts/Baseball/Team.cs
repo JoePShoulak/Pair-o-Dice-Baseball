@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FibDev.Baseball
 {
-    public struct TeamCreationData
+    public struct Team
     {
         public string city;
         public string name;
