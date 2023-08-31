@@ -6,6 +6,7 @@ namespace FibDev.Baseball
     public enum TeamType
     {
         Home,
-        Visiting
+        Visiting,
+        Null
     }
 }

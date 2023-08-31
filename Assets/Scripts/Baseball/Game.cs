@@ -1,19 +1,21 @@
 using System;
+using FibDev.Baseball.Records;
 using UnityEngine;
 
 namespace FibDev.Baseball
 {
     public class Game : MonoBehaviour
     {
+        [SerializeField] private Record record;
 
         // Serialized for debugging
         [SerializeField] private int inning;
-        [SerializeField] private TeamType battingTeamType;
+        [SerializeField] private TeamType teamAtBat;
         [SerializeField] private int outs;
         [SerializeField] private Bases bases;
-        [SerializeField] private int visitingScore;
-        [SerializeField] private int homeScore;
         public bool gameEnded;
+
+        private TeamType FieldingTeam => teamAtBat == TeamType.Home ? TeamType.Visiting : TeamType.Home;
 
         private void Start()
         {
@@ -23,13 +25,13 @@ namespace FibDev.Baseball
         public void ResetState() // for debug
         {
             bases.Reset();
-            battingTeamType = TeamType.Visiting;
-            
+            teamAtBat = TeamType.Visiting;
+
+            record = new Record();
+
             inning = 1;
             outs = 0;
-            homeScore = 0;
-            visitingScore = 0;
-            
+
             gameEnded = false;
         }
 
@@ -38,13 +40,13 @@ namespace FibDev.Baseball
             outs = 0;
             bases.Reset();
 
-            if (battingTeamType == TeamType.Visiting)
+            if (teamAtBat == TeamType.Visiting)
             {
-                battingTeamType = TeamType.Home;
+                teamAtBat = TeamType.Home;
                 return;
             }
 
-            battingTeamType = TeamType.Visiting;
+            teamAtBat = TeamType.Visiting;
             inning++;
         }
 
@@ -60,18 +62,20 @@ namespace FibDev.Baseball
             if (outs >= 3 && !gameEnded) AdvanceInning();
         }
 
+
         private void CheckForGameEnded()
         {
-            if (battingTeamType == TeamType.Home && inning > 8 && homeScore > visitingScore)
-            {
-                gameEnded = true;
-                Debug.Log("Home Won!");
-            }
-            else if (battingTeamType == TeamType.Visiting && inning > 9 && visitingScore > homeScore)
-            {
-                gameEnded = true;
-                Debug.Log("Visiting Won!");
-            }
+            var homeAtBatAndWinning = teamAtBat == TeamType.Home && record.LeadingTeam == TeamType.Home;
+            var visitorsAtBatAndWinning = teamAtBat == TeamType.Visiting && record.LeadingTeam == TeamType.Visiting;
+
+            if (inning > 8 && homeAtBatAndWinning) EndGame();
+            else if (inning > 9 && visitorsAtBatAndWinning) EndGame();
+        }
+
+        private void EndGame()
+        {
+            gameEnded = true;
+            Debug.Log($"{teamAtBat} Won!");
         }
 
         private void HandleAction(Operation bAction)
@@ -81,7 +85,7 @@ namespace FibDev.Baseball
                 case Operation.Baseman3rdRunsHome:
                     if (!bases.third.runnerOn) break;
                     bases.third.runnerOn = false;
-                    ScoreRun();
+                    record.Add(inning, teamAtBat, RecordType.Run);
                     break;
                 case Operation.Baseman2ndRunsThird:
                     if (!bases.second.runnerOn) break;
@@ -118,6 +122,7 @@ namespace FibDev.Baseball
                 case Operation.FielderCollectsBall:
                     break;
                 case Operation.FielderBobblesBall:
+                    record.Add(inning, teamAtBat, RecordType.Error);
                     break;
                 case Operation.OutAtSecond:
                     bases.second.runnerOn = false;
@@ -126,12 +131,6 @@ namespace FibDev.Baseball
                 default:
                     throw new ArgumentOutOfRangeException(nameof(bAction), bAction, null);
             }
-        }
-
-        private void ScoreRun()
-        {
-            if (battingTeamType == TeamType.Home) homeScore++;
-            else if (battingTeamType == TeamType.Visiting) visitingScore++;
         }
 
         // private void LogPlay(Play _event)
