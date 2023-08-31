@@ -26,7 +26,6 @@ namespace FibDev.Editor
 
                 if (GUILayout.Button("Start")) script.MoveTo(script.start);
                 if (GUILayout.Button("Stadium")) script.MoveTo(script.stadium);
-                if (GUILayout.Button("Dice")) script.MoveTo(script.dice);
                 if (GUILayout.Button("Notebook")) script.MoveTo(script.notebook);
 
                 GUILayout.EndHorizontal();

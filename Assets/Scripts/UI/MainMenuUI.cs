@@ -24,11 +24,5 @@ namespace FibDev.UI
             gameObject.SetActive(false);
             cam.LerpTo(cam.notebook, 2f);
         }
-
-        public void Dice()
-        {
-            gameObject.SetActive(false);
-            cam.LerpTo(cam.dice, 2f);
-        }
     }
 }
