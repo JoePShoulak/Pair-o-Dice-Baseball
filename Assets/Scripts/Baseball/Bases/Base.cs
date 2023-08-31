@@ -1,6 +1,6 @@
 using System;
 
-namespace FibDev.Baseball
+namespace FibDev.Baseball.Bases
 {
     [Serializable]
     public class Base

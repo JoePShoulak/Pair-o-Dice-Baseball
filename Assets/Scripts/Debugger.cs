@@ -1,6 +1,7 @@
+using UnityEngine;
+
 using FibDev.Core;
 using FibDev.UI;
-using UnityEngine;
 
 namespace FibDev
 {

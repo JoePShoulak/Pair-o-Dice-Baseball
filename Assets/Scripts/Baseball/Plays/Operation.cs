@@ -1,4 +1,4 @@
-namespace FibDev.Baseball
+namespace FibDev.Baseball.Plays
 {
     public enum Operation
     {

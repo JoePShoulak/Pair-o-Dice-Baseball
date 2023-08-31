@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FibDev.Baseball
+namespace FibDev.Baseball.Teams
 {
     public struct Team
     {

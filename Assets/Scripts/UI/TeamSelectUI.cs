@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-using FibDev.Baseball;
+using FibDev.Baseball.Teams;
 
 namespace FibDev.UI
 {

@@ -7,7 +7,6 @@ namespace FibDev.UI
     public class MainMenuUI : MonoBehaviour
     {
         private CameraMovement cam; // Cached
-        [SerializeField] private GameObject teamSelectUI;
 
         private void Start()
         {
@@ -17,7 +16,7 @@ namespace FibDev.UI
         public void Play()
         {
             gameObject.SetActive(false);
-            cam.LerpTo(cam.stadium, 2f, () => teamSelectUI.SetActive(true));
+            cam.LerpTo(cam.stadium, 2f, () => OverlayManager.Instance.teamSelect.SetActive(true));
         }
 
         public void Scores()

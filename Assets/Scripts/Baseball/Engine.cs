@@ -1,5 +1,7 @@
 using System;
+using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
+using FibDev.Baseball.Teams;
 using UnityEngine;
 
 namespace FibDev.Baseball
@@ -12,7 +14,7 @@ namespace FibDev.Baseball
         [SerializeField] private int inning;
         [SerializeField] private TeamType teamAtBat;
         [SerializeField] private int outs;
-        [SerializeField] private Bases bases;
+        [SerializeField] private Bases.Bases bases;
         public bool gameEnded;
 
         private TeamType FieldingTeam => teamAtBat == TeamType.Home ? TeamType.Visiting : TeamType.Home;
