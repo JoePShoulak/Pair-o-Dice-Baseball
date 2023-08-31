@@ -17,8 +17,6 @@ namespace FibDev.Baseball
         [SerializeField] private Bases.Bases bases;
         public bool gameEnded;
 
-        private TeamType FieldingTeam => teamAtBat == TeamType.Home ? TeamType.Visiting : TeamType.Home;
-
         private void Start()
         {
             ResetState();

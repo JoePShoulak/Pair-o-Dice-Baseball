@@ -6,7 +6,7 @@ namespace FibDev.Baseball
     {
         public static class A
         {
-            public static PlayBuilder Play => new PlayBuilder();
+            public static PlayBuilder Play => new ();
         }
     }
 }

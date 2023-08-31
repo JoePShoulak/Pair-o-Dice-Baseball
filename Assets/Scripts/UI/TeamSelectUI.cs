@@ -23,13 +23,13 @@ namespace FibDev.UI
             Debug.Log("Visiting Team: ");
             LogTeamData(visitingData);
 
-            var selection = new List<Team>() { homeData, visitingData };
+            var selection = new List<Team> { homeData, visitingData };
             OnTeamsSelected?.Invoke(selection);
 
             gameObject.SetActive(false);
         }
 
-        private void LogTeamData(Team data)
+        private static void LogTeamData(Team data)
         {
             Debug.Log($"  Name: {data.city} {data.name}");
             Debug.Log($"  P. Color: {data.primary}");

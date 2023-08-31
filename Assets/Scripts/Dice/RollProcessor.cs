@@ -15,12 +15,12 @@ namespace FibDev.Dice
             _dice.OnRollEnd += ProcessResult;
         }
 
-        private int GetDieRoll(DieCollection dice, int index)
+        private static int GetDieRoll(DieCollection dice, int index)
         {
             return dice.Get(index).GetRollResult().Value();
         }
 
-        private int GetD100Roll(DieCollection dice)
+        private static int GetD100Roll(DieCollection dice)
         {
             return GetDieRoll(dice, 0) + GetDieRoll(dice, 1) * 10;
         }

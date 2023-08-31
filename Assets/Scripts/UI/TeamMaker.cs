@@ -3,7 +3,6 @@ using UnityEngine;
 
 using Assets.SimpleColorPicker.Scripts;
 
-using FibDev.Baseball;
 using FibDev.Baseball.Teams;
 
 namespace FibDev.UI
