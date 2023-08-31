@@ -1,8 +1,9 @@
 using System;
+using UnityEngine;
+
 using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
 using FibDev.Baseball.Teams;
-using UnityEngine;
 
 namespace FibDev.Baseball
 {
@@ -83,7 +84,7 @@ namespace FibDev.Baseball
                 case Operation.Baseman3rdRunsHome:
                     if (!bases.third.runnerOn) break;
                     bases.third.runnerOn = false;
-                    record.Add(inning, teamAtBat, RecordType.Run);
+                    record.Add(inning, teamAtBat, StatType.Run);
                     break;
                 case Operation.Baseman2ndRunsThird:
                     if (!bases.second.runnerOn) break;
@@ -120,14 +121,14 @@ namespace FibDev.Baseball
                 case Operation.FielderCollectsBall:
                     break;
                 case Operation.FielderBobblesBall:
-                    record.Add(inning, teamAtBat, RecordType.Error);
+                    record.Add(inning, teamAtBat, StatType.Error);
                     break;
                 case Operation.OutAtSecond:
                     bases.second.runnerOn = false;
                     outs++;
                     break;
                 case Operation.RecordHit:
-                    record.Add(inning, teamAtBat, RecordType.Hit);
+                    record.Add(inning, teamAtBat, StatType.Hit);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(bAction), bAction, null);

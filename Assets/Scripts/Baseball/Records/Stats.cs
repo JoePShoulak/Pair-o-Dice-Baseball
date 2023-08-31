@@ -9,17 +9,17 @@ namespace FibDev.Baseball.Records
         public int hits;
         public int errors;
 
-        public void Add(RecordType type, int quantity = 1)
+        public void Add(StatType type, int quantity = 1)
         {
             switch (type)
             {
-                case RecordType.Run:
+                case StatType.Run:
                     runs += quantity;
                     break;
-                case RecordType.Hit:
+                case StatType.Hit:
                     hits += quantity;
                     break;
-                case RecordType.Error:
+                case StatType.Error:
                     errors += quantity;
                     break;
                 default:

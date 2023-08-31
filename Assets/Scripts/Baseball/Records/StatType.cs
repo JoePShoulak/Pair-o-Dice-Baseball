@@ -1,6 +1,6 @@
 namespace FibDev.Baseball.Records
 {
-    public enum RecordType
+    public enum StatType
     {
         Run,
         Hit,

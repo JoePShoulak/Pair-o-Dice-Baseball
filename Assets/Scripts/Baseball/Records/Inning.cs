@@ -9,7 +9,7 @@ namespace FibDev.Baseball.Records
         public Stats homeStats = new();
         public Stats visitorStats = new();
         
-        public void Add(TeamType team, RecordType type, int quantity = 1)
+        public void Add(TeamType team, StatType type, int quantity = 1)
         {
             (team == TeamType.Home ? homeStats : visitorStats).Add(type, quantity);
         }
