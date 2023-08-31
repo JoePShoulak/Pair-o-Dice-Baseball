@@ -3,6 +3,7 @@ using UnityEngine;
 
 using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
+using FibDev.Baseball.Rendering.Scoreboard;
 using FibDev.Baseball.Teams;
 
 namespace FibDev.Baseball
@@ -17,6 +18,8 @@ namespace FibDev.Baseball
         [SerializeField] private int outs;
         [SerializeField] private Bases.Bases bases;
         public bool gameEnded;
+
+        [SerializeField] private Board scoreboard;
 
         private void Start()
         {
@@ -34,6 +37,8 @@ namespace FibDev.Baseball
             outs = 0;
 
             gameEnded = false;
+            
+            scoreboard.Reset();
         }
 
         private void AdvanceInning()
@@ -57,6 +62,7 @@ namespace FibDev.Baseball
             Debug.Log(bPlay.name);
 
             foreach (var bAction in bPlay.actions) HandleAction(bAction);
+            scoreboard.Display(record);
 
             if (outs >= 3 && !gameEnded) AdvanceInning();
 
