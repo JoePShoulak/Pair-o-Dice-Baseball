@@ -425,7 +425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a86daf4bda3c114bb009697158b3ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamSelectUI: {fileID: 118221998}
 --- !u!1 &596012049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,8 +2663,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bab03494f842cb43bd29ef9ab4a73f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  record:
+    innings: []
+    homeTotal:
+      runs: 0
+      hits: 0
+      errors: 0
+    visitorTotal:
+      runs: 0
+      hits: 0
+      errors: 0
   inning: 9
-  battingTeam: 0
+  teamAtBat: 0
   outs: 1
   bases:
     first:
@@ -2676,8 +2685,6 @@ MonoBehaviour:
       runnerOn: 0
     home:
       runnerOn: 0
-  visitingScore: 16
-  homeScore: 17
   gameEnded: 1
 --- !u!4 &1674934044
 Transform:
