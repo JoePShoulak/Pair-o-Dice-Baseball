@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FibDev.Baseball.Choreography.References;
 using FibDev.Baseball.Teams;
+using UnityEngine.AI;
 
 namespace FibDev.Baseball.Choreography
 {
@@ -37,6 +38,9 @@ namespace FibDev.Baseball.Choreography
 
             CreateTeam(homeTeam);
             CreateTeam(visitorTeam);
+            
+            TakeField(_homeTeamGOs);
+            _visitorTeamGOs[Position.Catcher].GetComponent<NavMeshAgent>().SetDestination(field.Batter.position);
         }
 
         private void CreateTeam(Team pTeam)
@@ -51,7 +55,7 @@ namespace FibDev.Baseball.Choreography
         {
             var dugout = pTeam.type == TeamType.Home ? homeDugout : visitorDugout;
             var destination = dugout.GetTransform(pPosition);
-            var playerStats = pTeam.GetPlayer(pPosition);
+            var playerStats = pTeam.Get(pPosition);
 
             var player = Instantiate(playerPrefab, destination.position, Quaternion.identity);
             player.GetComponent<Player>().SetStats(playerStats);
@@ -60,9 +64,12 @@ namespace FibDev.Baseball.Choreography
             if (pTeam.type == TeamType.Visiting) _visitorTeamGOs.Add(pPosition, player);
         }
 
-        public void PlaceTeamOnField(Team pTeam)
+        private void TakeField(Dictionary<Position, GameObject> pDict)
         {
-            
+            foreach (var (position, gObj) in pDict)
+            {
+                gObj.GetComponent<NavMeshAgent>().SetDestination(field.GetTransform(position).position);
+            }
         }
     }
 }

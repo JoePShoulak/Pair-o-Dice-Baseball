@@ -1,3 +1,4 @@
+using System;
 using FibDev.Baseball.Player;
 using UnityEngine;
 
@@ -20,6 +21,11 @@ namespace FibDev.Baseball.Choreography
         {
             gameObject.GetComponent<MeshRenderer>().material.SetColor(Primary, pPrimary);
             gameObject.GetComponent<MeshRenderer>().material.SetColor(Secondary, pSecondary);
+        }
+
+        private void OnMouseDown()
+        {
+            Debug.Log("Clicked");
         }
     }
 }
