@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 using FibDev.Baseball.Choreography.References;
 using FibDev.Baseball.Teams;
 
@@ -17,6 +16,9 @@ namespace FibDev.Baseball.Choreography
         private List<Team> _teams;
         private Team _homeTeam;
         private Team _visitorTeam;
+
+        private Dictionary<Position, GameObject> _homeTeamGOs = new();
+        private Dictionary<Position, GameObject> _visitorTeamGOs = new();
 
         private GameObject homePitcher;
         private GameObject visitorPitcher;
@@ -39,31 +41,23 @@ namespace FibDev.Baseball.Choreography
 
         private void CreateTeam(Team pTeam)
         {
-            var Pitcher = CreatePlayer(pTeam, "Pitcher");
-            var Catcher = CreatePlayer(pTeam, "Catcher");
-            var Shortstop = CreatePlayer(pTeam, "Shortstop");
-            
-            var Baseman1st = CreatePlayer(pTeam, "Baseman1st");
-            var Baseman2nd = CreatePlayer(pTeam, "Baseman2nd");
-            var Baseman3rd = CreatePlayer(pTeam, "Baseman3rd");
-            
-            var FielderLeft = CreatePlayer(pTeam, "FielderLeft");
-            var FielderCenter = CreatePlayer(pTeam, "FielderCenter");
-            var FielderRight = CreatePlayer(pTeam, "FielderRight");
+            foreach (Position position in Enum.GetValues(typeof(Position)))
+            {
+                CreatePlayer(pTeam, position);
+            }
         }
 
-        private GameObject CreatePlayer(Team pTeam, string pPosition)
+        private void CreatePlayer(Team pTeam, Position pPosition)
         {
-            if (!Enum.TryParse(pPosition, out Position pos)) throw new Exception("Couldn't parse position enum");
-            
             var dugout = pTeam.type == TeamType.Home ? homeDugout : visitorDugout;
-            var destination = (Transform)GetMonoProp(dugout, pPosition);
-            
-            var playerStats = pTeam.Get(pos);
+            var destination = (Transform)GetMonoProp(dugout, pPosition.ToString());
+
+            var playerStats = pTeam.Get(pPosition);
             var player = Instantiate(playerPrefab, destination.position, Quaternion.identity);
             player.GetComponent<Player>().SetStats(playerStats);
-            
-            return player;
+
+            var teamDict = pTeam.type == TeamType.Home ? _homeTeamGOs : _visitorTeamGOs;
+            teamDict.Add(pPosition, player);
         }
 
         private static object GetMonoProp(MonoBehaviour obj, string propName)
