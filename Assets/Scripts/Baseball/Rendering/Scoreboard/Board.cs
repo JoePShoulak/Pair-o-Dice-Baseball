@@ -1,5 +1,6 @@
-using FibDev.Baseball.Records;
 using UnityEngine;
+
+using FibDev.Baseball.Records;
 
 namespace FibDev.Baseball.Rendering.Scoreboard
 {

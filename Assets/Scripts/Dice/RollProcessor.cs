@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 using InnerDriveStudios.DiceCreator;
@@ -8,6 +9,8 @@ namespace FibDev.Dice
     public class RollProcessor : MonoBehaviour
     {
         private DieCollection _dice;
+
+        public static event Action<int> OnRollProcessed;
 
         private void Start()
         {
@@ -29,6 +32,7 @@ namespace FibDev.Dice
         {
             var result = GetD100Roll(_dice);
             Debug.Log(result);
+            OnRollProcessed?.Invoke(result);
         }
     }
 }

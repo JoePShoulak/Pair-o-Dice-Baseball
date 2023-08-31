@@ -1,4 +1,5 @@
 using System;
+
 using FibDev.Baseball.Teams;
 
 namespace FibDev.Baseball.Records

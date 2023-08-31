@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using static FibDev.Baseball.Builders;
 
 namespace FibDev.Baseball.Plays

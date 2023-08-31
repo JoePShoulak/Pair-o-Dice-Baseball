@@ -1,12 +1,13 @@
-using FibDev.Baseball.Records;
 using TMPro;
 using UnityEngine;
+
+using FibDev.Baseball.Records;
 
 namespace FibDev.Baseball.Rendering.Scoreboard
 {
     public class Row : MonoBehaviour
     {
-        public TMP_Text name;
+        public TMP_Text teamName;
 
         public TMP_Text[] innings;
         

@@ -24,6 +24,8 @@ namespace FibDev.Baseball
         private void Start()
         {
             ResetState();
+
+            Dice.RollProcessor.OnRollProcessed += NextPlay;
         }
 
         public void ResetState() // for debug
@@ -56,7 +58,7 @@ namespace FibDev.Baseball
             inning++;
         }
 
-        public void NextPlay()
+        public void NextPlay(int input = 0)
         {
             var bPlay = Play.Random();
             Debug.Log(bPlay.name);
