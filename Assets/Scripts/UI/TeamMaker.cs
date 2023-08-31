@@ -20,17 +20,17 @@ namespace FibDev.UI
             // TODO: This is dumb
             var selectedPlayers = new[]
             {
-                new Stats { position = Position.Pitcher},
-                new Stats { position = Position.Catcher},
-                new Stats { position = Position.Shortstop},
+                new Stats { position = Position.Pitcher },
+                new Stats { position = Position.Catcher },
+                new Stats { position = Position.Shortstop },
 
-                new Stats { position = Position.Baseman1st},
-                new Stats { position = Position.Baseman2nd},
-                new Stats { position = Position.Baseman3rd},
+                new Stats { position = Position.Baseman1st },
+                new Stats { position = Position.Baseman2nd },
+                new Stats { position = Position.Baseman3rd },
 
-                new Stats { position = Position.FielderLeft},
-                new Stats { position = Position.FielderCenter},
-                new Stats { position = Position.FielderRight},
+                new Stats { position = Position.FielderLeft },
+                new Stats { position = Position.FielderCenter },
+                new Stats { position = Position.FielderRight },
             };
 
             var team = new Team

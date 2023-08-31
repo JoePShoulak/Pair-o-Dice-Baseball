@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 using FibDev.Baseball.Teams;
 
 namespace FibDev.UI
@@ -12,12 +11,12 @@ namespace FibDev.UI
         [SerializeField] private TeamMaker visitingTeam;
 
         public static event Action<List<Team>> OnTeamsSelected;
-        
+
         public void SelectTeams()
         {
             var homeData = homeTeam.GetData();
             var visitingData = visitingTeam.GetData();
-            
+
             Debug.Log("Home Team: ");
             LogTeamData(homeData);
             Debug.Log("Visiting Team: ");

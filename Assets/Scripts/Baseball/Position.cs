@@ -5,11 +5,11 @@ namespace FibDev.Baseball
         Pitcher,
         Catcher,
         Shortstop,
-        
-        Baseman1st, 
-        Baseman2nd, 
-        Baseman3rd, 
-        
+
+        Baseman1st,
+        Baseman2nd,
+        Baseman3rd,
+
         FielderLeft,
         FielderCenter,
         FielderRight,

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using FibDev.Baseball.Choreography;
 using UnityEngine;
-
 using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
 using FibDev.Baseball.Rendering.Scoreboard;
@@ -79,7 +78,7 @@ namespace FibDev.Baseball
             outs = 0;
 
             gameEnded = false;
-            
+
             scoreboard.Reset();
         }
 
