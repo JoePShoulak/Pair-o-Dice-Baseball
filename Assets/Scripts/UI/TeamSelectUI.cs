@@ -11,7 +11,7 @@ namespace FibDev.UI
         [SerializeField] private TeamMaker homeTeam;
         [SerializeField] private TeamMaker visitingTeam;
 
-        public event Action<List<Team>> OnTeamsSelected;
+        public static event Action<List<Team>> OnTeamsSelected;
         
         public void SelectTeams()
         {

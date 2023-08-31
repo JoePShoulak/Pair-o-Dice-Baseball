@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
+using FibDev.Baseball.Choreography;
 using UnityEngine;
 
 using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
 using FibDev.Baseball.Rendering.Scoreboard;
 using FibDev.Baseball.Teams;
+using FibDev.UI;
 
 namespace FibDev.Baseball
 {
@@ -21,11 +24,48 @@ namespace FibDev.Baseball
 
         [SerializeField] private Board scoreboard;
 
+        [SerializeField] private Choreographer choreographer;
+
         private void Start()
         {
             ResetState();
 
+            TeamSelectUI.OnTeamsSelected += StartGame;
             Dice.RollProcessor.OnRollProcessed += NextPlay;
+        }
+
+        private void StartGame(List<Team> teams)
+        {
+            LogTeamData(teams[0]);
+            LogTeamData(teams[1]);
+            choreographer.SetupGame(teams);
+        }
+
+        private static void LogTeamData(Team data)
+        {
+            Debug.Log($"Name: {data.city} {data.name}");
+            Debug.Log($"  P. Color: {data.primary}");
+            Debug.Log($"  S. Color: {data.secondary}");
+            Debug.Log($"  Type: {data.type}");
+
+            Debug.Log("\n  Players:");
+            foreach (var player in data.players)
+            {
+                LogPlayerData(player);
+            }
+        }
+
+        private static void LogPlayerData(Player.Stats player)
+        {
+            Debug.Log($"  Name: {player.name}");
+            Debug.Log($"    Number: {player.number}");
+            Debug.Log($"    Height: {player.height}");
+            Debug.Log($"    Weight: {player.weight}");
+            Debug.Log($"    Lefty?: {player.lefty}");
+            Debug.Log($"    Skin Tone: {player.skinTone}");
+            Debug.Log($"    P. Color: {player.primaryColor}");
+            Debug.Log($"    S. Color: {player.secondaryColor}");
+            Debug.Log($"    Position: {player.position}");
         }
 
         public void ResetState() // for debug

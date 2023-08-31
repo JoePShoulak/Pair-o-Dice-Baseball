@@ -6,7 +6,7 @@ using FibDev.Baseball;
 namespace FibDev.Editor
 {
     [CustomEditor(typeof(Engine))]
-    public class BaseballGameEditor : UnityEditor.Editor
+    public class EngineEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {

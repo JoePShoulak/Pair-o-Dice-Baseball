@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Uniform
+  m_Name: HomeUniform
   m_Shader: {fileID: -6465566751694194690, guid: b7a34b482baf4df4b9ec60db00f5b8ce, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,8 +29,8 @@ Material:
     - _BUILTIN_QueueOffset: 0
     - _Height: 0.08
     m_Colors:
-    - _Primary: {r: 1, g: 0, b: 0, a: 0}
-    - _Secondary: {r: 0.2472091, g: 0, b: 1, a: 0}
+    - _Primary: {r: 0.07450979, g: 0.15294121, b: 0.30980393, a: 1}
+    - _Secondary: {r: 0.80784315, g: 0.06666664, b: 0.25490195, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7094618314447266518
 MonoBehaviour:
