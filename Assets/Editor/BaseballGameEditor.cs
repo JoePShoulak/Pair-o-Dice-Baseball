@@ -5,13 +5,13 @@ using FibDev.Baseball;
 
 namespace FibDev.Editor
 {
-    [CustomEditor(typeof(Game))]
+    [CustomEditor(typeof(Engine))]
     public class BaseballGameEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
-            var script = (Game)target;
+            var script = (Engine)target;
 
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Reset State")) script.ResetState();

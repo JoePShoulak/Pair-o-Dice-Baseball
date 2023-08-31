@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace FibDev.Baseball
 {
-    public class Game : MonoBehaviour
+    public class Engine : MonoBehaviour
     {
         [SerializeField] private Record record;
 
