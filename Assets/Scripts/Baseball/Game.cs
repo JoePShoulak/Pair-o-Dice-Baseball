@@ -54,22 +54,20 @@ namespace FibDev.Baseball
         {
             var bPlay = Play.Random();
             Debug.Log(bPlay.name);
-            // LogPlay(bPlay);
 
             foreach (var bAction in bPlay.actions) HandleAction(bAction);
 
-            CheckForGameEnded();
             if (outs >= 3 && !gameEnded) AdvanceInning();
+
+            if (CheckForGameEnded()) EndGame();
         }
 
-
-        private void CheckForGameEnded()
+        private bool CheckForGameEnded()
         {
             var homeAtBatAndWinning = teamAtBat == TeamType.Home && record.LeadingTeam == TeamType.Home;
             var visitorsAtBatAndWinning = teamAtBat == TeamType.Visiting && record.LeadingTeam == TeamType.Visiting;
 
-            if (inning > 8 && homeAtBatAndWinning) EndGame();
-            else if (inning > 9 && visitorsAtBatAndWinning) EndGame();
+            return (inning > 8 && homeAtBatAndWinning) || (inning > 9 && visitorsAtBatAndWinning);
         }
 
         private void EndGame()
@@ -128,14 +126,12 @@ namespace FibDev.Baseball
                     bases.second.runnerOn = false;
                     outs++;
                     break;
+                case Operation.RecordHit:
+                    record.Add(inning, teamAtBat, RecordType.Hit);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(bAction), bAction, null);
             }
         }
-
-        // private void LogPlay(Play _event)
-        // {
-        //     foreach (var bAction in _event.actions) Debug.Log(bAction);
-        // }
     }
 }
