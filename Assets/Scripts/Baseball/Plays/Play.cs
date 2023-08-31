@@ -91,11 +91,11 @@ namespace FibDev.Baseball.Plays
 
                 StrikeOut,
                 FlyOut,
-                FlyOutPlus,
                 PopOut,
                 LineOut,
                 FoulOut,
                 GroundOut,
+                FlyOutPlus,
                 GroundOut2
             };
 

@@ -23,6 +23,6 @@ namespace FibDev.Baseball.Plays
         OutAtSecond,
 
         Cleanup,
-        RecordHit
+        RecordHit // smelly
     }
 }
