@@ -14,30 +14,30 @@ namespace FibDev.Baseball.Choreography
         [SerializeField] private FieldPositions field;
         [SerializeField] private GameObject playerPrefab;
 
-        private List<Team> teams;
-        private Team homeTeam;
-        private Team visitorTeam;
+        private List<Team> _teams;
+        private Team _homeTeam;
+        private Team _visitorTeam;
 
         private Dictionary<Position, GameObject> _homeTeamGOs = new();
         private Dictionary<Position, GameObject> _visitorTeamGOs = new();
 
-        private GameObject homePitcher;
-        private GameObject visitorPitcher;
+        private GameObject _homePitcher;
+        private GameObject _visitorPitcher;
 
         private Team GetTeam(TeamType pType)
         {
-            return teams[0].type == pType ? teams[0] : teams[1];
+            return _teams[0].type == pType ? _teams[0] : _teams[1];
         }
 
         public void SetupGame(List<Team> pTeams)
         {
-            teams = pTeams;
+            _teams = pTeams;
 
-            homeTeam = GetTeam(TeamType.Home);
-            visitorTeam = GetTeam(TeamType.Visiting);
+            _homeTeam = GetTeam(TeamType.Home);
+            _visitorTeam = GetTeam(TeamType.Visiting);
 
-            CreateTeam(homeTeam);
-            CreateTeam(visitorTeam);
+            CreateTeam(_homeTeam);
+            CreateTeam(_visitorTeam);
             
             TakeField(_homeTeamGOs);
             _visitorTeamGOs[Position.Catcher].GetComponent<NavMeshAgent>().SetDestination(field.Batter.position);
@@ -47,6 +47,7 @@ namespace FibDev.Baseball.Choreography
         {
             foreach (Position position in Enum.GetValues(typeof(Position)))
             {
+                Debug.Log(position);
                 CreatePlayer(pTeam, position);
             }
         }
@@ -60,8 +61,15 @@ namespace FibDev.Baseball.Choreography
             var player = Instantiate(playerPrefab, destination.position, Quaternion.identity);
             player.GetComponent<Player>().SetStats(playerStats);
 
-            if (pTeam.type == TeamType.Home) _homeTeamGOs.Add(pPosition, player);
-            if (pTeam.type == TeamType.Visiting) _visitorTeamGOs.Add(pPosition, player);
+            if (pTeam.type == TeamType.Home)
+            {
+                _homeTeamGOs.Add(pPosition, player);
+            }
+
+            if (pTeam.type == TeamType.Visiting)
+            {
+                _visitorTeamGOs.Add(pPosition, player);
+            }
         }
 
         private void TakeField(Dictionary<Position, GameObject> pDict)
