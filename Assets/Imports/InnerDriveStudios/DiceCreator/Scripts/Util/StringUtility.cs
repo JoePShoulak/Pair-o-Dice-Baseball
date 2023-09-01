@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Util
 {
     /**
      * Simple string utility to concatenate IEnumerable<int>'s (eg List<int>, int []) 

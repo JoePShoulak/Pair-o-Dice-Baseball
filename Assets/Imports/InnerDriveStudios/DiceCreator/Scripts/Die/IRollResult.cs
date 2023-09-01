@@ -1,4 +1,4 @@
-﻿namespace InnerDriveStudios.DiceCreator
+﻿namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Die
 {
     /**
      * A generic interface for roll results, no matter whether you are rolling a single 

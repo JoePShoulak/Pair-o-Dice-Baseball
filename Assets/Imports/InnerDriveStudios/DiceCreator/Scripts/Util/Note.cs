@@ -1,6 +1,9 @@
 using UnityEngine;
 
-[AddComponentMenu("Note/Add Note")]
-public class Note: MonoBehaviour  {
-	public string note ="Your note here!";
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Util
+{
+	[AddComponentMenu("Note/Add Note")]
+	public class Note: MonoBehaviour  {
+		public string note ="Your note here!";
+	}
 }

@@ -1,4 +1,6 @@
-﻿namespace InnerDriveStudios.DiceCreator
+﻿using Imports.InnerDriveStudios.DiceCreator.Scripts.Core;
+
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Die
 {
     /**
      * Represents the result for a single Die roll.

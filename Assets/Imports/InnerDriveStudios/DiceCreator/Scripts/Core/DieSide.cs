@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Imports.InnerDriveStudios.DiceCreator.Scripts.Util;
+using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Core
 {
     /**
     * The DieSide class represents all there is to know about a single DieSide:

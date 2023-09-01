@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Imports.InnerDriveStudios.DiceCreator.Scripts.Die;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.DieCollection
 {
     /**
      * Implements a DieCollectionDebugUI for a maximum of 9 dice, to show some information

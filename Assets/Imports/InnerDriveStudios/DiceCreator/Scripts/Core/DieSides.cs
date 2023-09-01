@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Core
 {
     /**
      * DieSides stores a collection of DieSide instances and can tell which DieSide is currently

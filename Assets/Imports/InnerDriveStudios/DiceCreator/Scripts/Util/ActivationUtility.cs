@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Util
 {
     /**
      * A simple utility class to toggle gameobjects on/off based on key presses for the demo scene.

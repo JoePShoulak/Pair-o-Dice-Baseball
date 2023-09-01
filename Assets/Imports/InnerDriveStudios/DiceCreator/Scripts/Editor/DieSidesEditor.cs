@@ -1,11 +1,14 @@
 ﻿using System;
-using UnityEditor;
-using UnityEngine;
-using UnityEditor.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
+using Imports.InnerDriveStudios.DiceCreator.Scripts.Core;
+using Imports.InnerDriveStudios.DiceCreator.Scripts.Materials;
+using Imports.InnerDriveStudios.DiceCreator.Scripts.Util;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Editor
 {
     /**
      * The DieSidesEditor provides the editor for the DieSides component, which allows you to fill
@@ -19,7 +22,7 @@ namespace InnerDriveStudios.DiceCreator
      */
     [CustomEditor(typeof(DieSides))]
     [CanEditMultipleObjects]
-    public class DieSidesEditor : Editor
+    public class DieSidesEditor : UnityEditor.Editor
     {
         //References to static variables for layouting:
 

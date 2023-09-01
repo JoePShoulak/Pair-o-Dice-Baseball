@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Die
 {
     /**
      * Simple debug class that prints information about status and the events thrown by a Die.

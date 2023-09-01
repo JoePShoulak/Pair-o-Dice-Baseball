@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace SojaExiles
+namespace Imports.Brick_Project_Studio.Apartment_Kit.Common.Scripts___Animation.Windows
 
 {
 	public class opencloseWindowApt : MonoBehaviour

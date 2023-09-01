@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Materials
 {
     /**
      * Describes a set of materials.

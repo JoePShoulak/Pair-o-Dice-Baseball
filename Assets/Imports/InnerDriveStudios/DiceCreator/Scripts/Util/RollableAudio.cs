@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Imports.InnerDriveStudios.DiceCreator.Scripts.Die;
 using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Util
 {
     /**
      * Scaffold for an audio script that you can add to any rollable.

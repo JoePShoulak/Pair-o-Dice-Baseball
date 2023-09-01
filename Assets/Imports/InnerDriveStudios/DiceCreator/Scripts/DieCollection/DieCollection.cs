@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using Imports.InnerDriveStudios.DiceCreator.Scripts.Die;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.DieCollection
 {
     /**
      * DieCollection is a component to which you can add other ARollable instances,

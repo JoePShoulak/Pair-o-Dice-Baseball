@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Core
 {
     /**
     * The DieAreaFinder class is a helper script used internally by the DieSidesEditor class to process 

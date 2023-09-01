@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using Imports.InnerDriveStudios.DiceCreator.Scripts.Core;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Die
 {
     /**
      * Shows debug information for a Die on a small worldcanvas.

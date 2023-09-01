@@ -1,19 +1,22 @@
-﻿using InnerDriveStudios.DiceCreator;
+﻿using Imports.InnerDriveStudios.DiceCreator.Scripts.Core;
 using UnityEngine;
 
-/**
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.SideUtility
+{
+	/**
  * Example implementation of IDieSideAware to handle textfields attached to a prefab.
  * Basically just passes on the values of a DieSide as a string to the text of the TextMesh.
  * 
  * @author J.C. Wichman 
  * @copyright Inner Drive Studios 2019
  */
-public class DieSideAwareTextDie : MonoBehaviour, IDieSideAware {
+	public class DieSideAwareTextDie : MonoBehaviour, IDieSideAware {
 
-	public void SetDieSide(int pIndex, DieSide pDieSide)
-	{
-		TextMesh textMesh = GetComponent<TextMesh>();
-		if (textMesh != null) textMesh.text = pDieSide.ValuesAsString();
+		public void SetDieSide(int pIndex, DieSide pDieSide)
+		{
+			TextMesh textMesh = GetComponent<TextMesh>();
+			if (textMesh != null) textMesh.text = pDieSide.ValuesAsString();
+		}
+
 	}
-
 }

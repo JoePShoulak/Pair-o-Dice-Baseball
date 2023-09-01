@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.DieCollection
 {
     /**
      * A class that allows you to trigger the main methods on a DieCollection through key presses.

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Die
 {
     /**
      * Sample script to demonstrate how we can zoom in on the result of a single Die.
@@ -89,7 +89,7 @@ namespace InnerDriveStudios.DiceCreator
             RaycastHit info;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            bool infoFound = Physics.Raycast(ray, out info);
+            bool infoFound = UnityEngine.Physics.Raycast(ray, out info);
             Die dieFound = infoFound ? info.transform.GetComponent<Die>() : null;
 
             if (infoFound && dieFound && (_zoomInOnARollingDieAllowed || !dieFound.isRolling))

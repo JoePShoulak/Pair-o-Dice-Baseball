@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Assets.SimpleColorPicker.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.SimpleColorPicker.Scripts
+namespace Imports.SimpleColorPicker.Scripts
 {
 	/// <summary>
 	/// Color picker window representation.
@@ -27,6 +29,8 @@ namespace Assets.SimpleColorPicker.Scripts
 
 		[HideInInspector] public Texture2D Texture;
 
+		public event Action<Color> OnColorSelected;
+
 		/// <summary>
 		/// Called on app start if script is enabled.
 		/// </summary>
@@ -45,6 +49,13 @@ namespace Assets.SimpleColorPicker.Scripts
 		{
 			CompareLook[0].color = Color;
 			Debug.LogFormat("Color selected: {0}", Color);
+			OnColorSelected?.Invoke(Color);
+			Close();
+		}
+
+		public void Close()
+		{
+			gameObject.SetActive(false);
 		}
 
 		/// <summary>

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Die
 {
     /**
      * An example of how we could trigger the rolling of a die by using a mouse.

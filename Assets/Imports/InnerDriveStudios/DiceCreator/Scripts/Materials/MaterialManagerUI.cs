@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Materials
 {
     /**
      * UI that lets you change the material for the given DieCollection to the material from a selected materialset.
@@ -22,7 +22,7 @@ namespace InnerDriveStudios.DiceCreator
 
 		//reference to full collection of dice
 		[SerializeField]
-		private DieCollection _dieCollection = null;
+		private DieCollection.DieCollection _dieCollection = null;
 
 		//internal storage of all dice in another format for quicker processing
 		private List<GameObject> _diceAsGameObjects = new List<GameObject>();

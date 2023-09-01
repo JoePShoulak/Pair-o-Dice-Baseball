@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using Imports.InnerDriveStudios.DiceCreator.Scripts.Die;
+using Imports.InnerDriveStudios.DiceCreator.Scripts.Util;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.DieCollection
 {
     /**
      * DieCollectionResult represents the totals and status for a whole collection of dice 

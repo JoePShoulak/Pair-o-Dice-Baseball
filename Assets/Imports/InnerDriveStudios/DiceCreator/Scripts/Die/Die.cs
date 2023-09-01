@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Imports.InnerDriveStudios.DiceCreator.Scripts.Core;
+using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Die
 {
     /**
      * This Die class subclasses ARollable to provide an abstract base for a single Die.

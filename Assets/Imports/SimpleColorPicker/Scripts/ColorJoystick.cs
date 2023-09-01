@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Imports.SimpleColorPicker.Scripts;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 

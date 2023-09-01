@@ -1,7 +1,8 @@
-﻿using UnityEditor;
+﻿using Imports.InnerDriveStudios.DiceCreator.Scripts.Die.Physics;
+using UnityEditor;
 using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Editor
 {
     /**
      * Simple editor that checks whether the component that the PhysicsDie is attached to
@@ -12,7 +13,7 @@ namespace InnerDriveStudios.DiceCreator
      */
     [CustomEditor(typeof(PhysicsDie))]
     [CanEditMultipleObjects]
-    public class PhysicsDieEditor : Editor
+    public class PhysicsDieEditor : UnityEditor.Editor
     {
 
         private void OnEnable()

@@ -1,9 +1,10 @@
-using TMPro;
-using UnityEngine;
-using Assets.SimpleColorPicker.Scripts;
 using FibDev.Baseball;
 using FibDev.Baseball.Player;
 using FibDev.Baseball.Teams;
+using Imports.SimpleColorPicker.Scripts;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace FibDev.UI
 {
@@ -11,9 +12,36 @@ namespace FibDev.UI
     {
         [SerializeField] private TMP_InputField cityField;
         [SerializeField] private TMP_InputField nameField;
-        [SerializeField] private ColorPicker primaryPicker;
-        [SerializeField] private ColorPicker secondaryPicker;
-        [SerializeField] private TeamType _type;
+        [SerializeField] private Button primaryButton;
+        [SerializeField] private Button secondaryButton;
+        [SerializeField] private ColorPicker popupPicker;
+        [SerializeField] private TeamType type;
+
+        private void Start()
+        {
+            primaryButton.onClick.AddListener(() =>
+            {
+                popupPicker.gameObject.SetActive(true);
+                popupPicker.OnColorSelected += SetPrimaryColor;
+            });
+            
+            secondaryButton.onClick.AddListener(() =>
+            {
+                popupPicker.gameObject.SetActive(true);
+                popupPicker.OnColorSelected += SetSecondaryColor;
+            });
+        }
+
+        private void SetPrimaryColor(Color pColor)
+        {
+            primaryButton.image.color = pColor;
+            popupPicker.OnColorSelected -= SetPrimaryColor;
+        }
+        private void SetSecondaryColor(Color pColor)
+        {
+            secondaryButton.image.color = pColor;
+            popupPicker.OnColorSelected -= SetSecondaryColor;
+        }
 
         public Team GetData()
         {
@@ -37,9 +65,9 @@ namespace FibDev.UI
             {
                 city = cityField.text,
                 name = nameField.text,
-                primary = primaryPicker.Color,
-                secondary = secondaryPicker.Color,
-                type = _type,
+                primary = primaryButton.image.color,
+                secondary = secondaryButton.image.color,
+                type = type,
 
                 players = selectedPlayers
             };

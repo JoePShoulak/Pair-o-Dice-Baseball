@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Materials
 {
     /**
      * Utility class to match GameObjects with materials from a given MaterialSet.

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Die.Physics
 {
     /**
      * This is a utility script to use in combination with a PhysicsDieController,

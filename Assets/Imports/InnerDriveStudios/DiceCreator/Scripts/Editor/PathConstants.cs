@@ -1,4 +1,4 @@
-﻿namespace InnerDriveStudios.DiceCreator
+﻿namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Editor
 {
     /**
      * Some paths referenced in this asset, all located in one place.

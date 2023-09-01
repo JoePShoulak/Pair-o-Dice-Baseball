@@ -1,11 +1,13 @@
-﻿using InnerDriveStudios.DiceCreator;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using Imports.InnerDriveStudios.DiceCreator.Scripts.Materials;
 using UnityEditor;
 using UnityEngine;
 
-/**
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Editor
+{
+	/**
  * MaterialSetRebuilder is a utility script to rebuild all MaterialSets including the final MaterialSetCollection
  * from all material folders in the Dice Creator Package. 
  * 
@@ -34,122 +36,123 @@ using UnityEngine;
  *	Workaround:
  *	- just run the script again
  */
-public class MaterialSetRebuilder : Editor {
+	public class MaterialSetRebuilder : UnityEditor.Editor {
 
-	[MenuItem("IDS/DiceCreator/Rebuild material sets")]
-	private static void rebuildMaterialSets()
-	{
-		deleteExistingMaterialSets();
-
-		//create an empty list to pass in the different methods to operate upon
-		List<MaterialSet> materialSetList = new List<MaterialSet>();
-		//fill thee list with the created material sets
-		createMaterialSetsForAllMaterialFolders(materialSetList);
-		//and now pass it in again to combine all sets into a collection
-		createOrUpdateMaterialSetCollection(materialSetList);
-
-		AssetDatabase.SaveAssets();
-		AssetDatabase.Refresh();
-	}
-
-	private static void deleteExistingMaterialSets()
-	{
-		Debug.Log("Deleting existing material sets...");
-		//find all GUIDs that reference an asset which is an instance of the MaterialSet scriptable object in the materials folder
-		string[] materialSetGUIDList = AssetDatabase.FindAssets("t:MaterialSet", new[] { PathConstants.MATERIALS_FOLDER });
-
-		//delete all found materialsets so we can rebuild them
-		foreach (string materialSetGUID in materialSetGUIDList)
+		[MenuItem("IDS/DiceCreator/Rebuild material sets")]
+		private static void rebuildMaterialSets()
 		{
-			string materialSetPath = AssetDatabase.GUIDToAssetPath(materialSetGUID);
-			AssetDatabase.DeleteAsset(materialSetPath);
-			Debug.Log("Deleted " + materialSetPath);
+			deleteExistingMaterialSets();
+
+			//create an empty list to pass in the different methods to operate upon
+			List<MaterialSet> materialSetList = new List<MaterialSet>();
+			//fill thee list with the created material sets
+			createMaterialSetsForAllMaterialFolders(materialSetList);
+			//and now pass it in again to combine all sets into a collection
+			createOrUpdateMaterialSetCollection(materialSetList);
+
+			AssetDatabase.SaveAssets();
+			AssetDatabase.Refresh();
 		}
-	}
 
-	private static void createMaterialSetsForAllMaterialFolders(List<MaterialSet> pMaterialSetList)
-	{
-		string[] subfolders = AssetDatabase.GetSubFolders(PathConstants.MATERIALS_FOLDER);
-		foreach (string subfolder in subfolders)
+		private static void deleteExistingMaterialSets()
 		{
-			string subfolderName = Path.GetFileName(subfolder);
-			if (subfolderName.StartsWith("_"))
+			Debug.Log("Deleting existing material sets...");
+			//find all GUIDs that reference an asset which is an instance of the MaterialSet scriptable object in the materials folder
+			string[] materialSetGUIDList = AssetDatabase.FindAssets("t:MaterialSet", new[] { PathConstants.MATERIALS_FOLDER });
+
+			//delete all found materialsets so we can rebuild them
+			foreach (string materialSetGUID in materialSetGUIDList)
 			{
-				Debug.Log("Skipping " + subfolderName);
-			} else
-			{
-				pMaterialSetList.Add (createMaterialSetAssetForSubFolder(subfolder));
-			}
-		}
-	}
-
-	private static MaterialSet createMaterialSetAssetForSubFolder(string pSubfolder)
-	{
-		Debug.Log("Processing " + pSubfolder);
-		//first create an instance of a MaterialSet scriptable object
-		MaterialSet materialSet = createMaterialSetForSubFolder(pSubfolder);
-		//and then store it in an asset
-		AssetDatabase.CreateAsset(materialSet, pSubfolder+".asset");
-		return materialSet;
-	}
-
-	private static MaterialSet createMaterialSetForSubFolder (string pSubfolder)
-	{
-		//get the last path from the subfolder, that will be the name of our material set
-		string materialSetName = Path.GetFileName(pSubfolder);
-		Debug.Log("Creating material set for:"+materialSetName);
-
-		MaterialSet materialSet = ScriptableObject.CreateInstance<MaterialSet>();
-		//turn MyMaterialSet into "My Material Set"
-		string[] nameParts = Regex.Split(materialSetName, @"(?<!^)(?=[A-Z])");
-		materialSet.description = (nameParts.Length == 0)?materialSetName:string.Join (" ", nameParts);
-		materialSet.materials = getAllMaterialsInFolder(pSubfolder);
-		return materialSet;
-	}
-
-	private static Material[] getAllMaterialsInFolder(string pSubfolder)
-	{
-		string materialSetName = Path.GetFileName(pSubfolder);
-		//get all material GUIDs in the given material set sub folder
-		string[] materialGUIDList= AssetDatabase.FindAssets("t:Material", new[] { pSubfolder });
-
-		List<Material> materials = new List<Material>();
-		foreach (string materialGUID in materialGUIDList)
-		{
-			string materialPath = AssetDatabase.GUIDToAssetPath(materialGUID);
-			string materialName = Path.GetFileName(materialPath);
-
-			Material material = (Material)AssetDatabase.LoadAssetAtPath(materialPath, typeof(Material));
-			materials.Add(material);
-			Debug.Log(material.name + " found.");
-
-			//rename the material file in the folder
-			if (materialName.Contains("_"))
-			{
-				string newMaterialName = materialName.Substring(0, materialName.IndexOf("_") + 1) + materialSetName + "Material";
-				AssetDatabase.RenameAsset(materialPath, newMaterialName);
+				string materialSetPath = AssetDatabase.GUIDToAssetPath(materialSetGUID);
+				AssetDatabase.DeleteAsset(materialSetPath);
+				Debug.Log("Deleted " + materialSetPath);
 			}
 		}
 
-		return materials.ToArray();
-	}
-
-	private static void createOrUpdateMaterialSetCollection(List<MaterialSet> pMaterialSetList)
-	{
-		string[] materialSetCollectionGUIDList = AssetDatabase.FindAssets("t:MaterialSetCollection", new[] { PathConstants.MATERIALS_FOLDER});
-
-		MaterialSetCollection msc = null;
-
-		if (materialSetCollectionGUIDList.Length == 0)
+		private static void createMaterialSetsForAllMaterialFolders(List<MaterialSet> pMaterialSetList)
 		{
-			Debug.Log("Creating new material set collection...");
-			msc = ScriptableObject.CreateInstance<MaterialSetCollection>();
-			AssetDatabase.CreateAsset(msc, PathConstants.MATERIALS_FOLDER + "/_MaterialSetCollection.asset");
-		} else {
-			Debug.Log("Updating existing material set collection...");
-			msc = AssetDatabase.LoadAssetAtPath<MaterialSetCollection>(AssetDatabase.GUIDToAssetPath(materialSetCollectionGUIDList[0]));
+			string[] subfolders = AssetDatabase.GetSubFolders(PathConstants.MATERIALS_FOLDER);
+			foreach (string subfolder in subfolders)
+			{
+				string subfolderName = Path.GetFileName(subfolder);
+				if (subfolderName.StartsWith("_"))
+				{
+					Debug.Log("Skipping " + subfolderName);
+				} else
+				{
+					pMaterialSetList.Add (createMaterialSetAssetForSubFolder(subfolder));
+				}
+			}
 		}
 
-		msc.materialSets = pMaterialSetList.ToArray();
+		private static MaterialSet createMaterialSetAssetForSubFolder(string pSubfolder)
+		{
+			Debug.Log("Processing " + pSubfolder);
+			//first create an instance of a MaterialSet scriptable object
+			MaterialSet materialSet = createMaterialSetForSubFolder(pSubfolder);
+			//and then store it in an asset
+			AssetDatabase.CreateAsset(materialSet, pSubfolder+".asset");
+			return materialSet;
+		}
+
+		private static MaterialSet createMaterialSetForSubFolder (string pSubfolder)
+		{
+			//get the last path from the subfolder, that will be the name of our material set
+			string materialSetName = Path.GetFileName(pSubfolder);
+			Debug.Log("Creating material set for:"+materialSetName);
+
+			MaterialSet materialSet = ScriptableObject.CreateInstance<MaterialSet>();
+			//turn MyMaterialSet into "My Material Set"
+			string[] nameParts = Regex.Split(materialSetName, @"(?<!^)(?=[A-Z])");
+			materialSet.description = (nameParts.Length == 0)?materialSetName:string.Join (" ", nameParts);
+			materialSet.materials = getAllMaterialsInFolder(pSubfolder);
+			return materialSet;
+		}
+
+		private static Material[] getAllMaterialsInFolder(string pSubfolder)
+		{
+			string materialSetName = Path.GetFileName(pSubfolder);
+			//get all material GUIDs in the given material set sub folder
+			string[] materialGUIDList= AssetDatabase.FindAssets("t:Material", new[] { pSubfolder });
+
+			List<Material> materials = new List<Material>();
+			foreach (string materialGUID in materialGUIDList)
+			{
+				string materialPath = AssetDatabase.GUIDToAssetPath(materialGUID);
+				string materialName = Path.GetFileName(materialPath);
+
+				Material material = (Material)AssetDatabase.LoadAssetAtPath(materialPath, typeof(Material));
+				materials.Add(material);
+				Debug.Log(material.name + " found.");
+
+				//rename the material file in the folder
+				if (materialName.Contains("_"))
+				{
+					string newMaterialName = materialName.Substring(0, materialName.IndexOf("_") + 1) + materialSetName + "Material";
+					AssetDatabase.RenameAsset(materialPath, newMaterialName);
+				}
+			}
+
+			return materials.ToArray();
+		}
+
+		private static void createOrUpdateMaterialSetCollection(List<MaterialSet> pMaterialSetList)
+		{
+			string[] materialSetCollectionGUIDList = AssetDatabase.FindAssets("t:MaterialSetCollection", new[] { PathConstants.MATERIALS_FOLDER});
+
+			MaterialSetCollection msc = null;
+
+			if (materialSetCollectionGUIDList.Length == 0)
+			{
+				Debug.Log("Creating new material set collection...");
+				msc = ScriptableObject.CreateInstance<MaterialSetCollection>();
+				AssetDatabase.CreateAsset(msc, PathConstants.MATERIALS_FOLDER + "/_MaterialSetCollection.asset");
+			} else {
+				Debug.Log("Updating existing material set collection...");
+				msc = AssetDatabase.LoadAssetAtPath<MaterialSetCollection>(AssetDatabase.GUIDToAssetPath(materialSetCollectionGUIDList[0]));
+			}
+
+			msc.materialSets = pMaterialSetList.ToArray();
+		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿namespace InnerDriveStudios.DiceCreator
+﻿using Imports.InnerDriveStudios.DiceCreator.Scripts.Core;
+
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.SideUtility
 {
 	/**
 	 * Describes an interface for instances of prefabs that have been attached to a Die through 

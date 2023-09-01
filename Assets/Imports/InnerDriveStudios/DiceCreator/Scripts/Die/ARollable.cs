@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Die
 {
     /**
      * ARollable is the abstract base class for anything rollable, eg Die or DieCollection.

@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator {
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Editor {
 
     /**
      * Helper class to show a small DieCreator / IDS Logo.

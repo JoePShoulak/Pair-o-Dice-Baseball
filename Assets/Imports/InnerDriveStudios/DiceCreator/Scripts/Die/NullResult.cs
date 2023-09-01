@@ -1,4 +1,4 @@
-﻿namespace InnerDriveStudios.DiceCreator
+﻿namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Die
 {
 	/**
 	 * Represents a zero result, used for disabled dice, to avoid exceptions.

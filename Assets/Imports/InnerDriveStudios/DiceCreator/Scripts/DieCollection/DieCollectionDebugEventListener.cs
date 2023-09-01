@@ -1,7 +1,8 @@
 ﻿using System.Text;
+using Imports.InnerDriveStudios.DiceCreator.Scripts.Die;
 using UnityEngine;
 
-namespace InnerDriveStudios.DiceCreator
+namespace Imports.InnerDriveStudios.DiceCreator.Scripts.DieCollection
 {
 
     /**

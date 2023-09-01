@@ -1,4 +1,4 @@
-﻿namespace InnerDriveStudios.DiceCreator
+﻿namespace Imports.InnerDriveStudios.DiceCreator.Scripts.Core
 {
     /**
      * DieSideMatchInfo is returned by the DieSides component, describing which DieSide most
