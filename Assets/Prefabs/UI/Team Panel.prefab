@@ -854,7 +854,7 @@ GameObject:
   - component: {fileID: 6545849809888113420}
   - component: {fileID: 7728987956197307548}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Players TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2508,8 +2508,8 @@ RectTransform:
   - {fileID: 3756640569506541960}
   - {fileID: 5665964510083843182}
   - {fileID: 6228445626667078030}
-  - {fileID: 9020165061605240941}
   - {fileID: 5888654156070390486}
+  - {fileID: 9020165061605240941}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

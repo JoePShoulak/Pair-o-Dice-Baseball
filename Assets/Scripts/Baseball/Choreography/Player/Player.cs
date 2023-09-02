@@ -1,7 +1,7 @@
 using FibDev.Baseball.Player;
 using UnityEngine;
 
-namespace FibDev.Baseball.Choreography
+namespace FibDev.Baseball.Choreography.Player
 {
     public class Player : MonoBehaviour
     {
@@ -14,7 +14,7 @@ namespace FibDev.Baseball.Choreography
             var decorator = GetComponent<Decorator>();
             decorator.SetColor(stats.primaryColor, stats.secondaryColor);
             decorator.SetJerseyNumber(stats.number);
-            
+            decorator.SetName(stats.playerName);
         }
     }
 }

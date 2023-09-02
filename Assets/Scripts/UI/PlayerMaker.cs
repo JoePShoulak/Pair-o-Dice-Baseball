@@ -3,7 +3,6 @@ using FibDev.Baseball;
 using FibDev.Baseball.Player;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace FibDev.UI
@@ -13,35 +12,44 @@ namespace FibDev.UI
         [SerializeField] private Position playerPosition;
         [SerializeField] private TMP_InputField nameField;
         [SerializeField] private TMP_InputField numberField;
-        
+
         [SerializeField] private Toggle leftyToggle;
-        
+
         [SerializeField] private TMP_Dropdown weightDropdown;
         [SerializeField] private TMP_Dropdown heightDropdown;
-        
+
         [SerializeField] private Slider skinToneSlider;
         [SerializeField] private Image skinToneImage;
-        
+
         [SerializeField] private Button upButton;
         [SerializeField] private Button downButton;
 
-        private static string GetDropdownText(TMP_Dropdown pDropdown)
+        private static T GetDropdownValueAsEnum<T>(TMP_Dropdown pDropdown) where T : struct
         {
-            return pDropdown.options[pDropdown.value].text;
+            return Enum.Parse<T>(pDropdown.options[pDropdown.value].text);
+        }
+
+        private static string GetInputFieldValueOrPlaceholder(TMP_InputField pInputField)
+        {
+            var fieldText = pInputField.text;
+            return fieldText.Length > 0 ? fieldText : pInputField.placeholder.GetComponent<TMP_Text>().text;
+        }
+
+        private static string PadJerseyNumber(string num)
+        {
+            return num.Length >= 2 ? num : $"0{num}";
         }
 
         public Stats CreatePlayer()
         {
-            var weightParsed = Enum.Parse<WeightType>(GetDropdownText(weightDropdown));
-            var heightParsed = Enum.Parse<HeightType>(GetDropdownText(heightDropdown));
-            
+
             var stats = new Stats
             {
-                playerName = nameField.text,
-                number = numberField.text == "" ? 0 : int.Parse(numberField.text),
+                playerName = GetInputFieldValueOrPlaceholder(nameField),
+                number = PadJerseyNumber(GetInputFieldValueOrPlaceholder(numberField)),
                 lefty = leftyToggle.isOn,
-                weight = weightParsed,
-                height = heightParsed,
+                weight = GetDropdownValueAsEnum<WeightType>(weightDropdown),
+                height = GetDropdownValueAsEnum<HeightType>(heightDropdown),
                 skinColor = skinToneImage.color,
                 position = playerPosition
             };

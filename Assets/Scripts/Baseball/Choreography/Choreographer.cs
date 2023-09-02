@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using FibDev.Baseball.Choreography.Positions;
 using UnityEngine;
-using FibDev.Baseball.Choreography.References;
 using FibDev.Baseball.Teams;
 using UnityEngine.AI;
 
@@ -59,7 +59,7 @@ namespace FibDev.Baseball.Choreography
             var playerStats = pTeam.Get(pPosition);
 
             var player = Instantiate(playerPrefab, destination.position, Quaternion.identity);
-            player.GetComponent<Player>().SetStats(playerStats);
+            player.GetComponent<Player.Player>().SetStats(playerStats);
 
             if (pTeam.type == TeamType.Home)
             {
