@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FibDev.Baseball.Player;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace FibDev.Baseball.Teams
 
         public TeamType type;
 
-        public Stats[] players;
+        public List<Stats> players;
 
         public Stats Get(Position pPosition)
         {
@@ -22,7 +23,7 @@ namespace FibDev.Baseball.Teams
                 if (player.position == pPosition) return player;
             }
 
-            throw new Exception("No player found");
+            throw new Exception($"No player found matching position {pPosition}");
         }
     }
 }

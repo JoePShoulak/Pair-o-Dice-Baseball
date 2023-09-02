@@ -1,4 +1,4 @@
-using FibDev.Baseball;
+using System.Collections.Generic;
 using FibDev.Baseball.Player;
 using FibDev.Baseball.Teams;
 using Imports.SimpleColorPicker.Scripts;
@@ -16,6 +16,8 @@ namespace FibDev.UI
         [SerializeField] private Button secondaryButton;
         [SerializeField] private ColorPicker popupPicker;
         [SerializeField] private TeamType type;
+        
+        [SerializeField] private List<PlayerMaker> playerMakers;
 
         private void Start()
         {
@@ -45,21 +47,11 @@ namespace FibDev.UI
 
         public Team GetData()
         {
-            // TODO: This is dumb
-            var selectedPlayers = new[]
+            List<Stats> selectedPlayers = new();
+            foreach (var maker in playerMakers)
             {
-                new Stats { position = Position.Pitcher },
-                new Stats { position = Position.Catcher },
-                new Stats { position = Position.Shortstop },
-
-                new Stats { position = Position.Baseman1st },
-                new Stats { position = Position.Baseman2nd },
-                new Stats { position = Position.Baseman3rd },
-
-                new Stats { position = Position.FielderLeft },
-                new Stats { position = Position.FielderCenter },
-                new Stats { position = Position.FielderRight },
-            };
+                selectedPlayers.Add(maker.CreatePlayer());
+            }
 
             var team = new Team
             {

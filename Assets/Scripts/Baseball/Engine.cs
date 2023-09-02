@@ -35,8 +35,8 @@ namespace FibDev.Baseball
 
         private void StartGame(List<Team> teams)
         {
-            LogTeamData(teams[0]);
-            LogTeamData(teams[1]);
+            // LogTeamData(teams[0]);
+            // LogTeamData(teams[1]);
             choreographer.SetupGame(teams);
         }
 
@@ -56,12 +56,12 @@ namespace FibDev.Baseball
 
         private static void LogPlayerData(Player.Stats player)
         {
-            Debug.Log($"  Name: {player.name}");
+            Debug.Log($"  Name: {player.playerName}");
             Debug.Log($"    Number: {player.number}");
             Debug.Log($"    Height: {player.height}");
             Debug.Log($"    Weight: {player.weight}");
             Debug.Log($"    Lefty?: {player.lefty}");
-            Debug.Log($"    Skin Tone: {player.skinTone}");
+            Debug.Log($"    Skin Tone: {player.skinColor}");
             Debug.Log($"    P. Color: {player.primaryColor}");
             Debug.Log($"    S. Color: {player.secondaryColor}");
             Debug.Log($"    Position: {player.position}");

@@ -17,10 +17,10 @@ namespace FibDev.UI
             var homeData = homeTeam.GetData();
             var visitingData = visitingTeam.GetData();
 
-            Debug.Log("Home Team: ");
-            LogTeamData(homeData);
-            Debug.Log("Visiting Team: ");
-            LogTeamData(visitingData);
+            // Debug.Log("Home Team: ");
+            // LogTeamData(homeData);
+            // Debug.Log("Visiting Team: ");
+            // LogTeamData(visitingData);
 
             var selection = new List<Team> { homeData, visitingData };
             OnTeamsSelected?.Invoke(selection);
