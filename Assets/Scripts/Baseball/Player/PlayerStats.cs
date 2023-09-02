@@ -4,7 +4,7 @@ using UnityEngine;
 namespace FibDev.Baseball.Player
 {
     [Serializable]
-    public class Stats
+    public class PlayerStats
     {
         public string playerName;
         public string number;

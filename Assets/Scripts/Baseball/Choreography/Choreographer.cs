@@ -145,7 +145,6 @@ namespace FibDev.Baseball.Choreography
         {
             foreach (Position position in Enum.GetValues(typeof(Position)))
             {
-                // Debug.Log(position);
                 CreatePlayer(pTeam, position);
             }
         }

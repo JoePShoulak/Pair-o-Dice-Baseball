@@ -3,7 +3,7 @@ using System;
 namespace FibDev.Baseball.Records
 {
     [Serializable]
-    public class Stats
+    public class InningStats
     {
         public int runs;
         public int hits;

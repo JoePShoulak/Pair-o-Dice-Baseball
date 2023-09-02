@@ -40,10 +40,10 @@ namespace FibDev.UI
             return num.Length >= 2 ? num : $"0{num}";
         }
 
-        public Stats CreatePlayer()
+        public PlayerStats CreatePlayer()
         {
 
-            var stats = new Stats
+            var stats = new PlayerStats
             {
                 playerName = GetInputFieldValueOrPlaceholder(nameField),
                 number = PadJerseyNumber(GetInputFieldValueOrPlaceholder(numberField)),

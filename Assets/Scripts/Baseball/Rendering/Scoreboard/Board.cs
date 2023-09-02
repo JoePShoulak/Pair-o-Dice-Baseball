@@ -19,8 +19,8 @@ namespace FibDev.Baseball.Rendering.Scoreboard
         {
             for (var i = 0; i < record.innings.Count; i++)
             {
-                visitorScoreboardRow.SetInning(i, record.innings[i].visitorStats.runs);
-                homeScoreboardRow.SetInning(i, record.innings[i].homeStats.runs);
+                visitorScoreboardRow.SetInning(i, record.innings[i].visitorInningStats.runs);
+                homeScoreboardRow.SetInning(i, record.innings[i].homeInningStats.runs);
             }
 
             visitorScoreboardRow.SetTotal(record.visitorTotal);

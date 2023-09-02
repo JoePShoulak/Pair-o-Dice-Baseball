@@ -10,8 +10,8 @@ namespace FibDev.Baseball.Records
     {
         public List<Inning> innings = new();
 
-        public Stats homeTotal = new();
-        public Stats visitorTotal = new();
+        public InningStats homeTotal = new();
+        public InningStats visitorTotal = new();
 
         public TeamType? LeadingTeam
         {

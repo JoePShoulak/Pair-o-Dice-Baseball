@@ -15,7 +15,7 @@ namespace FibDev.Baseball.Rendering.Scoreboard
         [SerializeField] private TMP_Text hits;
         [SerializeField] private TMP_Text errors;
 
-        public void SetTotal(Stats total)
+        public void SetTotal(InningStats total)
         {
             runs.text = total.runs.ToString();
             hits.text = total.hits.ToString();
@@ -41,7 +41,7 @@ namespace FibDev.Baseball.Rendering.Scoreboard
 
             teamName.text = "";
             
-            SetTotal(new Stats());
+            SetTotal(new InningStats());
         }
     }
 }

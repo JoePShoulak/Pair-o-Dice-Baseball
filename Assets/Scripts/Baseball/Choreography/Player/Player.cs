@@ -5,16 +5,16 @@ namespace FibDev.Baseball.Choreography.Player
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField] private Stats stats;
+        [SerializeField] private PlayerStats playerStats;
 
-        public void SetStats(Stats pStats)
+        public void SetStats(PlayerStats pPlayerStats)
         {
-            stats = pStats;
+            playerStats = pPlayerStats;
 
             var decorator = GetComponent<Decorator>();
-            decorator.SetColor(stats.primaryColor, stats.secondaryColor);
-            decorator.SetJerseyNumber(stats.number);
-            decorator.SetName(stats.playerName);
+            decorator.SetColor(playerStats.primaryColor, playerStats.secondaryColor);
+            decorator.SetJerseyNumber(playerStats.number);
+            decorator.SetName(playerStats.playerName);
         }
     }
 }
