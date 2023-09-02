@@ -30,21 +30,20 @@ namespace Imports.SimpleColorPicker.Scripts
 		[HideInInspector] public ColorSlider v;
 
 		private RectTransform _rectTransform;
-		private ColorJoystick _colorJoystick;
+		public ColorJoystick _colorJoystick;
 		private Slider _hue;
 		public event Action<Color> OnColorSelected;
 
 		public void Start()
 		{
 			_rectTransform = gradient.GetComponent<RectTransform>();
-			_colorJoystick = gradient.GetComponentInChildren<ColorJoystick>();
 			_hue = gradient.GetComponentInChildren<Slider>();
 
 			AssignSlidersFromChildren();
 
 			texture = new Texture2D(128, 128) { filterMode = FilterMode.Point };
 			gradient.sprite = Sprite.Create(texture, new Rect(0f, 0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
-			SetColor(color);
+				SetColor(color);
 			compareLook[0].color = color;
 		}
 

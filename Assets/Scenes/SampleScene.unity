@@ -728,29 +728,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97030d6bf5bf43848c260384dd6784d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Color: {r: 0.5882353, g: 0.19607845, b: 1, a: 1}
-  ColorMode: 0
-  ColorJoystick: {fileID: 420930085}
-  Gradient: {fileID: 1454861772}
-  RectTransform: {fileID: 1454861775}
-  Hue: {fileID: 571256388}
-  R: {fileID: 274377749}
-  G: {fileID: 1923715488}
-  B: {fileID: 965155608}
-  H: {fileID: 2009443079}
-  S: {fileID: 632268452}
-  V: {fileID: 1881563937}
-  A: {fileID: 164328350}
-  Hex: {fileID: 1848484313}
-  CompareLook:
+  color: {r: 0, g: 0, b: 0, a: 1}
+  colorMode: 0
+  gradient: {fileID: 1454861772}
+  a: {fileID: 164328350}
+  hex: {fileID: 1848484313}
+  compareLook:
   - {fileID: 1972375261}
   - {fileID: 1460756813}
-  TransparencyLook: {fileID: 116951204}
-  Mode: {fileID: 120604186}
-  RgbSliders: {fileID: 890431028}
-  HsvSliders: {fileID: 1802979825}
-  Locked: 0
-  Texture: {fileID: 0}
+  transparencyLook: {fileID: 740764467}
+  mode: {fileID: 120604186}
+  rgbSliders: {fileID: 890431028}
+  hsvSliders: {fileID: 1802979825}
+  locked: 0
+  texture: {fileID: 0}
+  r: {fileID: 0}
+  g: {fileID: 0}
+  b: {fileID: 0}
+  h: {fileID: 0}
+  s: {fileID: 0}
+  v: {fileID: 0}
+  _colorJoystick: {fileID: 420930085}
 --- !u!1 &102513992
 GameObject:
   m_ObjectHideFlags: 0
@@ -3162,10 +3160,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b676c92ee02e4aacb6fabdb4e3143ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 118222003}
-  Center: {fileID: 511044160}
-  RectTransform: {fileID: 1454861775}
-  ColorPicker: {fileID: 69969061}
+  canvas: {fileID: 118222003}
+  rectTransform: {fileID: 1454861775}
+  colorPicker: {fileID: 69969061}
+  center: {fileID: 420930087}
 --- !u!224 &420930086
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9543,8 +9541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79cd9794f6074356b4c7926ec9176af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 118222003}
-  ColorJoystick: {fileID: 420930085}
+  canvas: {fileID: 118222003}
 --- !u!224 &1454861775
 RectTransform:
   m_ObjectHideFlags: 0

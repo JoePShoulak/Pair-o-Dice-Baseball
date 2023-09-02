@@ -12,7 +12,7 @@ namespace Imports.SimpleColorPicker.Scripts
 
         [HideInInspector] public Image center;
         
-        private void Start()
+        private void Awake()
         {
             center = GetComponent<Image>();
         }
