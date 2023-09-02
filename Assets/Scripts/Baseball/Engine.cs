@@ -30,7 +30,12 @@ namespace FibDev.Baseball
             ResetState();
 
             TeamSelectUI.OnTeamsSelected += StartGame;
-            Dice.RollProcessor.OnRollProcessed += NextPlay;
+            Dice.RollProcessor.OnRollProcessed += HandleRoll;
+        }
+
+        private void HandleRoll(int pObj)
+        {
+            NextPlay(Play.Random());
         }
 
         private void StartGame(List<Team> teams)
@@ -97,9 +102,9 @@ namespace FibDev.Baseball
             inning++;
         }
 
-        public void NextPlay(int input = 0)
+        public void NextPlay(Play play = null)
         {
-            var bPlay = Play.Random();
+            var bPlay = play ?? Play.Random();
             Debug.Log(bPlay.name);
 
             foreach (var bAction in bPlay.actions) HandleAction(bAction);

@@ -1,13 +1,15 @@
 using UnityEditor;
 using UnityEngine;
-
 using FibDev.Baseball;
+using FibDev.Baseball.Plays;
 
 namespace FibDev.Editor
 {
     [CustomEditor(typeof(Engine))]
     public class EngineEditor : UnityEditor.Editor
     {
+        private bool showPlaysSection = true;
+
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
@@ -16,12 +18,23 @@ namespace FibDev.Editor
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Reset State")) script.ResetState();
             EditorGUI.BeginDisabledGroup(script.gameEnded);
-            if (GUILayout.Button("Next Play")) script.NextPlay();
+            if (GUILayout.Button("Random Play")) script.NextPlay(Play.Random());
             GUILayout.EndHorizontal();
-            if (GUILayout.Button("Play Entire Game"))
+
+            if (GUILayout.Button("Play Until Finished"))
             {
-                script.ResetState();
                 while (!script.gameEnded) script.NextPlay();
+            }
+            
+            showPlaysSection = EditorGUILayout.Foldout(showPlaysSection, "Plays");
+            if (showPlaysSection)
+            {
+                EditorGUI.indentLevel++;
+                foreach (var play in Play.plays.Values)
+                {
+                    if (GUILayout.Button(play.name)) script.NextPlay(play);
+                }
+                EditorGUI.indentLevel--;
             }
 
             EditorGUI.EndDisabledGroup();
