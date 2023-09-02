@@ -17,8 +17,8 @@ namespace FibDev.Baseball.Choreography
 
         private Dictionary<TeamType, Team> _teams;
 
-        private readonly Dictionary<Position, GameObject> _homeTeamGOs = new();
-        private readonly Dictionary<Position, GameObject> _visitorTeamGOs = new();
+        private readonly Dictionary<Position, Player.Player> _homeTeam = new();
+        private readonly Dictionary<Position, Player.Player> _visitorTeam = new();
 
         private GameObject _homePitcher;
         private GameObject _visitorPitcher;
@@ -31,8 +31,14 @@ namespace FibDev.Baseball.Choreography
 
         private void Start()
         {
-            OnMovementStart += () => { _movementUnfolding = true;};
-            OnMovementEnd += () => { _movementUnfolding = false;};
+            OnMovementStart += () => {
+                _movementUnfolding = true;
+                Debug.Log("Movement started");
+            };
+            OnMovementEnd += () => {
+                _movementUnfolding = false;
+                Debug.Log("Movement Ended");
+            };
         }
 
         private void Update()
@@ -42,20 +48,27 @@ namespace FibDev.Baseball.Choreography
             if (CheckPlayHasBeenReset()) OnMovementEnd?.Invoke();
         }
 
-        private IEnumerable<GameObject> AllPlayerGOs
+        private IEnumerable<Player.Player> AllPlayers
         {
             get
             {
-                var allPlayers = new List<GameObject>();
+                var allPlayers = new List<Player.Player>();
 
-                allPlayers.AddRange(_homeTeamGOs.Values.ToList());
-                allPlayers.AddRange(_visitorTeamGOs.Values.ToList());
+                allPlayers.AddRange(_homeTeam.Values.ToList());
+                allPlayers.AddRange(_visitorTeam.Values.ToList());
 
                 return allPlayers;
             }
         }
 
-        public bool PlayersReset => false; // TODO: Implement
+        public bool PlayersReset
+        {
+            get
+            {
+                return AllPlayers.All(player => player.IsIdle());
+            }
+        }
+
         public bool BatterAtPlate => false; // TODO: Implement
         public bool PitcherHasBall => false; // TODO: Implement
         public bool IdlePlayersInDugout => false; // TODO: Implement
@@ -69,8 +82,9 @@ namespace FibDev.Baseball.Choreography
             CreateTeam(_teams[TeamType.Home]);
             CreateTeam(_teams[TeamType.Visiting]);
 
-            TakePositions(_homeTeamGOs);
-            _visitorTeamGOs.Values.ToList()[0].GetComponent<NavMeshAgent>().SetDestination(field.Batter.position);
+            TakePositions(_homeTeam);
+            _visitorTeam.Values.ToList()[0].SetIdlePosition(field.Batter);
+            _visitorTeam.Values.ToList()[0].GoToIdle();
         }
 
         private bool CheckPlayHasBeenReset()
@@ -81,7 +95,7 @@ namespace FibDev.Baseball.Choreography
             // The pitcher must have the ball
             // Anyone but the batter and the 9 fielders are in the dugout
             
-            return false;
+            return PlayersReset;
         }
 
         public void RunPlay()
@@ -156,16 +170,17 @@ namespace FibDev.Baseball.Choreography
             var destination = dugout.positions[pPosition];
             var playerStats = pTeam.players[pPosition];
 
-            var player = Instantiate(playerPrefab, destination.position, Quaternion.identity);
-            player.GetComponent<Player.Player>().SetStats(playerStats);
+            var player = Instantiate(playerPrefab, destination.position, Quaternion.identity).GetComponent<Player.Player>();
+            player.SetStats(playerStats);
+            player.SetIdlePosition(destination);
 
             switch (pTeam.type)
             {
                 case TeamType.Home:
-                    _homeTeamGOs.Add(pPosition, player);
+                    _homeTeam.Add(pPosition, player);
                     break;
                 case TeamType.Visiting:
-                    _visitorTeamGOs.Add(pPosition, player);
+                    _visitorTeam.Add(pPosition, player);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -174,12 +189,12 @@ namespace FibDev.Baseball.Choreography
 
         // TODO: Have players store their "home" position on the field in a new class to work with the nav mesh agent
         // This will allow for easier checks on if all players are in the correct position on the field
-        private void TakePositions(Dictionary<Position, GameObject> pDict)
+        private void TakePositions(Dictionary<Position, Player.Player> pDict)
         {
             foreach (var (pPosition, playerObj) in pDict)
             {
-                var destination = field.positions[pPosition].position; // Man, this sucks
-                playerObj.GetComponent<NavMeshAgent>().SetDestination(destination);
+                playerObj.SetIdlePosition(field.positions[pPosition]);
+                playerObj.GoToIdle();
             }
         }
     }

@@ -41,7 +41,7 @@ namespace FibDev.Baseball
 
         private void HandleRoll(int pObj)
         {
-            // if (!readyForRoll) return;
+            if (!readyForRoll) return;
 
             NextPlay(Play.Random());
         }
