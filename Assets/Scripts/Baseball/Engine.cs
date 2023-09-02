@@ -20,9 +20,9 @@ namespace FibDev.Baseball
         [SerializeField] private int outs;
         [SerializeField] private Bases.Bases bases;
         public bool gameEnded;
+        private bool readyForRoll;
 
         [SerializeField] private Board scoreboard;
-
         [SerializeField] private Choreographer choreographer;
 
         private void Start()
@@ -31,45 +31,25 @@ namespace FibDev.Baseball
 
             TeamSelectUI.OnTeamsSelected += StartGame;
             Dice.RollProcessor.OnRollProcessed += HandleRoll;
+            choreographer.OnMovementEnd += () =>
+            {
+                readyForRoll = true;
+                Debug.Log("Ready for roll");
+            };
         }
 
         private void HandleRoll(int pObj)
         {
+            // if (!readyForRoll) return;
+
             NextPlay(Play.Random());
         }
 
         private void StartGame(List<Team> teams)
         {
-            // LogTeamData(teams[0]);
-            // LogTeamData(teams[1]);
+            // teams[0].Log();
+            // teams[1].Log();
             choreographer.SetupGame(teams);
-        }
-
-        private static void LogTeamData(Team data)
-        {
-            Debug.Log($"Name: {data.city} {data.name}");
-            Debug.Log($"  P. Color: {data.primary}");
-            Debug.Log($"  S. Color: {data.secondary}");
-            Debug.Log($"  Type: {data.type}");
-
-            Debug.Log("\n  Players:");
-            foreach (var player in data.players)
-            {
-                LogPlayerData(player);
-            }
-        }
-
-        private static void LogPlayerData(Player.Stats player)
-        {
-            Debug.Log($"  Name: {player.playerName}");
-            Debug.Log($"    Number: {player.number}");
-            Debug.Log($"    Height: {player.height}");
-            Debug.Log($"    Weight: {player.weight}");
-            Debug.Log($"    Lefty?: {player.lefty}");
-            Debug.Log($"    Skin Tone: {player.skinColor}");
-            Debug.Log($"    P. Color: {player.primaryColor}");
-            Debug.Log($"    S. Color: {player.secondaryColor}");
-            Debug.Log($"    Position: {player.position}");
         }
 
         public void ResetState() // for debug
@@ -104,6 +84,7 @@ namespace FibDev.Baseball
 
         public void NextPlay(Play play = null)
         {
+            readyForRoll = false;
             var bPlay = play ?? Play.Random();
             Debug.Log(bPlay.name);
 
@@ -159,8 +140,6 @@ namespace FibDev.Baseball
                     break;
                 case Operation.PitcherThrowStrike:
                     break;
-                case Operation.Cleanup:
-                    break;
                 case Operation.PitcherThrowsBall:
                     break;
                 case Operation.PitcherHitsPlayer:
@@ -181,6 +160,8 @@ namespace FibDev.Baseball
                     break;
                 case Operation.RecordHit:
                     record.Add(inning, teamAtBat, StatType.Hit);
+                    break;
+                case Operation.Cleanup:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(bAction), bAction, null);

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using FibDev.Baseball.Player;
 using UnityEngine;
@@ -14,16 +13,19 @@ namespace FibDev.Baseball.Teams
 
         public TeamType type;
 
-        public List<Stats> players;
+        public Dictionary<Position, Stats> players; // TODO: Make this a dict
 
-        public Stats Get(Position pPosition)
+
+        public void Log()
         {
-            foreach (var player in players)
-            {
-                if (player.position == pPosition) return player;
-            }
+            
+            Debug.Log($"Name: {city} {name}");
+            Debug.Log($"  P. Color: {primary}");
+            Debug.Log($"  S. Color: {secondary}");
+            Debug.Log($"  Type: {type}");
 
-            throw new Exception($"No player found matching position {pPosition}");
+            Debug.Log("\n  Players:");
+            foreach (var player in players.Values) player.Log();
         }
     }
 }

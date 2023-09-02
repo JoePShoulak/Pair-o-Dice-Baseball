@@ -8,7 +8,7 @@ namespace FibDev
     public class Debugger : MonoBehaviour
     {
         [SerializeField] private CameraMovement cam;
-        [SerializeField] NavMeshAgent agent;
+        [SerializeField] private NavMeshAgent agent;
         private OverlayManager _overlay; // Cached
 
         private void Start()

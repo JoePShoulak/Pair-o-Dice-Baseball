@@ -16,5 +16,18 @@ namespace FibDev.Baseball.Player
         public Color secondaryColor;
         public Color skinColor;
         public Position position;
+
+        public void Log()
+        {
+            Debug.Log($"  Name: {playerName}");
+            Debug.Log($"    Number: {number}");
+            Debug.Log($"    Height: {height}");
+            Debug.Log($"    Weight: {weight}");
+            Debug.Log($"    Lefty?: {lefty}");
+            Debug.Log($"    Skin Tone: {skinColor}");
+            Debug.Log($"    P. Color: {primaryColor}");
+            Debug.Log($"    S. Color: {secondaryColor}");
+            Debug.Log($"    Position: {position}");
+        }
     }
 }

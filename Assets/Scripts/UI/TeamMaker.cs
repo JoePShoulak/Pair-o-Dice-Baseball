@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FibDev.Baseball;
 using FibDev.Baseball.Player;
 using FibDev.Baseball.Teams;
 using Imports.SimpleColorPicker.Scripts;
@@ -47,10 +48,11 @@ namespace FibDev.UI
 
         public Team GetData()
         {
-            List<Stats> selectedPlayers = new();
+            Dictionary<Position, Stats> selectedPlayers = new();
             foreach (var maker in playerMakers)
             {
-                selectedPlayers.Add(maker.CreatePlayer());
+                var player = maker.CreatePlayer();
+                selectedPlayers.Add(player.position, player);
             }
 
             var team = new Team
@@ -64,7 +66,7 @@ namespace FibDev.UI
                 players = selectedPlayers
             };
 
-            foreach (var player in team.players)
+            foreach (var player in team.players.Values)
             {
                 player.primaryColor = team.primary;
                 player.secondaryColor = team.secondary;

@@ -12,6 +12,6 @@ namespace FibDev.Baseball
 
         FielderLeft,
         FielderCenter,
-        FielderRight,
+        FielderRight
     }
 }
