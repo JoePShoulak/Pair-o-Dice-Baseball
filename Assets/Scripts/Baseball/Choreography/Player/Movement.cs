@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,7 +7,7 @@ namespace FibDev.Baseball.Choreography.Player
     {
         private NavMeshAgent _agent;
 
-        public Vector3 IdlePosition { get; set;  }
+        public Vector3 IdlePosition { get; set; }
         [SerializeField] private float idleDetectionRadius = 1f;
         public bool IsIdle { get; private set; } = true;
 

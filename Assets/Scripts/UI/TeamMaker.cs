@@ -47,6 +47,12 @@ namespace FibDev.UI
             secondaryButton.image.color = pColor;
             popupPicker.OnColorSelected -= SetSecondaryColor;
         }
+        
+        private static string GetInputFieldValueOrPlaceholder(TMP_InputField pInputField)
+        {
+            var fieldText = pInputField.text;
+            return fieldText.Length > 0 ? fieldText : pInputField.placeholder.GetComponent<TMP_Text>().text;
+        }
 
         public Team GetData()
         {
@@ -56,8 +62,8 @@ namespace FibDev.UI
 
             var team = new Team
             {
-                city = cityField.text,
-                name = nameField.text,
+                city = GetInputFieldValueOrPlaceholder(cityField),
+                name = GetInputFieldValueOrPlaceholder(nameField),
                 primary = primaryButton.image.color,
                 secondary = secondaryButton.image.color,
                 type = type,
