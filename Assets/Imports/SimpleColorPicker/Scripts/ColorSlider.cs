@@ -1,8 +1,7 @@
-﻿using Imports.SimpleColorPicker.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.SimpleColorPicker.Scripts
+namespace Imports.SimpleColorPicker.Scripts
 {
 	/// <summary>
 	/// Slider representation (RGBA, HSV).
@@ -33,7 +32,7 @@ namespace Assets.SimpleColorPicker.Scripts
 		/// </summary>
 		public void OnValueChanged(float value)
 		{
-			if (ColorPicker.Locked) return;
+			if (ColorPicker.locked) return;
 
 			InputField.text = Mathf.RoundToInt(value * MaxValue).ToString();
 			ColorPicker.OnSliderChanged();
@@ -44,7 +43,7 @@ namespace Assets.SimpleColorPicker.Scripts
 		/// </summary>
 		public void OnValueChanged(string value)
 		{
-			if (ColorPicker.Locked) return;
+			if (ColorPicker.locked) return;
 
 			value = value.Replace("-", null);
 

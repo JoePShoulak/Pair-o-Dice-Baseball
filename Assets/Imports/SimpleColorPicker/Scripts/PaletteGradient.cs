@@ -1,35 +1,34 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.SimpleColorPicker.Scripts
+namespace Imports.SimpleColorPicker.Scripts
 {
-	/// <summary>
-	/// Main gradient representation (brightness/saturation).
-	/// </summary>
-	public class PaletteGradient : MonoBehaviour, IPointerDownHandler, IDragHandler
+    public class PaletteGradient : MonoBehaviour, IPointerDownHandler, IDragHandler
     {
-        public Canvas Canvas;
-		public ColorJoystick ColorJoystick;
+        public Canvas canvas;
+        private ColorJoystick _colorJoystick;
 
-		/// <summary>
-		/// Called when user clicks area.
-		/// </summary>
-		public void OnPointerDown(PointerEventData eventData)
-		{
-			if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, Canvas.renderMode == RenderMode.ScreenSpaceCamera ? Camera.main : null, out var position))
-			{
-				return;
-			}
+        private void Start()
+        {
+            _colorJoystick = GetComponentInChildren<ColorJoystick>();
+        }
 
-			ColorJoystick.OnDrag(eventData);
-		}
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            var cam = canvas.renderMode == RenderMode.ScreenSpaceCamera ? Camera.main : null;
+            var rect = GetComponent<RectTransform>();
+            var clickOutsideRect =
+                !RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, eventData.position, cam, out _);
 
-		/// <summary>
-		/// Called when user drags color picker.
-		/// </summary>
-		public void OnDrag(PointerEventData eventData)
-		{
-			ColorJoystick.OnDrag(eventData);
-		}
-	}
+            if (clickOutsideRect) return;
+
+            _colorJoystick.OnDrag(eventData);
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            _colorJoystick.OnDrag(eventData);
+        }
+    }
 }

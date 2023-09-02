@@ -1,55 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Assets.SimpleColorPicker.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Imports.SimpleColorPicker.Scripts
 {
-	/// <summary>
-	/// Color picker window representation.
-	/// </summary>
 	public class ColorPicker : MonoBehaviour
 	{
-		public Color Color;
-		public ColorMode ColorMode;
-		public ColorJoystick ColorJoystick;
-		public Image Gradient;
-		public RectTransform RectTransform;
-		public Slider Hue;
-		public ColorSlider R, G, B, H, S, V, A;
-		public InputField Hex;
-		public Image[] CompareLook; // [0] is old color, [1] is new color.
-		public Image TransparencyLook;
-		public Text Mode;
-		public GameObject RgbSliders;
-		public GameObject HsvSliders;
-		public bool Locked;
+		public Color color;
+		public ColorMode colorMode;
+		
+		public Image gradient;
+		public ColorSlider a;
+		public InputField hex;
+		public Image[] compareLook; // [0] is old color, [1] is new color.
+		public Image transparencyLook;
+		public Text mode;
+		public GameObject rgbSliders;
+		public GameObject hsvSliders;
+		public bool locked;
 
-		[HideInInspector] public Texture2D Texture;
+		[HideInInspector] public Texture2D texture;
+		[HideInInspector] public ColorSlider r;
+		[HideInInspector] public ColorSlider g;
+		[HideInInspector] public ColorSlider b;
+		[HideInInspector] public ColorSlider h;
+		[HideInInspector] public ColorSlider s;
+		[HideInInspector] public ColorSlider v;
 
+		private RectTransform _rectTransform;
+		private ColorJoystick _colorJoystick;
+		private Slider _hue;
 		public event Action<Color> OnColorSelected;
 
-		/// <summary>
-		/// Called on app start if script is enabled.
-		/// </summary>
 		public void Start()
 		{
-			Texture = new Texture2D(128, 128) { filterMode = FilterMode.Point };
-			Gradient.sprite = Sprite.Create(Texture, new Rect(0f, 0f, Texture.width, Texture.height), new Vector2(0.5f, 0.5f), 100f);
-			SetColor(Color);
-			CompareLook[0].color = Color;
+			_rectTransform = gradient.GetComponent<RectTransform>();
+			_colorJoystick = gradient.GetComponentInChildren<ColorJoystick>();
+			_hue = gradient.GetComponentInChildren<Slider>();
+
+			AssignSlidersFromChildren();
+
+			texture = new Texture2D(128, 128) { filterMode = FilterMode.Point };
+			gradient.sprite = Sprite.Create(texture, new Rect(0f, 0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
+			SetColor(color);
+			compareLook[0].color = color;
 		}
 
-		/// <summary>
-		/// Called when Select button pressed
-		/// </summary>
+		private void AssignSlidersFromChildren()
+		{
+			var children = new List<ColorSlider>(rgbSliders.GetComponentsInChildren<ColorSlider>());
+			children.AddRange(hsvSliders.GetComponentsInChildren<ColorSlider>());
+			foreach (var child in children)
+			{
+				if (child.name == "R") r = child;
+				else if (child.name == "G") g = child;
+				else if (child.name == "B") b = child;
+				else if (child.name == "H") h = child;
+				else if (child.name == "S") s = child;
+				else if (child.name == "V") v = child;
+			}
+		}
+
 		public void Select()
 		{
-			CompareLook[0].color = Color;
-			Debug.LogFormat("Color selected: {0}", Color);
-			OnColorSelected?.Invoke(Color);
+			compareLook[0].color = color;
+			Debug.LogFormat("Color selected: {0}", color);
+			OnColorSelected?.Invoke(color);
 			Close();
 		}
 
@@ -58,146 +76,113 @@ namespace Imports.SimpleColorPicker.Scripts
 			gameObject.SetActive(false);
 		}
 
-		/// <summary>
-		/// Write a review.
-		/// </summary>
-		public void Review()
+		public void SetColor(Color pColor, bool pPicker = true, bool pSliders = true, bool pHex = true, bool pHue = true)
 		{
-			Application.OpenURL("http://u3d.as/1cTo");
+			Color.RGBToHSV(pColor, out var oH, out var oS, out var oV);
+			SetColor(oS > 0 ? oH : h.Value, oS, oV, pColor.a, pPicker, pSliders, pHex, pHue);
 		}
 
-		/// <summary>
-		/// Set color picker RGB color.
-		/// </summary>
-		public void SetColor(Color color, bool picker = true, bool sliders = true, bool hex = true, bool hue = true)
+		private void SetColor(float pH, float pS, float pV, float pA, bool pPicker = true, bool pSliders = true, bool pHex = true, bool pHue = true)
 		{
-			float h, s, v;
+			var newColor = Color.HSVToRGB(pH, pS, pV);
 
-			Color.RGBToHSV(color, out h, out s, out v);
-			SetColor(s > 0 ? h : H.Value, s, v, color.a, picker, sliders, hex, hue);
-		}
+			newColor.a = pA;
 
-		/// <summary>
-		/// Set color picker HSV color.
-		/// </summary>
-		public void SetColor(float h, float s, float v, float a, bool picker = true, bool sliders = true, bool hex = true, bool hue = true)
-		{
-			var color = Color.HSVToRGB(h, s, v);
+			color = transparencyLook.color = compareLook[1].color = newColor;
+			_colorJoystick.center.color = new Color(color.r, color.g, color.b);
+			locked = true;
 
-			color.a = a;
-
-			Color = TransparencyLook.color = CompareLook[1].color = color;
-			ColorJoystick.Center.color = new Color(Color.r, Color.g, Color.b);
-			Locked = true;
-
-			if (sliders || ColorMode == ColorMode.Hsv)
+			if (pSliders || colorMode == ColorMode.Hsv)
 			{
-				R.Set(Color.r);
-				G.Set(Color.g);
-				B.Set(Color.b);
+				r.Set(color.r);
+				g.Set(color.g);
+				b.Set(color.b);
 			}
 
-			if (sliders || ColorMode == ColorMode.Rgb)
+			if (pSliders || colorMode == ColorMode.Rgb)
 			{
-				H.Set(h);
-				S.Set(s);
-				V.Set(v);
+				h.Set(pH);
+				s.Set(pS);
+				v.Set(pV);
 			}
 
-			A.Set(Color.a);
+			a.Set(color.a);
 
-			if (hue) Hue.value = h;
-			if (hex) Hex.text = ColorUtility.ToHtmlStringRGBA(Color);
-			if (picker) ColorJoystick.transform.localPosition = new Vector2(s * Texture.width / Texture.width * RectTransform.rect.width, v * Texture.height / Texture.height * RectTransform.rect.height);
+			if (pHue) _hue.value = pH;
+			if (pHex) hex.text = ColorUtility.ToHtmlStringRGBA(color);
+			if (pPicker) _colorJoystick.transform.localPosition = new Vector2(pS * texture.width / texture.width * _rectTransform.rect.width, pV * texture.height / texture.height * _rectTransform.rect.height);
 
-			Locked = false;
+			locked = false;
 			UpdateGradient();
 		}
 
-		/// <summary>
-		/// Called when HUE changed.
-		/// </summary>
-		public void OnHueShanged(float value)
+		public void OnHueChanged(float value)
 		{
-			if (Locked) return;
+			if (locked) return;
 
-			float h, s, v;
+			Color.RGBToHSV(color, out var oH, out var oS, out var oV);
 
-			Color.RGBToHSV(Color, out h, out s, out v);
-
-			h = value;
-			SetColor(h, s, v, A.Value, hue: false);
+			oH = value;
+			SetColor(oH, oS, oV, a.Value, pHue: false);
 		}
 
-		/// <summary>
-		/// Called when slider changed.
-		/// </summary>
 		public void OnSliderChanged()
 		{
-			if (Locked) return;
+			if (locked) return;
 
-			if (ColorMode == ColorMode.Rgb)
+			if (colorMode == ColorMode.Rgb)
 			{
-				SetColor(new Color(R.Value, G.Value, B.Value, A.Value), sliders: false);
+				SetColor(new Color(r.Value, g.Value, b.Value, a.Value), pSliders: false);
 			}
 			else
 			{
-				SetColor(H.Value, S.Value, V.Value, A.Value, sliders: false);
+				SetColor(h.Value, s.Value, v.Value, a.Value, pSliders: false);
 			}
 		}
 
-		/// <summary>
-		/// Called when HEX code changed.
-		/// </summary>
 		public void OnHexValueChanged(string value)
 		{
-			if (Locked) return;
+			if (locked) return;
 
 			value = Regex.Replace(value.ToUpper(), "[^0-9A-F]", "");
 
-			Hex.text = value;
+			hex.text = value;
 
-			Color color;
-
-			if (ColorUtility.TryParseHtmlString("#" + value, out color))
+			if (ColorUtility.TryParseHtmlString("#" + value, out var newColor))
 			{
-				SetColor(color, hex: false);
+				SetColor(newColor, pHex: false);
 			}
 		}
 
-		/// <summary>
-		/// Switch mode RGB/HSV.
-		/// </summary>
 		public void SwitchMode()
 		{
-			ColorMode = ColorMode == ColorMode.Rgb ? ColorMode.Hsv : ColorMode.Rgb;
-			SetMode(ColorMode);
+			colorMode = colorMode == ColorMode.Rgb ? ColorMode.Hsv : ColorMode.Rgb;
+			SetMode(colorMode);
 		}
 
-		/// <summary>
-		/// Set mode RGB/HSV.
-		/// </summary>
-		public void SetMode(ColorMode mode)
+		private void SetMode(ColorMode pMode)
 		{
-			RgbSliders.SetActive(mode == ColorMode.Rgb);
-			HsvSliders.SetActive(mode == ColorMode.Hsv);
-			Mode.text = mode == ColorMode.Rgb ? "HSV" : "RGB";
+			rgbSliders.SetActive(pMode == ColorMode.Rgb);
+			hsvSliders.SetActive(pMode == ColorMode.Hsv);
+			mode.text = pMode == ColorMode.Rgb ? "HSV" : "RGB";
 		}
 
 		private void UpdateGradient()
 		{
 			var pixels = new List<Color>();
 
-			for (var y = 0; y < Texture.height; y++)
+			for (var y = 0; y < texture.height; y++)
 			{
-				for (var x = 0; x < Texture.width; x++)
+				for (var x = 0; x < texture.width; x++)
 				{
-					pixels.Add(Color.HSVToRGB(Hue.value, (float) x / Texture.width, (float) y / Texture.height));
+					var texX = (float) x / texture.width;
+					var texY = (float) y / texture.height;
+					pixels.Add(Color.HSVToRGB(_hue.value, texX, texY));
 				}
 			}
 
-			Texture.SetPixels(pixels.ToArray());
-			Texture.Apply();
+			texture.SetPixels(pixels.ToArray());
+			texture.Apply();
 		}
 	}
 }

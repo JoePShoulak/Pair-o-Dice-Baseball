@@ -1,8 +1,5 @@
-﻿namespace Assets.SimpleColorPicker.Scripts
+﻿namespace Imports.SimpleColorPicker.Scripts
 {
-	/// <summary>
-	/// Color mode.
-	/// </summary>
 	public enum ColorMode
 	{
 		Rgb,

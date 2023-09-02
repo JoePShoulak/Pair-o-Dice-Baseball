@@ -74,9 +74,10 @@ namespace FibDev.Baseball.Choreography
 
         private void TakeField(Dictionary<Position, GameObject> pDict)
         {
-            foreach (var (position, gObj) in pDict)
+            foreach (var (position, playerObj) in pDict)
             {
-                gObj.GetComponent<NavMeshAgent>().SetDestination(field.GetTransform(position).position);
+                var destination = field.GetTransform(position).position;
+                playerObj.GetComponent<NavMeshAgent>().SetDestination(destination);
             }
         }
     }

@@ -8174,7 +8174,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1142295236}
         m_TargetAssemblyTypeName: Assets.SimpleColorPicker.Scripts.ColorPicker, Assembly-CSharp
-        m_MethodName: OnHueShanged
+        m_MethodName: OnHueChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
