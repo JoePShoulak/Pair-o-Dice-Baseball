@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using FibDev.Baseball;
 using FibDev.Baseball.Player;
 using FibDev.Baseball.Teams;
@@ -17,7 +18,7 @@ namespace FibDev.UI
         [SerializeField] private Button secondaryButton;
         [SerializeField] private ColorPicker popupPicker;
         [SerializeField] private TeamType type;
-        
+
         [SerializeField] private List<PlayerMaker> playerMakers;
 
         private void Start()
@@ -27,7 +28,7 @@ namespace FibDev.UI
                 popupPicker.gameObject.SetActive(true);
                 popupPicker.OnColorSelected += SetPrimaryColor;
             });
-            
+
             secondaryButton.onClick.AddListener(() =>
             {
                 popupPicker.gameObject.SetActive(true);
@@ -40,6 +41,7 @@ namespace FibDev.UI
             primaryButton.image.color = pColor;
             popupPicker.OnColorSelected -= SetPrimaryColor;
         }
+
         private void SetSecondaryColor(Color pColor)
         {
             secondaryButton.image.color = pColor;
@@ -48,12 +50,9 @@ namespace FibDev.UI
 
         public Team GetData()
         {
-            Dictionary<Position, Stats> selectedPlayers = new();
-            foreach (var maker in playerMakers)
-            {
-                var player = maker.CreatePlayer();
-                selectedPlayers.Add(player.position, player);
-            }
+            var selectedPlayers = playerMakers
+                .Select(maker => maker.CreatePlayer())
+                .ToDictionary(player => player.position);
 
             var team = new Team
             {

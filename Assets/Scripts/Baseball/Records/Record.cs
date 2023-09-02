@@ -13,11 +13,11 @@ namespace FibDev.Baseball.Records
         public Stats homeTotal = new();
         public Stats visitorTotal = new();
 
-        public TeamType LeadingTeam
+        public TeamType? LeadingTeam
         {
             get
             {
-                if (homeTotal.runs == visitorTotal.runs) return TeamType.Null;
+                if (homeTotal.runs == visitorTotal.runs) return null;
 
                 return homeTotal.runs > visitorTotal.runs
                     ? TeamType.Home

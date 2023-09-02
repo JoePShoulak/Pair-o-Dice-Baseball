@@ -160,7 +160,7 @@ namespace FibDev.Baseball.Choreography
         private void CreatePlayer(Team pTeam, Position pPosition)
         {
             var dugout = pTeam.type == TeamType.Home ? homeDugout : visitorDugout;
-            var destination = dugout.GetTransform(pPosition);
+            var destination = dugout.positions[pPosition];
             var playerStats = pTeam.players[pPosition];
 
             var player = Instantiate(playerPrefab, destination.position, Quaternion.identity);
@@ -183,9 +183,9 @@ namespace FibDev.Baseball.Choreography
         // This will allow for easier checks on if all players are in the correct position on the field
         private void TakePositions(Dictionary<Position, GameObject> pDict)
         {
-            foreach (var (position, playerObj) in pDict)
+            foreach (var (pPosition, playerObj) in pDict)
             {
-                var destination = field.GetTransform(position).position;
+                var destination = field.positions[pPosition].position; // Man, this sucks
                 playerObj.GetComponent<NavMeshAgent>().SetDestination(destination);
             }
         }

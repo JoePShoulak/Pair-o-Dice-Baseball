@@ -98,6 +98,8 @@ namespace FibDev.Baseball
 
         private bool CheckForGameEnded()
         {
+            if (record.LeadingTeam == null) return false;
+            
             var homeAtBatAndWinning = teamAtBat == TeamType.Home && record.LeadingTeam == TeamType.Home;
             var visitorsAtBatAndWinning = teamAtBat == TeamType.Visiting && record.LeadingTeam == TeamType.Visiting;
 

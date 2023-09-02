@@ -9,7 +9,7 @@ namespace FibDev.Baseball.Plays
         public string name = "";
         public readonly List<Operation> actions = new();
 
-        public static readonly Dictionary<PlayEnum, Play> plays = new Dictionary<PlayEnum, Play>()
+        public static readonly Dictionary<PlayEnum, Play> plays = new()
         {
             {
                 PlayEnum.Single, A.Play.Named("Single")

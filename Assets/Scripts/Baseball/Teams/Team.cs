@@ -13,9 +13,10 @@ namespace FibDev.Baseball.Teams
 
         public TeamType type;
 
-        public Dictionary<Position, Stats> players; // TODO: Make this a dict
+        public Dictionary<Position, Stats> players;
 
 
+        // ReSharper disable once UnusedMember.Global
         public void Log()
         {
             
