@@ -7,27 +7,28 @@ namespace FibDev.UI
 {
     public class TeamSelectUI : MonoBehaviour
     {
-        [SerializeField] private TeamMaker homeTeam;
-        [SerializeField] private TeamMaker visitingTeam;
+        [SerializeField] private TeamMaker homeTeamMaker;
+        [SerializeField] private TeamMaker visitingTeamMaker;
 
-        public static event Action<List<Team>> OnTeamsSelected;
+        public static event Action<Dictionary<TeamType, Team>> OnTeamsSelected;
 
         public void SelectTeams()
         {
-            var homeData = homeTeam.GetData();
-            var visitingData = visitingTeam.GetData();
+            var homeData = homeTeamMaker.GetData();
+            var visitingData = visitingTeamMaker.GetData();
 
             // Debug.Log("Home Team: ");
             // LogTeamData(homeData);
             // Debug.Log("Visiting Team: ");
             // LogTeamData(visitingData);
 
-            var selection = new List<Team> { homeData, visitingData };
+            var selection = new Dictionary<TeamType, Team> { { TeamType.Home, homeData }, {TeamType.Visiting,  visitingData } };
             OnTeamsSelected?.Invoke(selection);
 
             gameObject.SetActive(false);
         }
 
+        // ReSharper disable once UnusedMember.Local
         private static void LogTeamData(Team data)
         {
             Debug.Log($"  Name: {data.city} {data.name}");

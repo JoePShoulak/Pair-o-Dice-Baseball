@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using FibDev.Baseball;
-using FibDev.Baseball.Player;
-using FibDev.Baseball.Teams;
-using Imports.SimpleColorPicker.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Imports.SimpleColorPicker.Scripts;
+using FibDev.Baseball.Teams;
 
 namespace FibDev.UI
 {
@@ -36,6 +34,8 @@ namespace FibDev.UI
             });
         }
 
+        // TODO: Give this color-picking buttons their own class to handle this
+        // Also, while I'm here, make a simpler color picker. It doesn't need HSV or A
         private void SetPrimaryColor(Color pColor)
         {
             primaryButton.image.color = pColor;

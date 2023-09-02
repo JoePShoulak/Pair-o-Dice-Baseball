@@ -1,9 +1,9 @@
 using System;
-using FibDev.Baseball;
-using FibDev.Baseball.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using FibDev.Baseball;
+using FibDev.Baseball.Player;
 
 namespace FibDev.UI
 {

@@ -6,25 +6,31 @@ namespace FibDev.Baseball.Rendering.Scoreboard
 {
     public class Board : MonoBehaviour
     {
-        [SerializeField] private Row visitorRow;
-        [SerializeField] private Row homeRow;
+        [SerializeField] private ScoreboardRow visitorScoreboardRow;
+        [SerializeField] private ScoreboardRow homeScoreboardRow;
+
+        public void SetNames(string homeName, string visitorName)
+        {
+            homeScoreboardRow.SetName(homeName);
+            visitorScoreboardRow.SetName(visitorName);
+        }
 
         public void Display(Record record)
         {
             for (var i = 0; i < record.innings.Count; i++)
             {
-                visitorRow.innings[i].text = record.innings[i].visitorStats.runs.ToString();
-                homeRow.innings[i].text = record.innings[i].homeStats.runs.ToString();
+                visitorScoreboardRow.SetInning(i, record.innings[i].visitorStats.runs);
+                homeScoreboardRow.SetInning(i, record.innings[i].homeStats.runs);
             }
 
-            visitorRow.SetTotal(record.visitorTotal);
-            homeRow.SetTotal(record.homeTotal);
+            visitorScoreboardRow.SetTotal(record.visitorTotal);
+            homeScoreboardRow.SetTotal(record.homeTotal);
         }
 
         public void Reset()
         {
-            visitorRow.Reset();
-            homeRow.Reset();
+            visitorScoreboardRow.Reset();
+            homeScoreboardRow.Reset();
         }
     }
 }

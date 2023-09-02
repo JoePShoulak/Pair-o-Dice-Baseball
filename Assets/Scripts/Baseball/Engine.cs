@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FibDev.Baseball.Choreography;
 using UnityEngine;
 using FibDev.Baseball.Plays;
@@ -45,10 +46,11 @@ namespace FibDev.Baseball
             NextPlay(Play.Random());
         }
 
-        private void StartGame(List<Team> teams)
+        private void StartGame(Dictionary<TeamType, Team> teams)
         {
             // teams[0].Log();
             // teams[1].Log();
+            scoreboard.SetNames(teams[TeamType.Home].name, teams[TeamType.Visiting].name);
             choreographer.SetupGame(teams);
         }
 

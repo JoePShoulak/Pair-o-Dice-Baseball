@@ -15,9 +15,7 @@ namespace FibDev.Baseball.Choreography
         [SerializeField] private FieldPositions field;
         [SerializeField] private GameObject playerPrefab;
 
-        private List<Team> _teams;
-        private Team _homeTeam;
-        private Team _visitorTeam;
+        private Dictionary<TeamType, Team> _teams;
 
         private readonly Dictionary<Position, GameObject> _homeTeamGOs = new();
         private readonly Dictionary<Position, GameObject> _visitorTeamGOs = new();
@@ -30,7 +28,6 @@ namespace FibDev.Baseball.Choreography
         public event Action OnMovementStart;
         public event Action OnMovementEnd;
 
-        private Team GetTeam(TeamType pType) => _teams[0].type == pType ? _teams[0] : _teams[1];
 
         private void Start()
         {
@@ -64,16 +61,13 @@ namespace FibDev.Baseball.Choreography
         public bool IdlePlayersInDugout => false; // TODO: Implement
 
 
-        public void SetupGame(List<Team> pTeams)
+        public void SetupGame(Dictionary<TeamType, Team> pTeams)
         {
             OnMovementStart?.Invoke();
             _teams = pTeams;
 
-            _homeTeam = GetTeam(TeamType.Home);
-            _visitorTeam = GetTeam(TeamType.Visiting);
-
-            CreateTeam(_homeTeam);
-            CreateTeam(_visitorTeam);
+            CreateTeam(_teams[TeamType.Home]);
+            CreateTeam(_teams[TeamType.Visiting]);
 
             TakePositions(_homeTeamGOs);
             _visitorTeamGOs.Values.ToList()[0].GetComponent<NavMeshAgent>().SetDestination(field.Batter.position);

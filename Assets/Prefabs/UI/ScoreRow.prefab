@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b124a0a8824b651498b3f64d4248e851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: {fileID: 8576319350292640050}
+  teamName: {fileID: 8576319350292640050}
   innings:
   - {fileID: 8781517773141133661}
   - {fileID: 3912850435176138846}
@@ -1572,7 +1572,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Texas
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 27b771f1446083248a7ea835cf5a9503, type: 2}
   m_sharedMaterial: {fileID: -5561418462475210146, guid: 27b771f1446083248a7ea835cf5a9503, type: 2}
@@ -1599,7 +1599,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
