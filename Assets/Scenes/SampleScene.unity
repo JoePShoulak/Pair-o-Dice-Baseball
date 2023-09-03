@@ -11323,6 +11323,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.07450979
       objectReference: {fileID: 0}
+    - target: {fileID: 2002796270680017114, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
+      propertyPath: m_text
+      value: Rangers
+      objectReference: {fileID: 0}
     - target: {fileID: 2044713450429189312, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -11828,6 +11832,10 @@ PrefabInstance:
     - target: {fileID: 4128638547644688627, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394284147499510400, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
+      propertyPath: m_text
+      value: Texas
       objectReference: {fileID: 0}
     - target: {fileID: 4425910513326766993, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
       propertyPath: m_AnchorMax.y
