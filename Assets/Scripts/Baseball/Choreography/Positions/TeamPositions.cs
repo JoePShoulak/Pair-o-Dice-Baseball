@@ -19,7 +19,7 @@ namespace FibDev.Baseball.Choreography.Positions
 
         public Dictionary<Position, Transform> positions;
 
-        private void Start()
+        private void Awake()
         {
             positions = new Dictionary<Position, Transform>
             {

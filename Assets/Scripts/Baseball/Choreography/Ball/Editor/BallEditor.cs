@@ -12,30 +12,44 @@ namespace FibDev.Baseball.Choreography.Ball.Editor
 
             var ballMover = (BallMover)target;
 
-            GUILayout.BeginHorizontal();
             if (GUILayout.Button("Pitch Ball"))
             {
                 ballMover.PitchBall();
             }
+            
             if (GUILayout.Button("Pitch Strike"))
             {
                 ballMover.PitchStrike();
             }
-            GUILayout.EndHorizontal();
             
-            GUILayout.BeginHorizontal();
             if (GUILayout.Button("Hit Player"))
             {
                 ballMover.HitPlayer();
             }
+            
+            if (GUILayout.Button("Hit Line Out"))
+            {
+                ballMover.LineOut();
+            }
+            if (GUILayout.Button("Hit Pop Out"))
+            {
+                ballMover.HitPopOut();
+            }
+            
+            if (GUILayout.Button("Hit Fly Out"))
+            {
+                ballMover.FlyOut();
+            }
+            
+            if (GUILayout.Button("Throw to Pitcher"))
+            {
+                ballMover.ThrowToPitcher();
+            }
+                
             if (GUILayout.Button("Reset"))
             {
                 ballMover.Reset();
             }
-            
-            
-            
-            GUILayout.EndHorizontal();
         }
     }
 }

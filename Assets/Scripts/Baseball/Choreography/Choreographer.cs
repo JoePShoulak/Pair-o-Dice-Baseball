@@ -83,7 +83,7 @@ namespace FibDev.Baseball.Choreography
             CreateTeam(_teams[TeamType.Visiting]);
 
             TakePositions(_homeTeam);
-            _visitorTeam.Values.ToList()[0].SetIdlePosition(field.Batter);
+            _visitorTeam.Values.ToList()[0].SetIdlePosition(field.positions[Position.Batter]);
             _visitorTeam.Values.ToList()[0].GoToIdle();
         }
 
@@ -159,6 +159,7 @@ namespace FibDev.Baseball.Choreography
         {
             foreach (Position position in Enum.GetValues(typeof(Position)))
             {
+                if (position == Position.Batter) continue;
                 CreatePlayer(pTeam, position);
             }
         }

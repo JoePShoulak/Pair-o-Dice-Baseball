@@ -4,6 +4,11 @@ namespace FibDev.Baseball.Choreography.Positions
 {
     public class FieldPositions : TeamPositions
     {
-        public Transform Batter;
+        [SerializeField] private Transform batter;
+
+        private void Start()
+        {
+            positions.Add(Position.Batter, batter);
+        }
     }
 }
