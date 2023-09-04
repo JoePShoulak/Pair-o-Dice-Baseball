@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleDetectionRadius: 1
+  head: {fileID: 5126856775453588229}
 --- !u!195 &6515728539512712978
 NavMeshAgent:
   m_ObjectHideFlags: 0

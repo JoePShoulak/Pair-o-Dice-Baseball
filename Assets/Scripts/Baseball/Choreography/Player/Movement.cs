@@ -11,6 +11,7 @@ namespace FibDev.Baseball.Choreography.Player
 
         public Vector3 IdlePosition { get; set; }
         [SerializeField] private float idleDetectionRadius = 1f;
+        [SerializeField] private Transform head;
         public bool IsIdle { get; private set; } = true;
         private BallMover ball;
 
@@ -30,11 +31,30 @@ namespace FibDev.Baseball.Choreography.Player
             _agent.SetDestination(pPosition);
         }
 
+        private void RotateBodyToBall()
+        {
+            var direction = ball.transform.position - transform.position;
+            var angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+
+            transform.rotation =  Quaternion.Euler(0, angleY, 0);
+        } 
+        
+        private void RotateHeadToBall()
+        {
+            var direction = ball.transform.position - head.position;
+            var angleX = Mathf.Atan2(direction.y, direction.z) * Mathf.Rad2Deg;
+            var angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+
+            head.rotation =  Quaternion.Euler(-angleX, angleY, 0);
+        }
+        
+  
         private void Update()
         {
             if (IsIdle)
             {
-                transform.LookAt(ball.Transform);
+                RotateBodyToBall();
+                // RotateHeadToBall(); TODO: Fix this
             }
 
             var isAtIdlePosition = Vector3.Distance(transform.position, IdlePosition) < idleDetectionRadius;
