@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FibDev.Baseball.Choreography.Ball;
 using FibDev.Baseball.Choreography.Positions;
 using UnityEngine;
 using FibDev.Baseball.Teams;
-using UnityEngine.AI;
 
 namespace FibDev.Baseball.Choreography
 {
@@ -14,6 +14,7 @@ namespace FibDev.Baseball.Choreography
         [SerializeField] private TeamPositions visitorDugout;
         [SerializeField] private FieldPositions field;
         [SerializeField] private GameObject playerPrefab;
+        [SerializeField] private BallMover ball;
 
         private Dictionary<TeamType, Team> _teams;
 
@@ -28,6 +29,7 @@ namespace FibDev.Baseball.Choreography
         public event Action OnMovementStart;
         public event Action OnMovementEnd;
 
+        [HideInInspector] public PitchType pitchType;
 
         private void Start()
         {
@@ -61,7 +63,7 @@ namespace FibDev.Baseball.Choreography
             }
         }
 
-        public bool PlayersReset
+        private bool PlayersReset
         {
             get
             {
@@ -105,7 +107,20 @@ namespace FibDev.Baseball.Choreography
                 // Hit Type
                 // Is FlyOut+?
                 // Is GroundOut(2)?
-            
+            switch (pitchType)
+            {
+                case PitchType.Strike:
+                    ball.PitchStrike();
+                    break;
+                case PitchType.Ball:
+                    ball.PitchBall();
+                    break;
+                case PitchType.HitByPitch:
+                    ball.HitPlayer();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             OnMovementStart?.Invoke();
             // Throw pitch
             // Batter interaction

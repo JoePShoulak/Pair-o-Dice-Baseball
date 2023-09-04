@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using FibDev.Baseball.Choreography.Positions;
 using UnityEngine;
 
@@ -12,9 +11,10 @@ namespace FibDev.Baseball.Choreography.Ball
         [SerializeField] private Transform ballDestination;
         [SerializeField] private Transform strikeDestination;
         [SerializeField] private float pollingRate;
-
-
+        
         private const float tanAngle = 2f;
+        
+        public Transform Transform => transform;
 
         private readonly AnimationCurve pathCurve = new()
         {

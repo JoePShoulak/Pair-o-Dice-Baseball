@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FibDev.Baseball.Choreography;
+using FibDev.Baseball.Choreography.Ball;
 using UnityEngine;
 using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
@@ -91,6 +92,7 @@ namespace FibDev.Baseball
 
             foreach (var bAction in bPlay.actions) HandleAction(bAction);
             scoreboard.Display(record);
+            choreographer.RunPlay();
 
             if (outs >= 3 && !gameEnded) AdvanceInning();
 
@@ -142,10 +144,13 @@ namespace FibDev.Baseball
                     outs++;
                     break;
                 case Operation.PitcherThrowStrike:
+                    choreographer.pitchType = PitchType.Strike;
                     break;
                 case Operation.PitcherThrowsBall:
+                    choreographer.pitchType = PitchType.Ball;
                     break;
                 case Operation.PitcherHitsPlayer:
+                    choreographer.pitchType = PitchType.HitByPitch;
                     break;
                 case Operation.BasemenAdvanceIfForced:
                     break;

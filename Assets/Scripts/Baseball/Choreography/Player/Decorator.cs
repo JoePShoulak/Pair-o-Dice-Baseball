@@ -31,5 +31,6 @@ namespace FibDev.Baseball.Choreography.Player
             hatRenderer.material.color = pPrimary;
             billRenderer.material.color = pSecondary;
         }
+
     }
 }
