@@ -324,6 +324,7 @@ MonoBehaviour:
   nameText: {fileID: 4030210784666887583}
   hatRenderer: {fileID: 4843062587936281033}
   billRenderer: {fileID: 7742515125941260562}
+  headRenderer: {fileID: 5518878481195404089}
 --- !u!114 &2978005983884666260
 MonoBehaviour:
   m_ObjectHideFlags: 0

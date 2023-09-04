@@ -23,6 +23,20 @@ namespace FibDev.UI
 
         [SerializeField] private Button upButton;
         [SerializeField] private Button downButton;
+        
+        // TODO: Make this ia separate class
+        private void Start()
+        {
+            var white = new Color(1f, 0.855f, 0.725f);
+            var black = new Color(0.243f, 0.168f, 0.137f);
+            skinToneImage.color = white;
+            skinToneSlider.value = 0f;
+            
+            skinToneSlider.onValueChanged.AddListener(value =>
+            {
+                skinToneImage.color = Color.Lerp(white, black, value);
+            });
+        }
 
         private static T GetDropdownValueAsEnum<T>(TMP_Dropdown pDropdown) where T : struct
         {
