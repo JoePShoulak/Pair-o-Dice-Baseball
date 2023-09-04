@@ -7,6 +7,8 @@ namespace FibDev.Baseball.Choreography.Player
     {
         [SerializeField] private TMP_Text numberText;
         [SerializeField] private TMP_Text nameText;
+        [SerializeField] private Renderer hatRenderer;
+        [SerializeField] private Renderer billRenderer;
         
         private static readonly int Primary = Shader.PropertyToID("_Primary");
         private static readonly int Secondary = Shader.PropertyToID("_Secondary");
@@ -23,8 +25,11 @@ namespace FibDev.Baseball.Choreography.Player
         
         public void SetColor(Color pPrimary, Color pSecondary)
         {
-            gameObject.GetComponent<MeshRenderer>().material.SetColor(Primary, pPrimary);
-            gameObject.GetComponent<MeshRenderer>().material.SetColor(Secondary, pSecondary);
+            var material = gameObject.GetComponent<MeshRenderer>().material;
+            material.SetColor(Primary, pPrimary);
+            material.SetColor(Secondary, pSecondary);
+            hatRenderer.material.color = pPrimary;
+            billRenderer.material.color = pSecondary;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using FibDev.Baseball.Choreography.Positions;
 using UnityEngine;
 
@@ -53,20 +54,32 @@ namespace FibDev.Baseball.Choreography.Ball
 
         public void LineOut()
         {
-            StartCoroutine(LerpBall(field.positions[Position.Batter].position,
-                field.positions[Position.Baseman3rd].position, 1f, 3f));
+            var destination = field.RandomFrom(
+                Position.Baseman1st,
+                Position.Shortstop,
+                Position.Baseman3rd,
+                Position.Pitcher).position;
+            StartCoroutine(LerpBall(field.positions[Position.Batter].position, destination, 1f, 3f));
         }
 
         public void HitPopOut()
         {
-            StartCoroutine(LerpBall(field.positions[Position.Batter].position,
-                field.positions[Position.Baseman2nd].position, 10f, 2f));
+            var destination = field.RandomFrom(
+                Position.Baseman1st,
+                Position.Baseman2nd,
+                Position.Baseman3rd,
+                Position.Shortstop,
+                Position.Pitcher).position;
+            StartCoroutine(LerpBall(field.positions[Position.Batter].position, destination, 10f, 2f));
         }
 
         public void FlyOut()
         {
-            StartCoroutine(LerpBall(field.positions[Position.Batter].position,
-                field.positions[Position.FielderCenter].position, 20f, 2f));
+            var destination = field.RandomFrom(
+                Position.FielderLeft,
+                Position.FielderCenter,
+                Position.FielderRight).position;
+            StartCoroutine(LerpBall(field.positions[Position.Batter].position, destination, 20f, 2f));
         }
 
         public void ThrowToPitcher()
@@ -88,7 +101,7 @@ namespace FibDev.Baseball.Choreography.Ball
             var trail = GetComponentInChildren<TrailRenderer>();
 
             trail.enabled = false;
-            
+
             transform.position = pOrigin;
             transform.LookAt(pDestination);
 
