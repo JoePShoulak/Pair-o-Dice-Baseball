@@ -18004,6 +18004,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1762379041}
     - target: {fileID: 8850479893712864641, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
+      propertyPath: choreographer
+      value: 
+      objectReference: {fileID: 570826808}
+    - target: {fileID: 8850479893712864641, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
       propertyPath: ballDestination
       value: 
       objectReference: {fileID: 19743249}
