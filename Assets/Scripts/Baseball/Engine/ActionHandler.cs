@@ -30,20 +30,19 @@ namespace FibDev.Baseball.Engine
                 case Operation.BatterRunsFirst:
                     engine.Bases.first.runnerOn = true;
                     break;
-                // TODO: Need to implement all of this
                 case Operation.BatterHitBall:
                     break;
                 case Operation.BatterMissBall:
                     engine.AddOut();
                     break;
                 case Operation.PitcherThrowStrike:
-                    engine.choreographer.movement.pitchType = PitchType.Strike;
+                    engine.Choreographer.movement.pitchType = PitchType.Strike;
                     break;
                 case Operation.PitcherThrowsBall:
-                    engine.choreographer.movement.pitchType = PitchType.Ball;
+                    engine.Choreographer.movement.pitchType = PitchType.Ball;
                     break;
                 case Operation.PitcherHitsPlayer:
-                    engine.choreographer.movement.pitchType = PitchType.HitByPitch;
+                    engine.Choreographer.movement.pitchType = PitchType.HitByPitch;
                     break;
                 case Operation.BasemenAdvanceIfForced:
                     break;

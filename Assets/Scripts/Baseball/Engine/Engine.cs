@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using FibDev.Baseball.Choreography;
+using FibDev.Baseball.Choreography.Choreographer;
 using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
 using FibDev.Baseball.Rendering.Scoreboard;
@@ -22,6 +23,7 @@ namespace FibDev.Baseball.Engine
         [SerializeField] private Board scoreboard;
         [SerializeField] public Choreographer choreographer;
 
+        public Choreographer Choreographer => choreographer;
 
         public Bases.Bases Bases => bases;
 
@@ -35,13 +37,10 @@ namespace FibDev.Baseball.Engine
             // teams[0].Log();
             // teams[1].Log();
             scoreboard.SetNames(teams[TeamType.Home].name, teams[TeamType.Visiting].name);
-            choreographer.SetupGame(teams);
+            Choreographer.SetupGame(teams);
         }
 
-        public void AddOut()
-        {
-            outs++;
-        }
+        public void AddOut() => outs++;
 
         public void ResetState() // for debug
         {
@@ -80,7 +79,7 @@ namespace FibDev.Baseball.Engine
 
             foreach (var bAction in bPlay.actions) ActionHandler.HandleAction(this, bAction);
             scoreboard.Display(record);
-            choreographer.RunPlay();
+            Choreographer.RunPlay();
 
             if (outs >= 3 && !gameEnded) AdvanceInning();
 
