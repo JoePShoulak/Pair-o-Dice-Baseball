@@ -123,7 +123,7 @@ namespace FibDev.Baseball.Choreography.Ball
                 yield return new WaitForSeconds(pollingRate);
             }
             
-            choreographer.StartMovement();
+            choreographer.Begin();
         }
     }
 }

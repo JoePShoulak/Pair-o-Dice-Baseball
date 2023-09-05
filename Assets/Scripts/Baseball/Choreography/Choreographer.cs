@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FibDev.Baseball.Choreography.Ball;
-using FibDev.Baseball.Choreography.Player;
+using FibDev.Baseball.Choreography.Play;
 using FibDev.Baseball.Choreography.Positions;
 using UnityEngine;
 using FibDev.Baseball.Teams;
@@ -31,30 +31,13 @@ namespace FibDev.Baseball.Choreography
         private GameObject _homePitcher;
         private GameObject _visitorPitcher;
 
-        private bool _movementUnfolding;
-
-        public event Action OnMovementStart;
-        public event Action OnMovementEnd;
-
-        [HideInInspector] public PitchType pitchType;
-
-        private void Start()
-        {
-            OnMovementStart += () => {
-                _movementUnfolding = true;
-                Debug.Log("Movement started");
-            };
-            OnMovementEnd += () => {
-                _movementUnfolding = false;
-                Debug.Log("Movement Ended");
-            };
-        }
+        public Movement movement = new();
 
         private void Update()
         {
-            if (!_movementUnfolding) return;
+            if (!movement.inProgress) return;
             
-            if (CheckPlayHasBeenReset()) OnMovementEnd?.Invoke();
+            if (PlayHasBeenReset) movement.EndMovement();
         }
 
         private IEnumerable<Player.Player> AllPlayers
@@ -87,9 +70,11 @@ namespace FibDev.Baseball.Choreography
             }
         }
 
+        private bool PlayHasBeenReset => PlayersReset && PitcherHasBall;
+
         public void SetupGame(Dictionary<TeamType, Team> pTeams)
         {
-            OnMovementStart?.Invoke();
+            movement.StartMovement();
             _teams = pTeams;
 
             CreateTeam(_teams[TeamType.Home]);
@@ -101,20 +86,9 @@ namespace FibDev.Baseball.Choreography
             batter.GoToIdle();
         }
 
-        private bool CheckPlayHasBeenReset()
+        public void Begin()
         {
-            // Fielders must be back at their starting locations
-            // if (PlayersReset && BatterAtPlate && PitcherHasBall && IdlePlayersInDugout) 
-            // A batter must be at the plate
-            // The pitcher must have the ball
-            // Anyone but the batter and the 9 fielders are in the dugout
-            
-            return PlayersReset && PitcherHasBall; // this isn't working
-        }
-
-        public void StartMovement()
-        {
-            OnMovementStart?.Invoke();
+            movement.StartMovement();
         }
 
         public void RunPlay()
@@ -124,7 +98,7 @@ namespace FibDev.Baseball.Choreography
                 // Hit Type
                 // Is FlyOut+?
                 // Is GroundOut(2)?
-            switch (pitchType)
+            switch (movement.pitchType)
             {
                 case PitchType.Strike:
                     ball.PitchStrike();

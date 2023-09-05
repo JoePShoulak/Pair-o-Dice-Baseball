@@ -33,7 +33,7 @@ namespace FibDev.Baseball
 
             TeamSelectUI.OnTeamsSelected += StartGame;
             Dice.RollProcessor.OnRollProcessed += HandleRoll;
-            choreographer.OnMovementEnd += () =>
+            Movement.OnMovementEnd += _ =>
             {
                 readyForRoll = true;
                 Debug.Log("Ready for roll");
@@ -145,13 +145,13 @@ namespace FibDev.Baseball
                     outs++;
                     break;
                 case Operation.PitcherThrowStrike:
-                    choreographer.pitchType = PitchType.Strike;
+                    choreographer.movement.pitchType = PitchType.Strike;
                     break;
                 case Operation.PitcherThrowsBall:
-                    choreographer.pitchType = PitchType.Ball;
+                    choreographer.movement.pitchType = PitchType.Ball;
                     break;
                 case Operation.PitcherHitsPlayer:
-                    choreographer.pitchType = PitchType.HitByPitch;
+                    choreographer.movement.pitchType = PitchType.HitByPitch;
                     break;
                 case Operation.BasemenAdvanceIfForced:
                     break;
