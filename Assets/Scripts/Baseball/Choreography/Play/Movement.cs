@@ -23,6 +23,7 @@ namespace FibDev.Baseball.Choreography.Play
         public bool playAtFirst;
 
         public bool inProgress;
+        public bool outHasOccurred;
 
         public event Action<Movement> OnMovementStart = movement =>
         {
@@ -35,6 +36,12 @@ namespace FibDev.Baseball.Choreography.Play
             movement.inProgress = false;
             Debug.Log("Movement Ended");
         };
+        
+        public static event Action<Movement> OnOut = movement =>
+        {
+            movement.outHasOccurred = true;
+            Debug.Log("Out Has Occurred");
+        };
 
         public void StartMovement()
         {
@@ -44,6 +51,11 @@ namespace FibDev.Baseball.Choreography.Play
         public void EndMovement()
         {
             OnMovementEnd?.Invoke(this);
+        }
+
+        public void CallOut()
+        {
+            OnOut?.Invoke(this);
         }
     }
 }

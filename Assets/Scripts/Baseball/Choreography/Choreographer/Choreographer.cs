@@ -37,6 +37,13 @@ namespace FibDev.Baseball.Choreography.Choreographer
         private void Start()
         {
             _playerCreator = GetComponent<PlayerCreator>();
+
+            Movement.OnOut += _ => Cleanup();
+        }
+
+        private void Cleanup()
+        {
+            throw new NotImplementedException();
         }
 
         private void Update()
