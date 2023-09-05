@@ -22,13 +22,12 @@ namespace FibDev.Baseball.Engine
         [SerializeField] private Board scoreboard;
         [SerializeField] public Choreographer choreographer;
 
-        private ActionHandler _actionHandler;
 
         public Bases.Bases Bases => bases;
 
         private void Start()
         {
-            _actionHandler = GetComponent<ActionHandler>(); // TODO: FIXME 2-way dependency
+            ResetState();
         }
 
         public void StartGame(Dictionary<TeamType, Team> teams)
@@ -79,7 +78,7 @@ namespace FibDev.Baseball.Engine
             var bPlay = play ?? Play.Random();
             Debug.Log(bPlay.name);
 
-            foreach (var bAction in bPlay.actions) _actionHandler.HandleAction(bAction);
+            foreach (var bAction in bPlay.actions) ActionHandler.HandleAction(this, bAction);
             scoreboard.Display(record);
             choreographer.RunPlay();
 
