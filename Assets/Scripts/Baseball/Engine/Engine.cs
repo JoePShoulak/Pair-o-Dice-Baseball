@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using FibDev.Baseball.Choreography;
 using FibDev.Baseball.Choreography.Choreographer;
 using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
