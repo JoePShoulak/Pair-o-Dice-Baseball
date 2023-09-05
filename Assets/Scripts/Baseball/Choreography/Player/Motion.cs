@@ -1,11 +1,10 @@
-using System;
 using FibDev.Baseball.Choreography.Ball;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace FibDev.Baseball.Choreography.Player
 {
-    public class Movement : MonoBehaviour
+    public class Motion : MonoBehaviour
     {
         private NavMeshAgent _agent;
 
@@ -14,6 +13,15 @@ namespace FibDev.Baseball.Choreography.Player
         [SerializeField] private Transform head;
         public bool IsIdle { get; private set; } = true;
         private BallMover ball;
+
+        public bool HasBall
+        {
+            get
+            {
+                const float ballDetectionRadius = 3f;
+                return Vector3.Distance(transform.position, ball.Transform.position) <= ballDetectionRadius;
+            }
+        }
 
         private void Awake()
         {

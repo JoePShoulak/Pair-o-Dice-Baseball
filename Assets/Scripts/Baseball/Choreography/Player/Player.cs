@@ -6,16 +6,16 @@ namespace FibDev.Baseball.Choreography.Player
     public class Player : MonoBehaviour
     {
         [SerializeField] private PlayerStats playerStats;
-        private Movement _movement;
+        private Motion _motion;
 
         public bool IsIdle()
         {
-            return _movement.IsIdle;
+            return _motion.IsIdle;
         }
 
         private void Awake()
         {
-            _movement = GetComponent<Movement>();
+            _motion = GetComponent<Motion>();
         }
 
         public void SetStats(PlayerStats pPlayerStats)
@@ -30,17 +30,17 @@ namespace FibDev.Baseball.Choreography.Player
 
         public void GoTo(Transform pTransform)
         {
-            _movement.SetDestination(pTransform.position);
+            _motion.SetDestination(pTransform.position);
         }
         
         public void GoToIdle()
         {
-            _movement.SetDestination(_movement.IdlePosition);
+            _motion.SetDestination(_motion.IdlePosition);
         }
 
         public void SetIdlePosition(Transform pTransform)
         {
-            _movement.IdlePosition = pTransform.position;
+            _motion.IdlePosition = pTransform.position;
         }
     }
 }

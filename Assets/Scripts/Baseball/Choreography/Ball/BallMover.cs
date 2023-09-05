@@ -11,6 +11,7 @@ namespace FibDev.Baseball.Choreography.Ball
         [SerializeField] private Transform ballDestination;
         [SerializeField] private Transform strikeDestination;
         [SerializeField] private float pollingRate;
+        [SerializeField] private Choreographer choreographer;
         private Vector3 _destination;
         
         private const float tanAngle = 2f;
@@ -38,7 +39,7 @@ namespace FibDev.Baseball.Choreography.Ball
             return keyframe;
         }
         
-        public Vector3 Destination => _destination;
+        // public Vector3 Destination => _destination;
 
         public void PitchBall()
         {
@@ -121,6 +122,8 @@ namespace FibDev.Baseball.Choreography.Ball
 
                 yield return new WaitForSeconds(pollingRate);
             }
+            
+            choreographer.StartMovement();
         }
     }
 }
