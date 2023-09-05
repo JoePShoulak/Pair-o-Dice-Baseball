@@ -76,7 +76,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
             _homeTeam = _playerCreator.CreateTeam(_teams[TeamType.Home], homeDugout, visitorDugout);
             _visitorTeam = _playerCreator.CreateTeam(_teams[TeamType.Visiting], homeDugout, visitorDugout);
 
-            TakePositions(_homeTeam);
+            TakeFieldPositions(_homeTeam);
             var batter = _visitorTeam.Values.ToList()[_visitorBatterIndex];
             batter.SetIdlePosition(field.positions[Position.Batter]);
             batter.GoToIdle();
@@ -103,9 +103,11 @@ namespace FibDev.Baseball.Choreography.Choreographer
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
+            // Do more
         }
 
-        private void TakePositions(Dictionary<Position, Player.Player> pDict)
+        private void TakeFieldPositions(Dictionary<Position, Player.Player> pDict)
         {
             foreach (var (pPosition, playerObj) in pDict)
             {
