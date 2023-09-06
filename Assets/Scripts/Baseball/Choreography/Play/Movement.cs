@@ -18,7 +18,6 @@ namespace FibDev.Baseball.Choreography.Play
 
         public Vector3 HitDestination;
 
-        public bool bobble = false;
         public RunnerMovement runnerMovement;
         public bool playAtFirst;
 
