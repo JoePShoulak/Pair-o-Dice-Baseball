@@ -793,7 +793,7 @@ GameObject:
   - component: {fileID: 82218627}
   - component: {fileID: 82218626}
   m_Layer: 5
-  m_Name: Ball Message Canvas
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -875,8 +875,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1945170882}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1895614319}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1376,7 +1376,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8850479893712864641, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
   m_PrefabInstance: {fileID: 1059527288421677281}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395798935}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 590f3ab7716f3914482441b07a490ac8, type: 3}
@@ -9818,32 +9818,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157a4261c5f61ed498665ee4d6b878da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1395798935 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7561072312091718208, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
+--- !u!114 &1395798943 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4911441159544719746, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
   m_PrefabInstance: {fileID: 1059527288421677281}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1395798939
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395798935}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ba50819cdfe3ea54d9a5bb63d8094dfb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc73a4cd7e097b47a0f25515dee5206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1426758180
 GameObject:
   m_ObjectHideFlags: 0
@@ -11442,6 +11427,7 @@ MonoBehaviour:
   gameEnded: 0
   scoreboard: {fileID: 60337544}
   choreographer: {fileID: 0}
+  ballMessager: {fileID: 1395798943}
 --- !u!4 &1674934044
 Transform:
   m_ObjectHideFlags: 0
@@ -14911,7 +14897,7 @@ GameObject:
   - component: {fileID: 1867117088}
   - component: {fileID: 1867117087}
   m_Layer: 0
-  m_Name: BallCam
+  m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14975,13 +14961,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867117086}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1050.6503, y: 963.7201, z: 141.24854}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3529.2676, y: 255.82721, z: -1139.4991}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 1895614319}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1874970093
 GameObject:
@@ -15212,6 +15198,39 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: -110}
   m_SizeDelta: {x: 60, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1895614318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1895614319}
+  m_Layer: 0
+  m_Name: Ball Render Texture Stuff
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1895614319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895614318}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2478.6174, y: 707.8929, z: 1280.7477}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 82218629}
+  - {fileID: 1867117088}
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1905552919
 GameObject:
   m_ObjectHideFlags: 0
@@ -15691,7 +15710,7 @@ GameObject:
   - component: {fileID: 1945170884}
   - component: {fileID: 1945170883}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Ball Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16197,6 +16216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2031107989}
+  - component: {fileID: 2031107990}
   m_Layer: 0
   m_Name: Team Positions
   m_TagString: Untagged
@@ -16222,6 +16242,21 @@ Transform:
   m_Father: {fileID: 1643791516}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2031107990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031107988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9392a68e8514b0b42a908d6b9669ed30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  homeDugout: {fileID: 547533062}
+  visitorDugout: {fileID: 1730195639}
+  field: {fileID: 1577157155}
 --- !u!1 &2047247506
 GameObject:
   m_ObjectHideFlags: 0
@@ -19043,25 +19078,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 963194228}
     m_Modifications:
-    - target: {fileID: 4275521565669766563, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+    - target: {fileID: 4911441159544719746, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
+      propertyPath: ballMessageTMPro
       value: 
-      objectReference: {fileID: 2100000, guid: 0701be16b5e21f74699f7ad34785c9c3, type: 2}
+      objectReference: {fileID: 1945170883}
     - target: {fileID: 5991534083953195009, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
       propertyPath: m_RootOrder
       value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991534083953195009, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991534083953195009, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5991534083953195009, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5991534083953195009, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19103,17 +19126,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5991534083953195009, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7561072312091718208, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
       propertyPath: m_Name
       value: Ball
-      objectReference: {fileID: 0}
-    - target: {fileID: 7561072312091718208, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8850479893712864641, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
       propertyPath: field
@@ -19138,10 +19153,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7561072312091718208, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1395798939}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
 --- !u!1001 &1092286538264292450
 PrefabInstance:
