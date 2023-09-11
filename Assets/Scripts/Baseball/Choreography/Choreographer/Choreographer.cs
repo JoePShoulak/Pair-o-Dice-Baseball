@@ -50,7 +50,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
         {
             if (!movement.inProgress) return;
             
-            if (PlayHasBeenReset) movement.EndMovement();
+            if (PlayersReset) movement.EndMovement();
         }
 
         private IEnumerable<Player.Player> AllPlayers
@@ -71,10 +71,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
         private Player.Player ActivePitcher =>
             (_teamOnField == TeamType.Visiting ? _visitorTeam : _homeTeam)[Position.Pitcher];
 
-        private bool PitcherHasBall => ActivePitcher.GetComponent<Motion>().HasBall;
-
-        private bool PlayHasBeenReset => PlayersReset && PitcherHasBall;
-
+        
         public void SetupGame(Dictionary<TeamType, Team> pTeams)
         {
             movement.StartMovement();
@@ -96,6 +93,9 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         public void RunPlay(Action callback)
         {
+            ball.animator.enabled = true;
+            ball.animator.Play("Ball");
+            
             switch (movement.pitchType)
             {
                 case PitchType.Strike:

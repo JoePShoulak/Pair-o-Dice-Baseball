@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Baseball Message
-  m_Shader: {fileID: -6465566751694194690, guid: 6fd3345c00649fd448ed7c9923a3b747, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 57616dc6fedd291459002d8f18530bb9, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Message:
-        m_Texture: {fileID: 2800000, guid: 9df961d9aaaae7d4c9500c00eca7d4c6, type: 3}
+        m_Texture: {fileID: 8600000, guid: 64d4849a0e309c149807c6bf0af65570, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []

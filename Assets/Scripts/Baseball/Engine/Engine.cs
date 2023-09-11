@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FibDev.Baseball.Choreography.Ball;
 using FibDev.Baseball.Choreography.Choreographer;
 using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
@@ -21,6 +22,7 @@ namespace FibDev.Baseball.Engine
 
         [SerializeField] private Board scoreboard;
         [HideInInspector] public Choreographer choreographer;
+        [SerializeField] private Messager ballMessager;
 
         public Bases.Bases Bases => bases;
         private bool HomeAtBat => teamAtBat == TeamType.Home;
@@ -76,6 +78,8 @@ namespace FibDev.Baseball.Engine
         {
             var bPlay = play ?? Play.Random();
             Debug.Log(bPlay.name);
+            ballMessager.UpdateMessage(bPlay.name);
+
 
             foreach (var operation in bPlay.actions)
             {

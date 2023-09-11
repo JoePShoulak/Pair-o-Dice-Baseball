@@ -1,4 +1,6 @@
 using FibDev.Baseball.Choreography.Ball;
+using FibDev.Baseball.Choreography.Positions;
+using FibDev.Baseball.Player;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,29 +41,33 @@ namespace FibDev.Baseball.Choreography.Player
             _agent.SetDestination(pPosition);
         }
 
-        private void RotateBodyToBall()
+        private void RotateBodyToTarget(Transform target)
         {
-            var direction = ball.transform.position - transform.position;
+            var direction = target.position - transform.position;
             var angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
-            transform.rotation =  Quaternion.Euler(0, angleY, 0);
-        } 
-        
+            transform.rotation = Quaternion.Euler(0, angleY, 0);
+        }
+
         private void RotateHeadToBall()
         {
             var direction = ball.transform.position - head.position;
             var angleX = Mathf.Atan2(direction.y, direction.z) * Mathf.Rad2Deg;
             var angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
-            head.rotation =  Quaternion.Euler(-angleX, angleY, 0);
+            head.rotation = Quaternion.Euler(-angleX, angleY, 0);
         }
-        
-  
+
+
         private void Update()
         {
             if (IsIdle)
             {
-                RotateBodyToBall();
+                var position = GetComponent<Player>().playerStats.position;
+                var fieldPositions = PositionManager.Instance.field.positions;
+                var target =  fieldPositions[position == Position.Pitcher ? Position.Batter : Position.Pitcher];
+                
+                RotateBodyToTarget(target);
                 // RotateHeadToBall(); TODO: Fix this
             }
 

@@ -5,7 +5,7 @@ namespace FibDev.Baseball.Choreography.Player
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField] private PlayerStats playerStats;
+        public PlayerStats playerStats;
         private Motion _motion;
 
         public bool IsIdle()
