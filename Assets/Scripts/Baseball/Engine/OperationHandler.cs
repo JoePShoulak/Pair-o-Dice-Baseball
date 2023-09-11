@@ -5,9 +5,9 @@ using FibDev.Baseball.Records;
 
 namespace FibDev.Baseball.Engine
 {
-    public static class ActionHandler
+    public static class OperationHandler
     {
-        public static void HandleAction(Engine engine, Operation bAction)
+        public static void HandleOperation(Engine engine, Operation bAction)
         {
             switch (bAction)
             {
@@ -36,13 +36,13 @@ namespace FibDev.Baseball.Engine
                     engine.AddOut();
                     break;
                 case Operation.PitcherThrowStrike:
-                    engine.Choreographer.movement.pitchType = PitchType.Strike;
+                    engine.choreographer.movement.pitchType = PitchType.Strike;
                     break;
                 case Operation.PitcherThrowsBall:
-                    engine.Choreographer.movement.pitchType = PitchType.Ball;
+                    engine.choreographer.movement.pitchType = PitchType.Ball;
                     break;
                 case Operation.PitcherHitsPlayer:
-                    engine.Choreographer.movement.pitchType = PitchType.HitByPitch;
+                    engine.choreographer.movement.pitchType = PitchType.HitByPitch;
                     break;
                 case Operation.BasemenAdvanceIfForced:
                     break;

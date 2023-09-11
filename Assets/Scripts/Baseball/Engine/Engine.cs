@@ -20,16 +20,16 @@ namespace FibDev.Baseball.Engine
         public bool gameEnded;
 
         [SerializeField] private Board scoreboard;
-        private Choreographer _choreographer;
-
-        public Choreographer Choreographer => _choreographer;
+        [HideInInspector] public Choreographer choreographer;
 
         public Bases.Bases Bases => bases;
+        private bool HomeAtBat => teamAtBat == TeamType.Home;
+        private bool VisitorsAtBat => teamAtBat == TeamType.Visiting;
 
         private void Start()
         {
             ResetState();
-            _choreographer = GetComponent<Choreographer>();
+            choreographer = GetComponent<Choreographer>();
         }
 
         public void StartGame(Dictionary<TeamType, Team> teams)
@@ -37,7 +37,7 @@ namespace FibDev.Baseball.Engine
             // teams[0].Log();
             // teams[1].Log();
             scoreboard.SetNames(teams[TeamType.Home].name, teams[TeamType.Visiting].name);
-            Choreographer.SetupGame(teams);
+            choreographer.SetupGame(teams);
         }
 
         public void AddOut() => outs++;
@@ -62,7 +62,7 @@ namespace FibDev.Baseball.Engine
             outs = 0;
             bases.Reset();
 
-            if (teamAtBat == TeamType.Visiting)
+            if (VisitorsAtBat)
             {
                 teamAtBat = TeamType.Home;
                 return;
@@ -77,9 +77,12 @@ namespace FibDev.Baseball.Engine
             var bPlay = play ?? Play.Random();
             Debug.Log(bPlay.name);
 
-            foreach (var bAction in bPlay.actions) ActionHandler.HandleAction(this, bAction);
-            scoreboard.Display(record);
-            Choreographer.RunPlay();
+            foreach (var operation in bPlay.actions)
+            {
+                OperationHandler.HandleOperation(this, operation);
+            }
+
+            choreographer.RunPlay(() => scoreboard.Display(record));
 
             if (outs >= 3 && !gameEnded) AdvanceInning();
 
@@ -90,10 +93,10 @@ namespace FibDev.Baseball.Engine
         {
             if (record.LeadingTeam == null) return false;
 
-            var homeAtBatAndWinning = teamAtBat == TeamType.Home && record.LeadingTeam == TeamType.Home;
-            var visitorsAtBatAndWinning = teamAtBat == TeamType.Visiting && record.LeadingTeam == TeamType.Visiting;
+            var homeWon = inning > 8 && HomeAtBat && record.HomeWinning;
+            var visitorsWon = inning > 9 && VisitorsAtBat && record.VisitorsWinning;
 
-            return (inning > 8 && homeAtBatAndWinning) || (inning > 9 && visitorsAtBatAndWinning);
+            return homeWon || visitorsWon;
         }
 
         private void EndGame()
@@ -101,6 +104,5 @@ namespace FibDev.Baseball.Engine
             gameEnded = true;
             Debug.Log($"{teamAtBat} Won!");
         }
-
     }
 }

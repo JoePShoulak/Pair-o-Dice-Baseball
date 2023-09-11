@@ -94,7 +94,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
             movement.StartMovement();
         }
 
-        public void RunPlay()
+        public void RunPlay(Action callback)
         {
             switch (movement.pitchType)
             {
@@ -110,8 +110,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
-            // Do more
+
+            callback?.Invoke();
         }
 
         private void TakeFieldPositions(Dictionary<Position, Player.Player> pDict)

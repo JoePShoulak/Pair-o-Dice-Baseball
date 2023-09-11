@@ -25,6 +25,9 @@ namespace FibDev.Baseball.Records
             }
         }
 
+        public bool HomeWinning => LeadingTeam == TeamType.Home;
+        public bool VisitorsWinning => LeadingTeam == TeamType.Visiting;
+
         public void Add(int inning, TeamType team, StatType type, int quantity = 1)
         {
             while (innings.Count < inning) innings.Add(new Inning());
