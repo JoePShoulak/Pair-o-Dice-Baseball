@@ -26,6 +26,7 @@ namespace FibDev.UI
             OnTeamsSelected?.Invoke(selection);
 
             gameObject.SetActive(false);
+            OverlayManager.Instance.gameOverlay.SetActive(true);
         }
 
         // ReSharper disable once UnusedMember.Local

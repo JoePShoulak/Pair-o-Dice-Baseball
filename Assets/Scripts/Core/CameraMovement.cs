@@ -9,6 +9,7 @@ namespace FibDev.Core
         [Header("Target Transforms")]
         public Transform start;
         public Transform stadium;
+        public Transform scoreboard;
         public Transform notebook;
 
         private Vector3 lerpStartPos;

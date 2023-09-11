@@ -105,12 +105,12 @@ namespace FibDev.Baseball.Choreography.Ball
             _destination = pDestination;
             var trail = GetComponentInChildren<TrailRenderer>();
 
-            trail.enabled = false;
+            // trail.enabled = false;
 
             transform.position = pOrigin;
             transform.LookAt(pDestination);
 
-            trail.enabled = true;
+            // trail.enabled = true;
             var t = 0f;
             while (t <= 1)
             {
