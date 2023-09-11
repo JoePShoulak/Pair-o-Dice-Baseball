@@ -20,15 +20,16 @@ namespace FibDev.Baseball.Engine
         public bool gameEnded;
 
         [SerializeField] private Board scoreboard;
-        [SerializeField] public Choreographer choreographer;
+        private Choreographer _choreographer;
 
-        public Choreographer Choreographer => choreographer;
+        public Choreographer Choreographer => _choreographer;
 
         public Bases.Bases Bases => bases;
 
         private void Start()
         {
             ResetState();
+            _choreographer = GetComponent<Choreographer>();
         }
 
         public void StartGame(Dictionary<TeamType, Team> teams)

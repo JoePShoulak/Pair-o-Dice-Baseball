@@ -4134,8 +4134,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 570826809}
-  - component: {fileID: 570826808}
-  - component: {fileID: 570826810}
   m_Layer: 6
   m_Name: Coreographer
   m_TagString: Untagged
@@ -4143,22 +4141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &570826808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 570826807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb98ac05c98745449fc0d7b421e0c84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  homeDugout: {fileID: 547533062}
-  visitorDugout: {fileID: 1730195639}
-  field: {fileID: 1577157155}
-  ball: {fileID: 158026222}
 --- !u!4 &570826809
 Transform:
   m_ObjectHideFlags: 0
@@ -4174,19 +4156,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &570826810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 570826807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cff3dc3f3c459846b744fbddbd115bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2611091226662236831, guid: ddc3906648f60b241bf649c77f9e87f6, type: 3}
 --- !u!1 &571256387
 GameObject:
   m_ObjectHideFlags: 0
@@ -10767,6 +10736,8 @@ GameObject:
   - component: {fileID: 1674934044}
   - component: {fileID: 1674934045}
   - component: {fileID: 1674934043}
+  - component: {fileID: 1674934047}
+  - component: {fileID: 1674934046}
   m_Layer: 6
   m_Name: BaseballEngine
   m_TagString: Untagged
@@ -10787,38 +10758,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   record:
-    innings:
-    - homeInningStats:
-        runs: 0
-        hits: 0
-        errors: 0
-      visitorInningStats:
-        runs: 60
-        hits: 64
-        errors: 1
+    innings: []
     homeTotal:
       runs: 0
       hits: 0
       errors: 0
     visitorTotal:
-      runs: 60
-      hits: 64
-      errors: 1
+      runs: 0
+      hits: 0
+      errors: 0
   inning: 1
   teamAtBat: 1
-  outs: 2
+  outs: 0
   bases:
     first:
-      runnerOn: 1
+      runnerOn: 0
     second:
-      runnerOn: 1
+      runnerOn: 0
     third:
-      runnerOn: 1
+      runnerOn: 0
     home:
       runnerOn: 0
   gameEnded: 0
   scoreboard: {fileID: 60337544}
-  choreographer: {fileID: 570826808}
 --- !u!4 &1674934044
 Transform:
   m_ObjectHideFlags: 0
@@ -10846,6 +10808,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846c0735f985ad7428553cd59f44fadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1674934046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674934042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cff3dc3f3c459846b744fbddbd115bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 2611091226662236831, guid: ddc3906648f60b241bf649c77f9e87f6, type: 3}
+--- !u!114 &1674934047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674934042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb98ac05c98745449fc0d7b421e0c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  homeDugout: {fileID: 547533062}
+  visitorDugout: {fileID: 1730195639}
+  field: {fileID: 1577157155}
+  ball: {fileID: 158026222}
 --- !u!1001 &1676770761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18087,7 +18078,7 @@ PrefabInstance:
     - target: {fileID: 8850479893712864641, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
       propertyPath: choreographer
       value: 
-      objectReference: {fileID: 570826808}
+      objectReference: {fileID: 0}
     - target: {fileID: 8850479893712864641, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
       propertyPath: ballDestination
       value: 
