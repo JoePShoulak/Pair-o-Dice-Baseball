@@ -30,9 +30,13 @@ namespace FibDev.Baseball.Records
 
         public void Add(int inning, TeamType team, StatType type, int quantity = 1)
         {
-            while (innings.Count < inning) innings.Add(new Inning());
+            while (innings.Count < inning)
+            {
+                innings.Add(new Inning());
+            }
+            
             innings[inning - 1].Add(team, type, quantity);
-
+            
             (team == TeamType.Home ? homeTotal : visitorTotal).Add(type, quantity);
         }
     }
