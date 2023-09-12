@@ -22,6 +22,7 @@ namespace FibDev.Baseball.Choreography.Player
         public void SetDestination(Vector3 pPosition)
         {
             if (_agent == null) return;
+            if (!_agent.isOnNavMesh) return;
             isIdle = false;
             _agent.SetDestination(pPosition);
         }

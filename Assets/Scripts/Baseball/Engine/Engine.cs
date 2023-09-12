@@ -42,6 +42,7 @@ namespace FibDev.Baseball.Engine
         {
             // teams[0].Log();
             // teams[1].Log();
+            scoreboard.Reset();
             scoreboard.SetNames(teams[TeamType.Home].name, teams[TeamType.Visiting].name);
             choreographer.SetupGame(teams);
         }

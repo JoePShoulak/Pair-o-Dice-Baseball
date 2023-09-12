@@ -39,6 +39,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
         private PlayerCreator _playerCreator;
 
         private bool _mustChangeSides;
+        private bool _mustEndGame;
 
         private void Start()
         {
@@ -47,7 +48,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
             var engine = GetComponent<Engine.Engine>();
             engine.OnInningAdvance += () => _mustChangeSides = true;
-            engine.OnGameEnd += EndGame;
+            engine.OnGameEnd += () => _mustEndGame = true;
         }
 
         private void Update()
@@ -194,6 +195,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
             _baseManager.CallNewBatter(ActiveBatter);
             
+            if (_mustEndGame) EndGame();
             if (_mustChangeSides) SwitchSides();
 
             callback?.Invoke();
