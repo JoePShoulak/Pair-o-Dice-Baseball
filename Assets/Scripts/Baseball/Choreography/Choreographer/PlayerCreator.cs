@@ -33,8 +33,9 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
             var player = Instantiate(playerPrefab, destination.position, Quaternion.identity)
                 .GetComponent<Player.Player>();
+            player.team = pTeam.type;
             player.SetStats(playerStats);
-            player.SetIdlePosition(destination);
+            player.SetIdlePosition(destination.position);
 
             teamDict.Add(pPosition, player);
         }

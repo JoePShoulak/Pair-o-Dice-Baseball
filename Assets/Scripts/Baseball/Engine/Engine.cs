@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using FibDev.Baseball.Choreography.Ball;
 using FibDev.Baseball.Choreography.Choreographer;
@@ -27,6 +28,9 @@ namespace FibDev.Baseball.Engine
         public Bases.Bases Bases => bases;
         private bool HomeAtBat => teamAtBat == TeamType.Home;
         private bool VisitorsAtBat => teamAtBat == TeamType.Visiting;
+
+        public event Action OnInningAdvance; 
+        public event Action OnGameEnd; 
 
         private void Start()
         {
@@ -61,6 +65,7 @@ namespace FibDev.Baseball.Engine
 
         private void AdvanceInning()
         {
+            OnInningAdvance?.Invoke();
             outs = 0;
             bases.Reset();
 
@@ -85,7 +90,7 @@ namespace FibDev.Baseball.Engine
                 OperationHandler.HandleOperation(this, operation);
             }
 
-            choreographer.RunPlay(() => scoreboard.Display(record));
+            choreographer.InitiateMovement(() => scoreboard.Display(record));
 
             if (outs >= 3 && !gameEnded) AdvanceInning();
 
@@ -105,6 +110,7 @@ namespace FibDev.Baseball.Engine
         private void EndGame()
         {
             gameEnded = true;
+            OnGameEnd?.Invoke();
             Debug.Log($"{teamAtBat} Won!");
         }
     }

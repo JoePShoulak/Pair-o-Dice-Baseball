@@ -35,20 +35,17 @@ namespace FibDev.Baseball.Plays
                 PlayEnum.Walk, A.Play.Named("Walk")
                     .BatterTakesBall()
                     .Add(Operation.BasemenAdvanceIfForced)
-                    .Add(Operation.BatterRunsFirst)
             },
             {
                 PlayEnum.HitByPitch, A.Play.Named("Hit By Pitch")
                     .BatterGetsHit()
                     .Add(Operation.BasemenAdvanceIfForced)
-                    .Add(Operation.BatterRunsFirst)
             },
             {
                 PlayEnum.Error, A.Play.Named("Error")
                     .BatterHitBall(false)
                     .Add(Operation.BasemenAdvanceIfForced)
                     .Add(Operation.Error)
-                    .BasemenAdvance()
             },
             {
                 PlayEnum.StrikeOut, A.Play.Named("Strike Out")
@@ -80,10 +77,10 @@ namespace FibDev.Baseball.Plays
                     .BatterHitBall()
                     .Add(Operation.FielderCatchesBall)
             },
-            {
+            { // TODO: Don't advance the batter
                 PlayEnum.GroundOut, A.Play.Named("Ground Out")
                     .BatterHitBall()
-                    .Add(Operation.FielderCollectsBall)
+                    .Add(Operation.OutAtFirst)
                     .BasemenAdvance(1, false)
             },
             // {

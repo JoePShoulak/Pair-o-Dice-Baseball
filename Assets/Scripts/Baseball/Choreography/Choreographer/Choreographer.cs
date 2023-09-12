@@ -1,11 +1,15 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FibDev.Baseball.Choreography.Ball;
 using FibDev.Baseball.Choreography.Play;
 using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Teams;
+using FibDev.Core;
+using FibDev.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace FibDev.Baseball.Choreography.Choreographer
 {
@@ -38,11 +42,10 @@ namespace FibDev.Baseball.Choreography.Choreographer
         {
             _playerCreator = GetComponent<PlayerCreator>();
             _baseManager = GetComponent<BaseManager>();
-        }
 
-        private void Cleanup()
-        {
-            throw new NotImplementedException();
+            var engine = GetComponent<Engine.Engine>();
+            engine.OnInningAdvance += SwitchSides;
+            engine.OnGameEnd += EndGame;
         }
 
         private void Update()
@@ -92,19 +95,56 @@ namespace FibDev.Baseball.Choreography.Choreographer
             _baseManager.CallNewBatter(ActiveBatter);
         }
 
+        private void EndGame()
+        {
+            var cam = GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>();
+            cam.LerpTo(cam.scoreboard, 2f);
+            TearDownGame();
+        }
+
         public void Begin()
         {
             // movement.OnMovementEnd += () => 
             movement.StartMovement();
         }
 
-        public void RunPlay(Action callback)
+        public void TearDownGame()
         {
-            movement.StartMovement();
+            foreach (var player in AllPlayers)
+            {
+                Destroy(player.gameObject);
+            }
+        }
+
+        private void SwitchSides()
+        {
+            _teamOnField = _teamOnField == TeamType.Home ? TeamType.Visiting : TeamType.Home;
             
+            TakeFieldPositions(_teamOnField == TeamType.Home ? _homeTeam : _visitorTeam);
+            TakeDugoutPositions(_teamOnField == TeamType.Visiting ? _homeTeam : _visitorTeam);
+            
+            _baseManager.Reset();
+            _baseManager.CallNewBatter(ActiveBatter);
+        }
+
+        private Button CamButton => OverlayManager.Instance.gameOverlay.GetComponent<GameOverlayUI>().camButton;
+
+        public void InitiateMovement(Action callback)
+        {
             ball.animator.enabled = true;
             ball.animator.Play("Ball", -1, 0f);
 
+            StartCoroutine(ExecutePlay(callback));
+        }
+
+        private IEnumerator ExecutePlay(Action callback)
+        {
+            var animationTime = ball.animator.GetCurrentAnimatorStateInfo(0).length;
+            const float offset = 1f;
+            yield return new WaitForSeconds(animationTime - offset);
+            CamButton.interactable = true;
+            
+            movement.StartMovement();
             switch (movement.runnerMovement)
             {
                 case RunnerMovement.Single:
@@ -124,6 +164,10 @@ namespace FibDev.Baseball.Choreography.Choreographer
                     break;
                 case RunnerMovement.Stay:
                     break;
+                case RunnerMovement.OutAdvance:
+                    _baseManager.Advance(ActiveBatter, 1, false);
+                    _baseManager.Out(ActiveBatter);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -131,16 +175,16 @@ namespace FibDev.Baseball.Choreography.Choreographer
             Debug.Log($"Movement: {movement.runnerMovement}");
             if (movement.runnerMovement == RunnerMovement.Stay)
             {
-                _baseManager.Out(ActiveBatter, TeamAtBat);
+                _baseManager.Out(ActiveBatter);
             }
 
             if (_teamOnField == TeamType.Home)
             {
-                _visitorBatterIndex++;
+                _visitorBatterIndex = (_visitorBatterIndex + 1) % _visitorTeam.Count;
             }
             else
             {
-                _homeBatterIndex++;
+                _homeBatterIndex = (_homeBatterIndex + 1) % _homeTeam.Count;
             }
 
             _baseManager.CallNewBatter(ActiveBatter);
@@ -152,7 +196,20 @@ namespace FibDev.Baseball.Choreography.Choreographer
         {
             foreach (var (pPosition, playerObj) in pDict)
             {
-                playerObj.SetIdlePosition(field.positions[pPosition]);
+                var offsetList = new List<Position> { Position.Baseman1st, Position.Baseman2nd, Position.Baseman3rd };
+                var offset = offsetList.Contains(pPosition) ? new Vector3(0, 0, 5) : Vector3.zero;
+
+                playerObj.SetIdlePosition(field.positions[pPosition].position + offset);
+            }
+        }  
+        
+        private void TakeDugoutPositions(Dictionary<Position, Player.Player> pDict)
+        {
+            var dugout = pDict[Position.Pitcher].team == TeamType.Home ? homeDugout : visitorDugout;
+            
+            foreach (var (pPosition, playerObj) in pDict)
+            {
+                playerObj.SetIdlePosition(dugout.positions[pPosition].position);
             }
         }
     }

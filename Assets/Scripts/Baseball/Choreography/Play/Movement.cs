@@ -11,7 +11,8 @@ namespace FibDev.Baseball.Choreography.Play
         Triple,
         HomeRun,
         Force,
-        Stay
+        Stay,
+        OutAdvance
     }
 
     public class Movement

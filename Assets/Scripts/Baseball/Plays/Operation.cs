@@ -18,7 +18,7 @@ namespace FibDev.Baseball.Plays
         BasemanAdvance,
             
         FielderCatchesBall,
-        FielderCollectsBall,
+        OutAtFirst,
         Error,
         
         OutAtSecond,

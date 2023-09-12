@@ -46,11 +46,33 @@ namespace FibDev.Baseball.Engine
                     break;
                 case Operation.BasemenAdvanceIfForced:
                     engine.choreographer.movement.runnerMovement = RunnerMovement.Force;
+                    
+                    if (engine.Bases.first.runnerOn && engine.Bases.second.runnerOn && engine.Bases.third.runnerOn)
+                    {
+                        engine.Bases.third.runnerOn = false;
+                        engine.record.Add(engine.inning, engine.teamAtBat, StatType.Run);
+                    }
+                    
+                    if (engine.Bases.first.runnerOn && engine.Bases.second.runnerOn)
+                    {
+                        engine.Bases.third.runnerOn = true;
+                        engine.Bases.second.runnerOn = false;
+                    }
+
+                    if (engine.Bases.first.runnerOn)
+                    {
+                        engine.Bases.second.runnerOn = true;
+                        engine.Bases.first.runnerOn = false;
+                    }
+
+                    engine.Bases.first.runnerOn = true;
                     break;
                 case Operation.FielderCatchesBall:
                     engine.AddOut();
                     break;
-                case Operation.FielderCollectsBall:
+                case Operation.OutAtFirst:
+                    engine.AddOut();
+                    engine.choreographer.movement.runnerMovement = RunnerMovement.OutAdvance;
                     break;
                 case Operation.Error:
                     engine.record.Add(engine.inning, engine.teamAtBat, StatType.Error);
@@ -85,9 +107,8 @@ namespace FibDev.Baseball.Engine
                             Debug.Log("Triple became a home run");
                             break;
                         case RunnerMovement.HomeRun:
-                            break;
                         case RunnerMovement.Force:
-                            // TODO: Outs are advancing if forced; figure out why
+                        case RunnerMovement.OutAdvance:
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();

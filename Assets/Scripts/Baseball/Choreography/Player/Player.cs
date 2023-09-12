@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using FibDev.Baseball.Player;
+using FibDev.Baseball.Teams;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +11,7 @@ namespace FibDev.Baseball.Choreography.Player
     {
         public PlayerStats playerStats;
         private Motion _motion;
+        public TeamType team;
 
         public NavMeshAgent Agent => GetComponent<NavMeshAgent>(); 
 
@@ -42,9 +45,9 @@ namespace FibDev.Baseball.Choreography.Player
             _motion.SetDestination(_motion.IdlePosition);
         }
 
-        public void SetIdlePosition(Transform pTransform, bool autoGo = true)
+        public void SetIdlePosition(Vector3 position, bool autoGo = true)
         {
-            _motion.IdlePosition = pTransform.position;
+            _motion.IdlePosition = position;
             if (autoGo) GoToIdle();
         }
     }
