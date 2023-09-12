@@ -2,14 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
 using FibDev.Baseball.Choreography.Ball;
 using FibDev.Baseball.Choreography.Play;
 using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Teams;
 using FibDev.Core;
 using FibDev.UI;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace FibDev.Baseball.Choreography.Choreographer
 {
