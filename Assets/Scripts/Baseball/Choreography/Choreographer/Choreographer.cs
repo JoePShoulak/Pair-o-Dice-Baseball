@@ -6,7 +6,6 @@ using FibDev.Baseball.Choreography.Play;
 using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Teams;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace FibDev.Baseball.Choreography.Choreographer
 {
@@ -50,7 +49,11 @@ namespace FibDev.Baseball.Choreography.Choreographer
         {
             if (!movement.inProgress) return;
 
-            if (PlayersReset) movement.EndMovement();
+            if (PlayersReset)
+            {
+                movement.EndMovement();
+                movement = new Movement();
+            }
         }
 
         private IEnumerable<Player.Player> AllPlayers
@@ -97,8 +100,10 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         public void RunPlay(Action callback)
         {
+            movement.StartMovement();
+            
             ball.animator.enabled = true;
-            ball.animator.Play("Ball");
+            ball.animator.Play("Ball", -1, 0f);
 
             switch (movement.runnerMovement)
             {
@@ -127,8 +132,6 @@ namespace FibDev.Baseball.Choreography.Choreographer
             if (movement.runnerMovement == RunnerMovement.Stay)
             {
                 _baseManager.Out(ActiveBatter, TeamAtBat);
-
-                movement.EndMovement();
             }
 
             if (_teamOnField == TeamType.Home)

@@ -355,9 +355,9 @@ MonoBehaviour:
   textTransform: {fileID: 8459839451987132767}
   numberText: {fileID: 5443333860907773654}
   nameText: {fileID: 4030210784666887583}
+  headRenderer: {fileID: 5518878481195404089}
   hatRenderer: {fileID: 4843062587936281033}
   billRenderer: {fileID: 7742515125941260562}
-  headRenderer: {fileID: 5518878481195404089}
 --- !u!114 &2978005983884666260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleDetectionRadius: 1
   head: {fileID: 5126856775453588229}
+  isIdle: 1
 --- !u!195 &6515728539512712978
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -382,7 +383,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 7
+  m_Speed: 10
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120

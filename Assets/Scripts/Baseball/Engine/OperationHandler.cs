@@ -65,6 +65,7 @@ namespace FibDev.Baseball.Engine
                 case Operation.Cleanup:
                     break;
                 case Operation.BasemanAdvance:
+                    Debug.Log("Baseman Advance called");
                     switch (movement)
                     {
                         case RunnerMovement.Stay:
@@ -86,6 +87,7 @@ namespace FibDev.Baseball.Engine
                         case RunnerMovement.HomeRun:
                             break;
                         case RunnerMovement.Force:
+                            // TODO: Outs are advancing if forced; figure out why
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();

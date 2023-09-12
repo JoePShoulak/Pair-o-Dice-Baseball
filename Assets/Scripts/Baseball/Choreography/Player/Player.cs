@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FibDev.Baseball.Player;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,7 +14,7 @@ namespace FibDev.Baseball.Choreography.Player
 
         public bool IsIdle()
         {
-            return _motion.IsIdle;
+            return _motion.isIdle;
         }
 
         private void Awake()
@@ -41,10 +42,10 @@ namespace FibDev.Baseball.Choreography.Player
             _motion.SetDestination(_motion.IdlePosition);
         }
 
-        public void SetIdlePosition(Transform pTransform)
+        public void SetIdlePosition(Transform pTransform, bool autoGo = true)
         {
             _motion.IdlePosition = pTransform.position;
-            GoToIdle();
+            if (autoGo) GoToIdle();
         }
     }
 }

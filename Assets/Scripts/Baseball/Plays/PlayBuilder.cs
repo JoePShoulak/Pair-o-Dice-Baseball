@@ -60,6 +60,7 @@ namespace FibDev.Baseball.Plays
                 play.actions.Add(Operation.Baseman2ndRunsThird);
                 play.actions.Add(Operation.Baseman1stRunsSecond);
                 if (i==0 && hit) play.actions.Add(Operation.BatterRunsFirst);
+                play.actions.Add(Operation.BasemanAdvance);
             }
 
             return this;

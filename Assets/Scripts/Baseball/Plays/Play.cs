@@ -59,12 +59,12 @@ namespace FibDev.Baseball.Plays
                     .BatterHitBall()
                     .Add(Operation.FielderCatchesBall)
             },
-            {
-                PlayEnum.FlyOutPlus, A.Play.Named("Fly Out Plus")
-                    .BatterHitBall()
-                    .Add(Operation.FielderCatchesBall)
-                    .Add(Operation.Baseman3rdRunsHome)
-            },
+            // {
+            //     PlayEnum.FlyOutPlus, A.Play.Named("Fly Out Plus")
+            //         .BatterHitBall()
+            //         .Add(Operation.FielderCatchesBall)
+            //         .Add(Operation.Baseman3rdRunsHome)
+            // },
             {
                 PlayEnum.PopOut, A.Play.Named("Pop Out")
                     .BatterHitBall()
@@ -86,13 +86,13 @@ namespace FibDev.Baseball.Plays
                     .Add(Operation.FielderCollectsBall)
                     .BasemenAdvance(1, false)
             },
-            {
-                PlayEnum.GroundOut2, A.Play.Named("Ground Out (2)")
-                    .BatterHitBall()
-                    .Add(Operation.FielderCollectsBall)
-                    .Add(Operation.OutAtSecond)
-                    .BasemenAdvance(1, false)
-            }
+            // {
+            //     PlayEnum.GroundOut2, A.Play.Named("Ground Out (2)")
+            //         .BatterHitBall()
+            //         .Add(Operation.FielderCollectsBall)
+            //         .Add(Operation.OutAtSecond)
+            //         .BasemenAdvance(1, false)
+            // }
         };
 
         public static Play Random()
