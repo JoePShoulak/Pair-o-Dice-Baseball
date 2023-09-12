@@ -38,13 +38,15 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         private PlayerCreator _playerCreator;
 
+        private bool _mustChangeSides;
+
         private void Start()
         {
             _playerCreator = GetComponent<PlayerCreator>();
             _baseManager = GetComponent<BaseManager>();
 
             var engine = GetComponent<Engine.Engine>();
-            engine.OnInningAdvance += SwitchSides;
+            engine.OnInningAdvance += () => _mustChangeSides = true;
             engine.OnGameEnd += EndGame;
         }
 
@@ -100,6 +102,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
             var cam = GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>();
             cam.LerpTo(cam.scoreboard, 2f);
             TearDownGame();
+            OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().rollButton.interactable = false;
+            OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().autoRun.interactable = false;
         }
 
         public void Begin()
@@ -112,6 +116,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
         {
             foreach (var player in AllPlayers)
             {
+                if (player == null) return;
                 Destroy(player.gameObject);
             }
         }
@@ -188,6 +193,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
             }
 
             _baseManager.CallNewBatter(ActiveBatter);
+            
+            if (_mustChangeSides) SwitchSides();
 
             callback?.Invoke();
         }

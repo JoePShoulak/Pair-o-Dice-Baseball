@@ -27,6 +27,7 @@ namespace FibDev.Baseball.Engine
             {
                 readyForRoll = true;
                 gameOverlay.rollButton.interactable = true;
+                gameOverlay.autoRun.interactable = true;
                 Debug.Log("Ready for roll");
             };
         }
