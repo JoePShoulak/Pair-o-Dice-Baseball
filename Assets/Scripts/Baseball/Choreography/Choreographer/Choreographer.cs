@@ -194,9 +194,18 @@ namespace FibDev.Baseball.Choreography.Choreographer
             }
 
             _baseManager.CallNewBatter(ActiveBatter);
-            
-            if (_mustEndGame) EndGame();
-            if (_mustChangeSides) SwitchSides();
+
+            if (_mustEndGame)
+            {
+                _mustEndGame = false;
+                EndGame();
+            }
+
+            if (_mustChangeSides)
+            {
+                _mustChangeSides = false;
+                SwitchSides();
+            }
 
             callback?.Invoke();
         }
