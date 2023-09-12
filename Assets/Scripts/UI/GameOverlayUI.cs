@@ -38,6 +38,8 @@ namespace FibDev.UI
         {
             _cam.LerpTo(_cam.start, 2f, () => OverlayManager.Instance.mainMenu.SetActive(true));
             rollButton.interactable = false;
+            autoRun.interactable = false;
+            choreographer.gameEnded = true;
             choreographer.TearDownGame();
             gameObject.SetActive(false);
         }

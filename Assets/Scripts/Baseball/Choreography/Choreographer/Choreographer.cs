@@ -10,6 +10,7 @@ using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Teams;
 using FibDev.Core;
 using FibDev.UI;
+using Unity.VisualScripting;
 
 namespace FibDev.Baseball.Choreography.Choreographer
 {
@@ -40,6 +41,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         private bool _mustChangeSides;
         private bool _mustEndGame;
+
+        public bool gameEnded;
 
         private void Start()
         {
@@ -88,6 +91,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         public void SetupGame(Dictionary<TeamType, Team> pTeams)
         {
+            gameEnded = false;
+            
             movement.StartMovement();
             _teams = pTeams;
 
@@ -100,6 +105,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         private void EndGame()
         {
+            gameEnded = true;
+            
             var cam = GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>();
             cam.LerpTo(cam.scoreboard, 2f);
             TearDownGame();
@@ -115,6 +122,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         public void TearDownGame()
         {
+            OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().autoRun.isOn = false;
+            
             foreach (var player in AllPlayers)
             {
                 if (player == null) return;
@@ -137,6 +146,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         public void InitiateMovement(Action callback)
         {
+            if (gameEnded) return;
+
             ball.animator.enabled = true;
             ball.animator.Play("Ball", -1, 0f);
 

@@ -1,10 +1,9 @@
-using System;
+using FibDev.Baseball.Choreography.Choreographer;
 using FibDev.Baseball.Choreography.Play;
 using FibDev.Baseball.Plays;
 using FibDev.UI;
 using Imports.InnerDriveStudios.DiceCreator.Scripts.DieCollection;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace FibDev.Baseball.Engine
 {
@@ -13,11 +12,13 @@ namespace FibDev.Baseball.Engine
         private Engine _engine;
         private bool readyForRoll;
         [SerializeField] private DieCollection _dieCollection;
+        private Choreographer _choreographer;
         private GameOverlayUI gameOverlay;
 
         private void Start()
         {
             _engine = GetComponent<Engine>();
+            _choreographer = GetComponent<Choreographer>();
             _engine.ResetState();
             gameOverlay = OverlayManager.Instance.gameOverlay.GetComponent<GameOverlayUI>();
 
@@ -43,6 +44,7 @@ namespace FibDev.Baseball.Engine
         private void HandleRoll(int pObj)
         {
             if (!readyForRoll) return;
+            if (_choreographer.gameEnded) return;
 
             readyForRoll = false;
 
