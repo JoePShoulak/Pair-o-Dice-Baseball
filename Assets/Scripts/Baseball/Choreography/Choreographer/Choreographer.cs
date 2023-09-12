@@ -214,7 +214,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
         
         private void TakeDugoutPositions(Dictionary<Position, Player.Player> pDict)
         {
-            var dugout = pDict[Position.Pitcher].team == TeamType.Home ? homeDugout : visitorDugout;
+            var dugout = pDict.Values.First().team == TeamType.Home ? homeDugout : visitorDugout;
             
             foreach (var (pPosition, playerObj) in pDict)
             {
