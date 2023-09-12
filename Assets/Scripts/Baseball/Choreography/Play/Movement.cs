@@ -6,23 +6,19 @@ namespace FibDev.Baseball.Choreography.Play
 {
     public enum RunnerMovement
     {
-        Stay,
-        Advance,
-        Force
+        Single,
+        Double,
+        Triple,
+        HomeRun,
+        Force,
+        Stay
     }
 
     public class Movement
     {
-        public PitchType pitchType;
-        public HitType hitType;
-
-        public Vector3 HitDestination;
-
-        public RunnerMovement runnerMovement;
-        public bool playAtFirst;
+        public RunnerMovement runnerMovement = RunnerMovement.Stay;
 
         public bool inProgress;
-        public bool outHasOccurred;
 
         public event Action<Movement> OnMovementStart = movement =>
         {
@@ -36,12 +32,6 @@ namespace FibDev.Baseball.Choreography.Play
             Debug.Log("Movement Ended");
         };
         
-        public static event Action<Movement> OnOut = movement =>
-        {
-            movement.outHasOccurred = true;
-            Debug.Log("Out Has Occurred");
-        };
-
         public void StartMovement()
         {
             OnMovementStart?.Invoke(this);
@@ -52,9 +42,5 @@ namespace FibDev.Baseball.Choreography.Play
             OnMovementEnd?.Invoke(this);
         }
 
-        public void CallOut()
-        {
-            OnOut?.Invoke(this);
-        }
     }
 }

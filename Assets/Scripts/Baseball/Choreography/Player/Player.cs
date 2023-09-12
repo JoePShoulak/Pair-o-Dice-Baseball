@@ -1,5 +1,6 @@
 using FibDev.Baseball.Player;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace FibDev.Baseball.Choreography.Player
 {
@@ -7,6 +8,8 @@ namespace FibDev.Baseball.Choreography.Player
     {
         public PlayerStats playerStats;
         private Motion _motion;
+
+        public NavMeshAgent Agent => GetComponent<NavMeshAgent>(); 
 
         public bool IsIdle()
         {
@@ -33,7 +36,7 @@ namespace FibDev.Baseball.Choreography.Player
             _motion.SetDestination(pTransform.position);
         }
         
-        public void GoToIdle()
+        private void GoToIdle()
         {
             _motion.SetDestination(_motion.IdlePosition);
         }
@@ -41,6 +44,7 @@ namespace FibDev.Baseball.Choreography.Player
         public void SetIdlePosition(Transform pTransform)
         {
             _motion.IdlePosition = pTransform.position;
+            GoToIdle();
         }
     }
 }

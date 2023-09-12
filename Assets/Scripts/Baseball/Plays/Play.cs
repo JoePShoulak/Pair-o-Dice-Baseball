@@ -46,7 +46,8 @@ namespace FibDev.Baseball.Plays
             {
                 PlayEnum.Error, A.Play.Named("Error")
                     .BatterHitBall(false)
-                    .Add(Operation.FielderBobblesBall)
+                    .Add(Operation.BasemenAdvanceIfForced)
+                    .Add(Operation.Error)
                     .BasemenAdvance()
             },
             {

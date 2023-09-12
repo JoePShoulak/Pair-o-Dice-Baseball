@@ -80,7 +80,6 @@ namespace FibDev.Baseball.Engine
             Debug.Log(bPlay.name);
             ballMessager.UpdateMessage(bPlay.name);
 
-
             foreach (var operation in bPlay.actions)
             {
                 OperationHandler.HandleOperation(this, operation);

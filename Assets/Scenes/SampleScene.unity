@@ -11382,6 +11382,7 @@ GameObject:
   - component: {fileID: 1674934045}
   - component: {fileID: 1674934043}
   - component: {fileID: 1674934047}
+  - component: {fileID: 1674934048}
   - component: {fileID: 1674934046}
   m_Layer: 6
   m_Name: BaseballEngine
@@ -11484,6 +11485,18 @@ MonoBehaviour:
   visitorDugout: {fileID: 1730195639}
   field: {fileID: 1577157155}
   ball: {fileID: 158026222}
+--- !u!114 &1674934048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674934042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb3230c9a30a034c95a25babdcdb268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1676770761
 PrefabInstance:
   m_ObjectHideFlags: 0

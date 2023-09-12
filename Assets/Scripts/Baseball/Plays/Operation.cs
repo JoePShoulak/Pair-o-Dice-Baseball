@@ -15,10 +15,11 @@ namespace FibDev.Baseball.Plays
         Baseman3rdRunsHome,
             
         BasemenAdvanceIfForced,
+        BasemanAdvance,
             
         FielderCatchesBall,
         FielderCollectsBall,
-        FielderBobblesBall,
+        Error,
         
         OutAtSecond,
 

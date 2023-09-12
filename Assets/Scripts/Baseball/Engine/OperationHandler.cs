@@ -1,7 +1,9 @@
 using System;
 using FibDev.Baseball.Choreography.Ball;
+using FibDev.Baseball.Choreography.Play;
 using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
+using UnityEngine;
 
 namespace FibDev.Baseball.Engine
 {
@@ -9,6 +11,7 @@ namespace FibDev.Baseball.Engine
     {
         public static void HandleOperation(Engine engine, Operation bAction)
         {
+            var movement = engine.choreographer.movement.runnerMovement;
             switch (bAction)
             {
                 // TODO: Fix all these public properties and no functions
@@ -36,22 +39,20 @@ namespace FibDev.Baseball.Engine
                     engine.AddOut();
                     break;
                 case Operation.PitcherThrowStrike:
-                    engine.choreographer.movement.pitchType = PitchType.Strike;
                     break;
                 case Operation.PitcherThrowsBall:
-                    engine.choreographer.movement.pitchType = PitchType.Ball;
                     break;
                 case Operation.PitcherHitsPlayer:
-                    engine.choreographer.movement.pitchType = PitchType.HitByPitch;
                     break;
                 case Operation.BasemenAdvanceIfForced:
+                    engine.choreographer.movement.runnerMovement = RunnerMovement.Force;
                     break;
                 case Operation.FielderCatchesBall:
                     engine.AddOut();
                     break;
                 case Operation.FielderCollectsBall:
                     break;
-                case Operation.FielderBobblesBall:
+                case Operation.Error:
                     engine.record.Add(engine.inning, engine.teamAtBat, StatType.Error);
                     break;
                 case Operation.OutAtSecond:
@@ -62,6 +63,35 @@ namespace FibDev.Baseball.Engine
                     engine.record.Add(engine.inning, engine.teamAtBat, StatType.Hit);
                     break;
                 case Operation.Cleanup:
+                    break;
+                case Operation.BasemanAdvance:
+                    switch (movement)
+                    {
+                        case RunnerMovement.Stay:
+                            movement = RunnerMovement.Single;
+                            Debug.Log("Stay became a single");
+                            break;
+                        case RunnerMovement.Single:
+                            movement = RunnerMovement.Double;
+                            Debug.Log("Single became a double");
+                            break;
+                        case RunnerMovement.Double:
+                            movement = RunnerMovement.Triple;
+                            Debug.Log("Double became a triple");
+                            break;
+                        case RunnerMovement.Triple:
+                            movement = RunnerMovement.HomeRun;
+                            Debug.Log("Triple became a home run");
+                            break;
+                        case RunnerMovement.HomeRun:
+                            break;
+                        case RunnerMovement.Force:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+
+                    engine.choreographer.movement.runnerMovement = movement;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(bAction), bAction, null);
