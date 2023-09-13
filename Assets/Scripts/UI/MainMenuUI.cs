@@ -22,7 +22,7 @@ namespace FibDev.UI
         public void Scores()
         {
             gameObject.SetActive(false);
-            cam.LerpTo(cam.notebook, 2f);
+            cam.LerpTo(cam.notebook, 2f, () => OverlayManager.Instance.scoresOverlay.SetActive(true));
         }
     }
 }

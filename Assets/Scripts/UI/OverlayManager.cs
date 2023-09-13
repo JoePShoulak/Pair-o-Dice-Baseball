@@ -7,6 +7,7 @@ namespace FibDev.UI
         public GameObject mainMenu;
         public GameObject teamSelect;
         public GameObject gameOverlay;
+        public GameObject scoresOverlay;
 
         public static OverlayManager Instance;
 
@@ -22,6 +23,7 @@ namespace FibDev.UI
             mainMenu.SetActive(true);
             teamSelect.SetActive(false);
             gameOverlay.SetActive(false);
+            scoresOverlay.SetActive(false);
         }
     }
 }
