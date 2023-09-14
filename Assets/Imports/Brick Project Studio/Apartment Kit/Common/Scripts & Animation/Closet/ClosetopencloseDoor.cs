@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Imports.Brick_Project_Studio.Apartment_Kit.Common.Scripts___Animation.Closet
+namespace SojaExiles
 
 {
 	public class ClosetopencloseDoor : MonoBehaviour

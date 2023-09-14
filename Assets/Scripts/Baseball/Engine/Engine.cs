@@ -18,7 +18,7 @@ namespace FibDev.Baseball.Engine
         public bool gameEnded;
         
         private int outs;
-        private Bases.Bases bases;
+        private Bases.Bases bases = new ();
 
         [SerializeField] private Board scoreboard;
         [HideInInspector] public Choreographer choreographer;
