@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace FibDev.Baseball.Choreography.Player
+namespace FibDev.Core
 {
     public class RenderTextureMaker : MonoBehaviour
     {

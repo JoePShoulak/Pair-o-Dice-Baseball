@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using FibDev.Baseball.Choreography.Positions;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,6 +14,7 @@ namespace FibDev.Baseball.Choreography.Player
         public Vector3 IdlePosition { get; set; }
         [SerializeField] private float idleDetectionRadius = 1f;
         public bool isIdle = true;
+        private bool lookedAtTarget;
 
         private List<Transform> _destinationQueue = new();
 
@@ -34,6 +36,7 @@ namespace FibDev.Baseball.Choreography.Player
             if (_agent == null) return;
             if (!_agent.isOnNavMesh) return;
             isIdle = false;
+            lookedAtTarget = false;
             _agent.SetDestination(pPosition);
         }
 
@@ -42,7 +45,7 @@ namespace FibDev.Baseball.Choreography.Player
             var direction = target.position - transform.position;
             var angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
-            transform.rotation = Quaternion.Euler(0, angleY, 0);
+            transform.DORotate(new Vector3(0, angleY, 0), 0.25f);
         }
 
         private bool IsAtHome()
@@ -64,12 +67,13 @@ namespace FibDev.Baseball.Choreography.Player
                 _destinationQueue.RemoveAt(0);
             }
 
-            if (isIdle)
+            if (isIdle && !lookedAtTarget)
             {
                 var fieldPositions = PositionManager.Instance.field.positions;
                 var target = fieldPositions[IsAtHome() ? Position.Pitcher : Position.Catcher];
 
                 RotateBodyToTarget(target);
+                lookedAtTarget = true;
             }
 
             var isAtIdlePosition = Vector3.Distance(transform.position, IdlePosition) < idleDetectionRadius;

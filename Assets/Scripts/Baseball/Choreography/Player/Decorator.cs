@@ -1,4 +1,5 @@
 using FibDev.Baseball.Player;
+using FibDev.Core;
 using UnityEngine;
 
 namespace FibDev.Baseball.Choreography.Player
