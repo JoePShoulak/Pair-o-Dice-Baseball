@@ -1,26 +1,24 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using FibDev.Baseball.Choreography.Positions;
-using FibDev.Baseball.Teams;
-using JetBrains.Annotations;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace FibDev.Baseball.Choreography.Choreographer
 {
     public class BaseManager : MonoBehaviour
     {
-        [SerializeField] private Player.Player runnerOnFirst;
-        [SerializeField] private Player.Player runnerOnSecond;
-        [SerializeField] private Player.Player runnerOnThird;
+        private PositionManager _positionManager;
 
+        private Player.Player runnerOnFirst;
+        private Player.Player runnerOnSecond;
+        private Player.Player runnerOnThird;
+        
         private Transform baseHome;
         private Transform baseFirst;
         private Transform baseSecond;
         private Transform baseThird;
 
-        private PositionManager _positionManager;
+        private List<Transform> _bases;
 
         private void Start()
         {
@@ -31,17 +29,17 @@ namespace FibDev.Baseball.Choreography.Choreographer
             baseFirst = fieldPositionsDictionary[Position.Baseman1st];
             baseSecond = fieldPositionsDictionary[Position.Baseman2nd];
             baseThird = fieldPositionsDictionary[Position.Baseman3rd];
-        }
 
-        [CanBeNull]
+            _bases = new List<Transform> { baseHome, baseFirst, baseSecond, baseThird };
+        }
+        
+
         private Transform ClosestBaseToPlayer(Player.Player player)
         {
-            var bases = new List<Transform>() { baseFirst, baseSecond, baseThird, baseHome };
-
             Transform closestBase = null;
             var closestDistance = float.MaxValue;
 
-            foreach (var baseLocation in bases)
+            foreach (var baseLocation in _bases)
             {
                 var distance = Vector3.Distance(baseLocation.position, player.transform.position);
 
@@ -71,11 +69,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
             if (baseLoc == baseThird) runnerOnThird = player;
         }
 
-        private void SendForward(Player.Player player, int basesToAdvance = 1)
+        private List<Transform> GenerateBasePath(Player.Player player, Transform currentBase, int basesToAdvance)
         {
-            if (player == null) return;
-
-            var currentBase = ClosestBaseToPlayer(player);
             var nextBase = currentBase;
 
             List<Transform> baseRoute = new();
@@ -86,33 +81,24 @@ namespace FibDev.Baseball.Choreography.Choreographer
                 baseRoute.Add(nextBase);
             }
 
+            return ParseBaseRoute(baseRoute, player);
+        }
+
+        private void SendForward(Player.Player player, int basesToAdvance = 1)
+        {
+            if (player == null) return;
+
+            var currentBase = ClosestBaseToPlayer(player);
             SetBase(currentBase, null);
 
-            var destinationList = ParseBaseRoute(baseRoute, player);
-            var finalStop = destinationList.Last();
-            var bases = new List<Transform> { baseFirst, baseSecond, baseThird };
-            if (bases.Contains(finalStop))
-            {
-                SetBase(nextBase, player);
-            }
-
+            var destinationList = GenerateBasePath(player, currentBase, basesToAdvance);
             player.Motion.SetQueue(destinationList);
-
-            // if (nextBase != null)
-            // {
-            //     player.SetIdlePosition(nextBase.position);
-            //     SetBase(nextBase, player);
-            //     Debug.Log($"sending player to {nextBase.gameObject.name}");
-            // }
-            // else
-            // {
-            //     var dugout = player.team == TeamType.Home
-            //         ? _positionManager.homeDugout
-            //         : _positionManager.visitorDugout;
-            //
-            //     var destination = dugout.positions[player.playerStats.position];
-            //     player.SetIdlePosition(destination.position);
-            // }
+            
+            var finalStop = destinationList.Last();
+            if (_bases.Contains(finalStop))
+            {
+                SetBase(finalStop, player);
+            }
         }
 
         private List<Transform> ParseBaseRoute(List<Transform> pBaseRoute, Player.Player player)
@@ -121,14 +107,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
             pBaseRoute = pBaseRoute.Where(x => x != null).ToList();
             if (crossedHome)
             {
-                var dugout = player.team == TeamType.Home
-                    ? _positionManager.homeDugout
-                    : _positionManager.visitorDugout;
-
-                var dugoutSpot = dugout.positions[player.playerStats.position];
-
                 pBaseRoute.Add(baseHome);
-                pBaseRoute.Add(dugoutSpot);
+                pBaseRoute.Add(player.DugoutPosition);
             }
 
             return pBaseRoute;
@@ -163,12 +143,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         public void Out(Player.Player batter)
         {
-            var dugout = batter.team == TeamType.Home ? _positionManager.homeDugout : _positionManager.visitorDugout;
-
-            var batterPosition = batter.playerStats.position;
-            var dugoutDestination = dugout.positions[batterPosition];
-
-            batter.SetIdlePosition(dugoutDestination.position);
+            batter.GoToDugout();
         }
 
         public void CallNewBatter(Player.Player batter)

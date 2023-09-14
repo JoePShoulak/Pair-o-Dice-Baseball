@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Player;
 using FibDev.Baseball.Teams;
@@ -17,16 +15,14 @@ namespace FibDev.Baseball.Choreography.Player
         public NavMeshAgent Agent => GetComponent<NavMeshAgent>();
         public Motion Motion => GetComponent<Motion>();
 
-        private PositionManager _positionManager;
+        private PositionManager _positions;
 
         private void Start()
         {
-            _positionManager = PositionManager.Instance;
+            _positions = PositionManager.Instance;
         }
 
-        private TeamPositions Dugout => team == TeamType.Home
-            ? _positionManager.homeDugout
-            : _positionManager.visitorDugout;
+        private TeamPositions Dugout => team == TeamType.Home ? _positions.homeDugout : _positions.visitorDugout;
 
         public Transform DugoutPosition => Dugout.positions[playerStats.position];
 
@@ -40,6 +36,11 @@ namespace FibDev.Baseball.Choreography.Player
             _motion = GetComponent<Motion>();
         }
 
+        public void GoToDugout()
+        {
+            SetIdlePosition(DugoutPosition.position);
+        }
+
         public void SetStats(PlayerStats pPlayerStats)
         {
             playerStats = pPlayerStats;
@@ -48,11 +49,6 @@ namespace FibDev.Baseball.Choreography.Player
             decorator.SetColor(playerStats.primaryColor, playerStats.secondaryColor, playerStats.skinColor);
             decorator.SetJerseyNumber(playerStats.number);
             decorator.SetName(playerStats.playerName);
-        }
-
-        public void GoTo(Transform pTransform)
-        {
-            _motion.SetDestination(pTransform.position);
         }
 
         private void GoToIdle()

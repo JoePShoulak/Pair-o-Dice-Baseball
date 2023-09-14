@@ -25,6 +25,7 @@ namespace FibDev.Baseball.Choreography.Player
         public void SetQueue(List<Transform> pDestinationQueue)
         {
             _destinationQueue = pDestinationQueue;
+            isIdle = false;
         }
 
         public void SetDestination(Vector3 pPosition)
@@ -45,15 +46,6 @@ namespace FibDev.Baseball.Choreography.Player
 
         private void Update()
         {
-            if (isIdle)
-            {
-                var position = GetComponent<Player>().playerStats.position;
-                var fieldPositions = PositionManager.Instance.field.positions;
-                var target = fieldPositions[position == Position.Pitcher ? Position.Batter : Position.Pitcher];
-
-                RotateBodyToTarget(target);
-            }
-
             if (_destinationQueue.Count > 0 && _agent.remainingDistance < 1)
             {
                 if (_destinationQueue.Count == 1)
@@ -62,6 +54,15 @@ namespace FibDev.Baseball.Choreography.Player
                 }
                 SetDestination(_destinationQueue[0].position);
                 _destinationQueue.RemoveAt(0);
+            }
+            
+            if (isIdle)
+            {
+                var position = GetComponent<Player>().playerStats.position;
+                var fieldPositions = PositionManager.Instance.field.positions;
+                var target = fieldPositions[position == Position.Pitcher ? Position.Batter : Position.Pitcher];
+
+                RotateBodyToTarget(target);
             }
 
             var isAtIdlePosition = Vector3.Distance(transform.position, IdlePosition) < idleDetectionRadius;
