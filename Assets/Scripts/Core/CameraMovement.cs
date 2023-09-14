@@ -1,64 +1,50 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
+using FibDev.Baseball;
+using FibDev.Baseball.Choreography.Positions;
 using UnityEngine;
 
 namespace FibDev.Core
 {
     public class CameraMovement : MonoBehaviour
     {
-        [SerializeField] private float lerpDuration = 2.0f;
-        [Header("Target Transforms")]
-        public Transform start;
+        [Header("Target Transforms")] public Transform start;
         public Transform stadium;
+        public Transform stadiumWaypoint;
         public Transform scoreboard;
         public Transform notebook;
 
-        private Vector3 lerpStartPos;
-        private Quaternion lerpStartRot;
-        private Action callbackAction;
+        private const float DEFAULT_DURATION = 0.5f;
 
-        private float lerpStartTime;
-        private Transform target;
+        private static Transform Pitcher => PositionManager.Instance.field.positions[Position.Pitcher];
 
         private void Start()
         {
-            MoveTo(start);
+            transform.position = start.position;
+            transform.rotation = start.rotation;
         }
 
-        private void Update()
+        public void MoveTo(Transform _target, float duration = DEFAULT_DURATION, TweenCallback cb = null)
         {
-            if (target == null) return;
-
-            var lerpTime = (Time.time - lerpStartTime) / lerpDuration;
-
-            var lerpedPosition = Vector3.Lerp(lerpStartPos, target.position, lerpTime);
-            var lerpedRotation = Quaternion.Slerp(lerpStartRot, target.rotation, lerpTime);
-            transform.position = lerpedPosition;
-            transform.rotation = lerpedRotation;
-
-            if (lerpTime > 1.0f)
-            {
-                callbackAction?.Invoke();
-                callbackAction = null;
-                target = null;
-            }
+            Rotate(_target, duration);
+            transform.DOMove(_target.position, duration).SetEase(Ease.InOutQuad).OnComplete(cb);
         }
 
-        // TODO: Add a callback so we can toggle UIs and stuff once we get to our destination
-        public void LerpTo(Transform _target, float duration = 0.5f, Action cb = null)
+        private void Rotate(Transform _target, float duration)
         {
-            lerpStartPos = transform.position;
-            lerpStartRot = transform.rotation;
-
-            target = _target;
-            lerpStartTime = Time.time;
-            lerpDuration = duration;
-            callbackAction = cb;
+            var desiredRotation = Quaternion.LookRotation(_target.forward, _target.up);
+            transform.DORotate(desiredRotation.eulerAngles, duration).SetEase(Ease.InOutQuad);
         }
 
-        public void MoveTo(Transform _target)
+        public void MoveAroundStadium(Transform pTarget, float duration = DEFAULT_DURATION, TweenCallback cb = null)
         {
-            transform.position = _target.position;
-            transform.rotation = _target.rotation;
-        } 
+            var waypoints = new[] { stadiumWaypoint, pTarget }.Select(pTransform => pTransform.position).ToArray();
+
+            if (pTarget == stadium) transform.DODynamicLookAt(Pitcher.position, duration);
+            else Rotate(start, duration);
+
+            transform.DOPath(waypoints, duration, PathType.CatmullRom).SetEase(Ease.InOutQuad).OnComplete(cb);
+        }
     }
 }

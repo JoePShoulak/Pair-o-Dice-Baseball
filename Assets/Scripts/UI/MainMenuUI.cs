@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 using FibDev.Core;
@@ -16,13 +17,13 @@ namespace FibDev.UI
         public void Play()
         {
             gameObject.SetActive(false);
-            cam.LerpTo(cam.stadium, 0.5f, () => OverlayManager.Instance.teamSelect.SetActive(true));
+            cam.MoveAroundStadium(cam.stadium, 2f, () => OverlayManager.Instance.teamSelect.SetActive(true));
         }
 
         public void Scores()
         {
             gameObject.SetActive(false);
-            cam.LerpTo(cam.notebook, 0.5f, () => OverlayManager.Instance.scoresOverlay.SetActive(true));
+            cam.MoveTo(cam.notebook, 0.5f, () => OverlayManager.Instance.scoresOverlay.SetActive(true));
         }
     }
 }

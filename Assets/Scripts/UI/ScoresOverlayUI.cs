@@ -14,7 +14,7 @@ namespace FibDev.UI
 
         public void Back()
         {
-            _cam.LerpTo(_cam.start, 0.5f, () => OverlayManager.Instance.mainMenu.SetActive(true));
+            _cam.MoveTo(_cam.start, 0.5f, () => OverlayManager.Instance.mainMenu.SetActive(true));
             gameObject.SetActive(false);
         }
     }

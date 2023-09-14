@@ -123,7 +123,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
             gameEnded = true;
 
             var cam = GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>();
-            cam.LerpTo(cam.scoreboard, 2f);
+            cam.MoveTo(cam.scoreboard, 2f);
             TearDownGame();
             OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().rollButton.interactable = false;
             OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().autoRun.interactable = false;

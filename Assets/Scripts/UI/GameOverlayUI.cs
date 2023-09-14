@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FibDev.Baseball.Choreography.Choreographer;
 using FibDev.Core;
 using FibDev.UI.Score_Overlay;
@@ -37,7 +38,7 @@ namespace FibDev.UI
 
         public void ToggleCamera()
         {
-            _cam.LerpTo(_atScoreboard ? _cam.stadium : _cam.scoreboard);
+            _cam.MoveTo(_atScoreboard ? _cam.stadium : _cam.scoreboard);
             _atScoreboard = !_atScoreboard;
             _diceFeed.SetActive(!_atScoreboard);
             ScoreOverlay.gameObject.SetActive(!_atScoreboard);
@@ -52,7 +53,7 @@ namespace FibDev.UI
         
         public void Exit()
         {
-            _cam.LerpTo(_cam.start, 0.5f, () => OverlayManager.Instance.mainMenu.SetActive(true));
+            _cam.MoveAroundStadium(_cam.start, 2f, () => OverlayManager.Instance.mainMenu.SetActive(true));
             Reset();
             choreographer.gameEnded = true;
             choreographer.TearDownGame();
