@@ -12347,9 +12347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb3230c9a30a034c95a25babdcdb268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runnerOnFirst: {fileID: 0}
-  runnerOnSecond: {fileID: 0}
-  runnerOnThird: {fileID: 0}
 --- !u!1001 &1676770761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20170,6 +20167,10 @@ PrefabInstance:
       propertyPath: origin
       value: 
       objectReference: {fileID: 1762379041}
+    - target: {fileID: 8850479893712864641, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8850479893712864641, guid: ccffc0404b327594887ab793001b0ebc, type: 3}
       propertyPath: choreographer
       value: 
