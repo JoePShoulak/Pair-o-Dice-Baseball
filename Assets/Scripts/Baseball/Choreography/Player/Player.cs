@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Player;
 using FibDev.Baseball.Teams;
 using UnityEngine;
@@ -13,7 +14,21 @@ namespace FibDev.Baseball.Choreography.Player
         private Motion _motion;
         public TeamType team;
 
-        public NavMeshAgent Agent => GetComponent<NavMeshAgent>(); 
+        public NavMeshAgent Agent => GetComponent<NavMeshAgent>();
+        public Motion Motion => GetComponent<Motion>();
+
+        private PositionManager _positionManager;
+
+        private void Start()
+        {
+            _positionManager = PositionManager.Instance;
+        }
+
+        private TeamPositions Dugout => team == TeamType.Home
+            ? _positionManager.homeDugout
+            : _positionManager.visitorDugout;
+
+        public Transform DugoutPosition => Dugout.positions[playerStats.position];
 
         public bool IsIdle()
         {
@@ -39,7 +54,7 @@ namespace FibDev.Baseball.Choreography.Player
         {
             _motion.SetDestination(pTransform.position);
         }
-        
+
         private void GoToIdle()
         {
             _motion.SetDestination(_motion.IdlePosition);

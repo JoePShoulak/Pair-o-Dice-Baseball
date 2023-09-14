@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Teams;
 using JetBrains.Annotations;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace FibDev.Baseball.Choreography.Choreographer
@@ -76,28 +78,60 @@ namespace FibDev.Baseball.Choreography.Choreographer
             var currentBase = ClosestBaseToPlayer(player);
             var nextBase = currentBase;
 
+            List<Transform> baseRoute = new();
+
             for (var i = 0; i < basesToAdvance; i++)
             {
                 nextBase = NextLocation(nextBase);
+                baseRoute.Add(nextBase);
             }
 
             SetBase(currentBase, null);
 
-            if (nextBase != null)
+            var destinationList = ParseBaseRoute(baseRoute, player);
+            var finalStop = destinationList.Last();
+            var bases = new List<Transform> { baseFirst, baseSecond, baseThird };
+            if (bases.Contains(finalStop))
             {
-                player.SetIdlePosition(nextBase.position);
                 SetBase(nextBase, player);
-                Debug.Log($"sending player to {nextBase.gameObject.name}");
             }
-            else
+
+            player.Motion.SetQueue(destinationList);
+
+            // if (nextBase != null)
+            // {
+            //     player.SetIdlePosition(nextBase.position);
+            //     SetBase(nextBase, player);
+            //     Debug.Log($"sending player to {nextBase.gameObject.name}");
+            // }
+            // else
+            // {
+            //     var dugout = player.team == TeamType.Home
+            //         ? _positionManager.homeDugout
+            //         : _positionManager.visitorDugout;
+            //
+            //     var destination = dugout.positions[player.playerStats.position];
+            //     player.SetIdlePosition(destination.position);
+            // }
+        }
+
+        private List<Transform> ParseBaseRoute(List<Transform> pBaseRoute, Player.Player player)
+        {
+            var crossedHome = pBaseRoute.Any(x => x == null);
+            pBaseRoute = pBaseRoute.Where(x => x != null).ToList();
+            if (crossedHome)
             {
                 var dugout = player.team == TeamType.Home
                     ? _positionManager.homeDugout
                     : _positionManager.visitorDugout;
 
-                var destination = dugout.positions[player.playerStats.position];
-                player.SetIdlePosition(destination.position);
+                var dugoutSpot = dugout.positions[player.playerStats.position];
+
+                pBaseRoute.Add(baseHome);
+                pBaseRoute.Add(dugoutSpot);
             }
+
+            return pBaseRoute;
         }
 
         public void Reset()

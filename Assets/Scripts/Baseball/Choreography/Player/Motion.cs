@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FibDev.Baseball.Choreography.Positions;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,11 +13,18 @@ namespace FibDev.Baseball.Choreography.Player
         [SerializeField] private float idleDetectionRadius = 1f;
         [SerializeField] private Transform head;
         public bool isIdle = true;
+
+        private List<Transform> _destinationQueue = new();
         
 
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
+        }
+
+        public void SetQueue(List<Transform> pDestinationQueue)
+        {
+            _destinationQueue = pDestinationQueue;
         }
 
         public void SetDestination(Vector3 pPosition)
@@ -44,6 +52,16 @@ namespace FibDev.Baseball.Choreography.Player
                 var target = fieldPositions[position == Position.Pitcher ? Position.Batter : Position.Pitcher];
 
                 RotateBodyToTarget(target);
+            }
+
+            if (_destinationQueue.Count > 0 && _agent.remainingDistance < 1)
+            {
+                if (_destinationQueue.Count == 1)
+                {
+                    IdlePosition = _destinationQueue[0].position;
+                }
+                SetDestination(_destinationQueue[0].position);
+                _destinationQueue.RemoveAt(0);
             }
 
             var isAtIdlePosition = Vector3.Distance(transform.position, IdlePosition) < idleDetectionRadius;
