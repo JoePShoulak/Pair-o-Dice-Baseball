@@ -17,5 +17,6 @@ namespace FibDev.Baseball.Bases
             third.runnerOn = false;
             home.runnerOn = false;
         }
+
     }
 }

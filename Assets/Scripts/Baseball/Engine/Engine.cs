@@ -6,6 +6,8 @@ using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
 using FibDev.Baseball.Rendering.Scoreboard;
 using FibDev.Baseball.Teams;
+using FibDev.UI;
+using FibDev.UI.Score_Overlay;
 using UnityEngine;
 
 namespace FibDev.Baseball.Engine
@@ -16,9 +18,9 @@ namespace FibDev.Baseball.Engine
         public int inning;
         public TeamType teamAtBat;
         public bool gameEnded;
-        
-        private int outs;
-        private Bases.Bases bases = new ();
+
+        public int outs;
+        public Bases.Bases bases = new ();
 
         [SerializeField] private Board scoreboard;
         [HideInInspector] public Choreographer choreographer;
@@ -27,6 +29,9 @@ namespace FibDev.Baseball.Engine
         public Bases.Bases Bases => bases;
         private bool HomeAtBat => teamAtBat == TeamType.Home;
         private bool VisitorsAtBat => teamAtBat == TeamType.Visiting;
+
+        private static ScoreOverlay ScoreOverlay =>
+            OverlayManager.Instance.gameOverlay.GetComponent<GameOverlayUI>().ScoreOverlay;
 
         public event Action OnInningAdvance; 
         public event Action OnGameEnd; 
@@ -42,6 +47,9 @@ namespace FibDev.Baseball.Engine
             scoreboard.Reset();
             scoreboard.SetNames(teams[TeamType.Home].name, teams[TeamType.Visiting].name);
             choreographer.SetupGame(teams);
+            
+            ScoreOverlay.SetColors(teams[TeamType.Visiting].primary, teams[TeamType.Home].primary);
+            ScoreOverlay.SetScores(0, 0);
         }
 
         public void AddOut() => outs++;
@@ -68,6 +76,8 @@ namespace FibDev.Baseball.Engine
             OnInningAdvance?.Invoke();
             outs = 0;
             bases.Reset();
+            ScoreOverlay.SetBases(bases);
+            ScoreOverlay.SetOuts(outs);
 
             if (VisitorsAtBat)
             {
@@ -89,7 +99,9 @@ namespace FibDev.Baseball.Engine
             {
                 OperationHandler.HandleOperation(this, operation);
             }
+            
 
+            
             choreographer.InitiateMovement(() => scoreboard.Display(record));
 
             if (outs >= 3 && !gameEnded) AdvanceInning();
@@ -109,6 +121,7 @@ namespace FibDev.Baseball.Engine
 
         private void EndGame()
         {
+            ScoreOverlay.Reset();
             gameEnded = true;
             OnGameEnd?.Invoke();
             Debug.Log($"{teamAtBat} Won!");

@@ -10,6 +10,7 @@ using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Teams;
 using FibDev.Core;
 using FibDev.UI;
+using FibDev.UI.Score_Overlay;
 
 namespace FibDev.Baseball.Choreography.Choreographer
 {
@@ -41,13 +42,17 @@ namespace FibDev.Baseball.Choreography.Choreographer
         private bool _mustEndGame;
 
         public bool gameEnded;
+        private Engine.Engine engine;
+        
+        private static ScoreOverlay ScoreOverlay =>
+            OverlayManager.Instance.gameOverlay.GetComponent<GameOverlayUI>().ScoreOverlay;
 
         private void Start()
         {
             _playerCreator = GetComponent<PlayerCreator>();
             _baseManager = GetComponent<BaseManager>();
 
-            var engine = GetComponent<Engine.Engine>();
+            engine = GetComponent<Engine.Engine>();
             engine.OnInningAdvance += () => _mustChangeSides = true;
             engine.OnGameEnd += () => _mustEndGame = true;
         }
@@ -202,6 +207,9 @@ namespace FibDev.Baseball.Choreography.Choreographer
             CamButton.interactable = true;
 
             movement.StartMovement();
+            ScoreOverlay.SetScores(engine.record.visitorTotal.runs, engine.record.homeTotal.runs);
+            ScoreOverlay.SetBases(engine.bases);
+            ScoreOverlay.SetOuts(engine.outs);
 
             HandleBases();
 

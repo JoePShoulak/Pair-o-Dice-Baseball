@@ -1,6 +1,8 @@
 using FibDev.Baseball.Choreography.Choreographer;
 using FibDev.Core;
+using FibDev.UI.Score_Overlay;
 using Imports.InnerDriveStudios.DiceCreator.Scripts.DieCollection;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,10 +18,12 @@ namespace FibDev.UI
         public Toggle autoRun;
         [SerializeField] private Choreographer choreographer;
         [SerializeField] private GameObject _diceFeed;
+        public ScoreOverlay ScoreOverlay;
         
         private void Start()
         {
             _cam = GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>();
+            ScoreOverlay = GetComponentInChildren<ScoreOverlay>();
         }
 
         public void Reset()
@@ -28,6 +32,7 @@ namespace FibDev.UI
             rollButton.interactable = false;
             autoRun.interactable = false;
             _diceFeed.SetActive(true);
+            ScoreOverlay.gameObject.SetActive(true);
         }
 
         public void ToggleCamera()
@@ -35,6 +40,7 @@ namespace FibDev.UI
             _cam.LerpTo(_atScoreboard ? _cam.stadium : _cam.scoreboard);
             _atScoreboard = !_atScoreboard;
             _diceFeed.SetActive(!_atScoreboard);
+            ScoreOverlay.gameObject.SetActive(!_atScoreboard);
         }
 
         public void Roll()
