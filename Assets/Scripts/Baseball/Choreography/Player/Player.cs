@@ -44,7 +44,7 @@ namespace FibDev.Baseball.Choreography.Player
 
             if (playerStats.position == Position.Catcher)
             {
-                offset = new Vector3(0, 0, -5);
+                offset = new Vector3(0, 0, -2.5f);
             }
             else if (offsetList.Contains(playerStats.position))
             {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using FibDev.Baseball.Choreography.Positions;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,6 +25,7 @@ namespace FibDev.Baseball.Choreography.Player
         public void SetQueue(List<Transform> pDestinationQueue)
         {
             _destinationQueue = pDestinationQueue;
+            IdlePosition = pDestinationQueue.Last().position;
             isIdle = false;
         }
 
