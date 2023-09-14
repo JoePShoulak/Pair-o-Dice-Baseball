@@ -11,15 +11,14 @@ using UnityEngine;
 namespace FibDev.Baseball.Engine
 {
     public class Engine : MonoBehaviour
-    {
-        [SerializeField] public Record record;
-
-        // Serialized for debugging
-        [SerializeField] public int inning;
-        [SerializeField] public TeamType teamAtBat;
-        [SerializeField] private int outs;
-        [SerializeField] private Bases.Bases bases;
+    { 
+        public Record record;
+        public int inning;
+        public TeamType teamAtBat;
         public bool gameEnded;
+        
+        private int outs;
+        private Bases.Bases bases;
 
         [SerializeField] private Board scoreboard;
         [HideInInspector] public Choreographer choreographer;
@@ -40,8 +39,6 @@ namespace FibDev.Baseball.Engine
 
         public void StartGame(Dictionary<TeamType, Team> teams)
         {
-            // teams[0].Log();
-            // teams[1].Log();
             scoreboard.Reset();
             scoreboard.SetNames(teams[TeamType.Home].name, teams[TeamType.Visiting].name);
             choreographer.SetupGame(teams);
@@ -49,7 +46,7 @@ namespace FibDev.Baseball.Engine
 
         public void AddOut() => outs++;
 
-        public void ResetState() // for debug
+        public void ResetState()
         {
             bases.Reset();
             teamAtBat = TeamType.Visiting;
