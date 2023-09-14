@@ -331,7 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4535457677105463455}
   m_Layer: 7
-  m_Name: Render Texture Text
+  m_Name: Ball Render Texture System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

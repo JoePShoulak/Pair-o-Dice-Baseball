@@ -1,38 +1,27 @@
 using FibDev.Baseball.Player;
-using TMPro;
 using UnityEngine;
 
 namespace FibDev.Baseball.Choreography.Player
 {
     public class Decorator : MonoBehaviour
     {
-        [SerializeField] private Transform textTransform;
-        [SerializeField] private TMP_Text numberText;
-        [SerializeField] private TMP_Text nameText;
         [SerializeField] private Renderer headRenderer;
         [SerializeField] private Renderer hatRenderer;
         [SerializeField] private Renderer billRenderer;
-
-        private Transform _cam;
+        [SerializeField] private Renderer jerseyRenderer;
+        [SerializeField] private RenderTextureMaker renderTextureMaker;
 
         private static readonly int Primary = Shader.PropertyToID("_Primary");
         private static readonly int Secondary = Shader.PropertyToID("_Secondary");
+        private static readonly int Message = Shader.PropertyToID("_Message");
 
         [SerializeField] private float scaleMin = 0.9f;
 
-        private void Start()
+        public void SetJerseyInfo(string jerseyNumber, string jerseyName)
         {
-            _cam = GameObject.FindWithTag("MainCamera").transform;
-        }
+            var renderTexture = renderTextureMaker.GenerateRenderTexture(jerseyNumber, jerseyName);
 
-        public void SetJerseyNumber(string jerseyNumber)
-        {
-            numberText.text = jerseyNumber;
-        }
-
-        public void SetName(string playerName)
-        {
-            nameText.text = playerName;
+            jerseyRenderer.material.SetTexture(Message, renderTexture);
         }
 
         private float GetHeightScale(HeightType height)
@@ -67,12 +56,6 @@ namespace FibDev.Baseball.Choreography.Player
             hatRenderer.material.color = pPrimary;
             billRenderer.material.color = pSecondary;
             headRenderer.material.color = pSkin;
-        }
-
-        private void Update()
-        {
-            textTransform.LookAt(_cam.position);
-            textTransform.Rotate(Vector3.up, 180f);
         }
     }
 }

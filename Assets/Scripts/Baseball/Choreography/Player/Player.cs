@@ -63,8 +63,7 @@ namespace FibDev.Baseball.Choreography.Player
 
             var decorator = GetComponent<Decorator>();
             decorator.SetColor(playerStats.primaryColor, playerStats.secondaryColor, playerStats.skinColor);
-            decorator.SetJerseyNumber(playerStats.number);
-            decorator.SetName(playerStats.playerName);
+            decorator.SetJerseyInfo(playerStats.number, playerStats.playerName);
             decorator.SetSize(playerStats.weight, playerStats.height);
         }
 
