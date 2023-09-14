@@ -28,6 +28,7 @@ namespace FibDev.UI
         private readonly Color white = new(1f, 0.855f, 0.725f);
         private readonly Color black = new(0.243f, 0.168f, 0.137f);
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public int CurrentIndex => transform.GetSiblingIndex();
 
         private void Start()
