@@ -5,11 +5,13 @@ namespace FibDev.Baseball.Choreography.Positions
 {
     public class FieldPositions : TeamPositions
     {
-        [SerializeField] private Transform batter;
+        [SerializeField] private Transform batterR;
+        [SerializeField] private Transform batterL;
 
         private void Start()
         {
-            positions.Add(Position.Batter, batter);
+            positions.Add(Position.BatterR, batterR);
+            positions.Add(Position.BatterL, batterL);
         }
 
         public Transform RandomFrom(params Position[] pPositions)

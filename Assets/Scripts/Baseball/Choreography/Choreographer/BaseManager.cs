@@ -145,7 +145,10 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         public void CallNewBatter(Player.Player batter)
         {
-            batter.SetIdlePosition(_positionManager.field.positions[Position.Batter].position);
+            var batteryType = batter.playerStats.lefty ? Position.BatterL : Position.BatterR;
+            var standLocation = _positionManager.field.positions[batteryType];
+            
+            batter.SetIdlePosition(standLocation.position);
         }
     }
 }

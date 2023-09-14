@@ -14,7 +14,7 @@ namespace FibDev.Baseball.Choreography.Player
         public bool isIdle = true;
 
         private List<Transform> _destinationQueue = new();
-        
+
 
         private void Awake()
         {
@@ -43,6 +43,12 @@ namespace FibDev.Baseball.Choreography.Player
             transform.rotation = Quaternion.Euler(0, angleY, 0);
         }
 
+        private bool IsAtHome()
+        {
+            var fieldPositions = PositionManager.Instance.field.positions;
+            return Vector3.Distance(transform.position, fieldPositions[Position.Catcher].position) < 3f;
+        }
+
         private void Update()
         {
             if (_destinationQueue.Count > 0 && _agent.remainingDistance < 1)
@@ -51,15 +57,15 @@ namespace FibDev.Baseball.Choreography.Player
                 {
                     IdlePosition = _destinationQueue[0].position;
                 }
+
                 SetDestination(_destinationQueue[0].position);
                 _destinationQueue.RemoveAt(0);
             }
-            
+
             if (isIdle)
             {
-                var position = GetComponent<Player>().playerStats.position;
                 var fieldPositions = PositionManager.Instance.field.positions;
-                var target = fieldPositions[position == Position.Pitcher ? Position.Batter : Position.Pitcher];
+                var target = fieldPositions[IsAtHome() ? Position.Pitcher : Position.Catcher];
 
                 RotateBodyToTarget(target);
             }

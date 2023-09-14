@@ -79,7 +79,6 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         private bool PlayersReset => AllPlayers.All(player => player.IsIdle());
 
-
         private TeamType TeamAtBat => _teamOnField == TeamType.Home ? TeamType.Visiting : TeamType.Home;
 
         private Player.Player ActiveBatter => TeamAtBat == TeamType.Home
@@ -151,14 +150,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
             StartCoroutine(ExecutePlay(callback));
         }
 
-        private IEnumerator ExecutePlay(Action callback)
+        private void HandleBases()
         {
-            var animationTime = ball.animator.GetCurrentAnimatorStateInfo(0).length;
-            const float offset = 1f;
-            yield return new WaitForSeconds(animationTime - offset);
-            CamButton.interactable = true;
-            
-            movement.StartMovement();
             switch (movement.runnerMovement)
             {
                 case RunnerMovement.Single:
@@ -185,8 +178,19 @@ namespace FibDev.Baseball.Choreography.Choreographer
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
 
-            Debug.Log($"Movement: {movement.runnerMovement}");
+        private IEnumerator ExecutePlay(Action callback)
+        {
+            var animationTime = ball.animator.GetCurrentAnimatorStateInfo(0).length;
+            const float offset = 1f;
+            yield return new WaitForSeconds(animationTime - offset);
+            CamButton.interactable = true;
+            
+            movement.StartMovement();
+
+            HandleBases();
+
             if (movement.runnerMovement == RunnerMovement.Stay)
             {
                 BaseManager.Out(ActiveBatter);
@@ -218,24 +222,19 @@ namespace FibDev.Baseball.Choreography.Choreographer
             callback?.Invoke();
         }
 
-        private void TakeFieldPositions(Dictionary<Position, Player.Player> pDict)
+        private static void TakeFieldPositions(Dictionary<Position, Player.Player> pDict)
         {
-            foreach (var (pPosition, playerObj) in pDict)
+            foreach (var  playerObj in pDict.Values)
             {
-                var offsetList = new List<Position> { Position.Baseman1st, Position.Baseman2nd, Position.Baseman3rd };
-                var offset = offsetList.Contains(pPosition) ? new Vector3(0, 0, 5) : Vector3.zero;
-
-                playerObj.SetIdlePosition(field.positions[pPosition].position + offset);
+                playerObj.GoToFieldPosition();
             }
         }  
         
-        private void TakeDugoutPositions(Dictionary<Position, Player.Player> pDict)
+        private static void TakeDugoutPositions(Dictionary<Position, Player.Player> pDict)
         {
-            var dugout = pDict.Values.First().team == TeamType.Home ? homeDugout : visitorDugout;
-            
-            foreach (var (pPosition, playerObj) in pDict)
+            foreach (var  playerObj in pDict.Values)
             {
-                playerObj.SetIdlePosition(dugout.positions[pPosition].position);
+                playerObj.GoToDugout();
             }
         }
     }

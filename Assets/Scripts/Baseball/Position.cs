@@ -15,6 +15,7 @@ namespace FibDev.Baseball
         FielderCenter,
         FielderRight,
         
-        Batter
+        BatterR,
+        BatterL,
     }
 }

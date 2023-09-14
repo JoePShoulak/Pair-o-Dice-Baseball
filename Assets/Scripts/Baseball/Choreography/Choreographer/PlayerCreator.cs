@@ -17,7 +17,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
             foreach (Position position in Enum.GetValues(typeof(Position)))
             {
-                if (position == Position.Batter) continue;
+                if (position is Position.BatterL or Position.BatterR) continue;
                 CreatePlayer(teamDict, pTeam, position, homeDugout, visitorDugout);
             }
 
