@@ -6,10 +6,10 @@ namespace FibDev.UI.Score_Overlay
 {
     public class ScoreBox : MonoBehaviour
     {
-        private Image _image;
-        private TMP_Text _runs;
+        [SerializeField] private Image _image;
+        [SerializeField] private TMP_Text _runs;
 
-        private void Start()
+        private void Awake()
         {
             _image = GetComponent<Image>();
             _runs = GetComponentInChildren<TMP_Text>();
@@ -17,6 +17,7 @@ namespace FibDev.UI.Score_Overlay
 
         public void SetColor(Color pColor)
         {
+            Debug.Log(_image);
             _image.color = pColor;
         }
 

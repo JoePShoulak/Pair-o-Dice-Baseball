@@ -50,10 +50,10 @@ namespace FibDev.Baseball.Engine
             scoreboard.SetStadiumName(teams[TeamType.Home].name);
             scoreboard.SetNames(teams[TeamType.Home].name, teams[TeamType.Visiting].name);
             scoreboard.SetAttendance();
-            choreographer.SetupGame(teams);
-            
             ScoreOverlay.SetColors(teams[TeamType.Visiting].primary, teams[TeamType.Home].primary);
             ScoreOverlay.SetScores(0, 0);
+            choreographer.SetupGame(teams);
+            
         }
 
         public void AddOut() => outs++;
