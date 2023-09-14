@@ -15,16 +15,26 @@ namespace FibDev.UI
         public Button rollButton;
         public Toggle autoRun;
         [SerializeField] private Choreographer choreographer;
+        [SerializeField] private GameObject _diceFeed;
         
         private void Start()
         {
             _cam = GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>();
         }
 
+        public void Reset()
+        {
+            _atScoreboard = false;
+            rollButton.interactable = false;
+            autoRun.interactable = false;
+            _diceFeed.SetActive(true);
+        }
+
         public void ToggleCamera()
         {
-            _cam.LerpTo(_atScoreboard ? _cam.stadium : _cam.scoreboard, 2f);
+            _cam.LerpTo(_atScoreboard ? _cam.stadium : _cam.scoreboard);
             _atScoreboard = !_atScoreboard;
+            _diceFeed.SetActive(!_atScoreboard);
         }
 
         public void Roll()
@@ -36,9 +46,8 @@ namespace FibDev.UI
         
         public void Exit()
         {
-            _cam.LerpTo(_cam.start, 2f, () => OverlayManager.Instance.mainMenu.SetActive(true));
-            rollButton.interactable = false;
-            autoRun.interactable = false;
+            _cam.LerpTo(_cam.start, 0.5f, () => OverlayManager.Instance.mainMenu.SetActive(true));
+            Reset();
             choreographer.gameEnded = true;
             choreographer.TearDownGame();
             gameObject.SetActive(false);

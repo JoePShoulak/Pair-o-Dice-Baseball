@@ -354,14 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590f3ab7716f3914482441b07a490ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  field: {fileID: 0}
-  origin: {fileID: 0}
-  ballDestination: {fileID: 0}
-  strikeDestination: {fileID: 0}
-  pollingRate: 0.001
-  choreographer: {fileID: 0}
   animator: {fileID: 0}
-  ballMessager: {fileID: 4911441159544719746}
 --- !u!95 &6939817586266841984
 Animator:
   serializedVersion: 5

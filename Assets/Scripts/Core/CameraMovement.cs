@@ -44,7 +44,7 @@ namespace FibDev.Core
         }
 
         // TODO: Add a callback so we can toggle UIs and stuff once we get to our destination
-        public void LerpTo(Transform _target, float duration, Action cb = null)
+        public void LerpTo(Transform _target, float duration = 0.5f, Action cb = null)
         {
             lerpStartPos = transform.position;
             lerpStartRot = transform.rotation;

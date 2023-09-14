@@ -5,7 +5,6 @@ namespace FibDev.UI
 {
     public class ScoresOverlayUI : MonoBehaviour
     {
-        
         private CameraMovement _cam; // Cached
         
         private void Start()
@@ -15,7 +14,7 @@ namespace FibDev.UI
 
         public void Back()
         {
-            _cam.LerpTo(_cam.start, 2f, () => OverlayManager.Instance.mainMenu.SetActive(true));
+            _cam.LerpTo(_cam.start, 0.5f, () => OverlayManager.Instance.mainMenu.SetActive(true));
             gameObject.SetActive(false);
         }
     }
