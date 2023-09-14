@@ -82,7 +82,7 @@ namespace FibDev.Baseball.Plays
                     .BatterHitBall()
                     .Add(Operation.OutAtFirst)
                     .BasemenAdvance(1, false)
-            },
+            }
             // {
             //     PlayEnum.GroundOut2, A.Play.Named("Ground Out (2)")
             //         .BatterHitBall()

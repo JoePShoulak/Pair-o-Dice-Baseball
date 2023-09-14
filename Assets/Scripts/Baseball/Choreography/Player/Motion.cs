@@ -11,7 +11,6 @@ namespace FibDev.Baseball.Choreography.Player
 
         public Vector3 IdlePosition { get; set; }
         [SerializeField] private float idleDetectionRadius = 1f;
-        [SerializeField] private Transform head;
         public bool isIdle = true;
 
         private List<Transform> _destinationQueue = new();

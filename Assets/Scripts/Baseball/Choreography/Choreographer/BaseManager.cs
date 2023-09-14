@@ -12,7 +12,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
         private Player.Player runnerOnFirst;
         private Player.Player runnerOnSecond;
         private Player.Player runnerOnThird;
-        
+
         private Transform baseHome;
         private Transform baseFirst;
         private Transform baseSecond;
@@ -32,9 +32,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
             _bases = new List<Transform> { baseHome, baseFirst, baseSecond, baseThird };
         }
-        
 
-        private Transform ClosestBaseToPlayer(Player.Player player)
+        private Transform ClosestBaseToPlayer(Component player)
         {
             Transform closestBase = null;
             var closestDistance = float.MaxValue;
@@ -53,16 +52,14 @@ namespace FibDev.Baseball.Choreography.Choreographer
             return closestBase;
         }
 
-        private Transform NextLocation(Transform location)
+        private Transform NextLocation(Object location)
         {
             if (location == baseHome) return baseFirst;
             if (location == baseFirst) return baseSecond;
-            if (location == baseSecond) return baseThird;
-
-            return null;
+            return location == baseSecond ? baseThird : null;
         }
 
-        private void SetBase(Transform baseLoc, Player.Player player)
+        private void SetBase(Object baseLoc, Player.Player player)
         {
             if (baseLoc == baseFirst) runnerOnFirst = player;
             if (baseLoc == baseSecond) runnerOnSecond = player;
@@ -93,7 +90,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
             var destinationList = GenerateBasePath(player, currentBase, basesToAdvance);
             player.Motion.SetQueue(destinationList);
-            
+
             var finalStop = destinationList.Last();
             if (_bases.Contains(finalStop))
             {
@@ -141,7 +138,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
             Debug.Log("Advancing if forced");
         }
 
-        public void Out(Player.Player batter)
+        public static void Out(Player.Player batter)
         {
             batter.GoToDugout();
         }

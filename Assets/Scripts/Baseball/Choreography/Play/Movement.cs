@@ -1,5 +1,4 @@
 using System;
-using FibDev.Baseball.Choreography.Ball;
 using UnityEngine;
 
 namespace FibDev.Baseball.Choreography.Play
@@ -21,6 +20,7 @@ namespace FibDev.Baseball.Choreography.Play
 
         public bool inProgress;
 
+        // ReSharper disable once EventNeverSubscribedTo.Global
         public event Action<Movement> OnMovementStart = movement =>
         {
             movement.inProgress = true;

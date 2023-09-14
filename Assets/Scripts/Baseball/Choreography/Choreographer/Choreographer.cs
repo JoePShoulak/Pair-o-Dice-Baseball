@@ -10,7 +10,6 @@ using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Teams;
 using FibDev.Core;
 using FibDev.UI;
-using Unity.VisualScripting;
 
 namespace FibDev.Baseball.Choreography.Choreographer
 {
@@ -26,8 +25,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
         private Dictionary<Position, Player.Player> _homeTeam = new();
         private Dictionary<Position, Player.Player> _visitorTeam = new();
 
-        private int _homeBatterIndex = 0;
-        private int _visitorBatterIndex = 0;
+        private int _homeBatterIndex;
+        private int _visitorBatterIndex;
 
         private TeamType _teamOnField = TeamType.Home;
 
@@ -80,8 +79,6 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         private bool PlayersReset => AllPlayers.All(player => player.IsIdle());
 
-        private Player.Player ActivePitcher =>
-            (_teamOnField == TeamType.Visiting ? _visitorTeam : _homeTeam)[Position.Pitcher];
 
         private TeamType TeamAtBat => _teamOnField == TeamType.Home ? TeamType.Visiting : TeamType.Home;
 
@@ -142,7 +139,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
             _baseManager.CallNewBatter(ActiveBatter);
         }
 
-        private Button CamButton => OverlayManager.Instance.gameOverlay.GetComponent<GameOverlayUI>().camButton;
+        private static Button CamButton => OverlayManager.Instance.gameOverlay.GetComponent<GameOverlayUI>().camButton;
 
         public void InitiateMovement(Action callback)
         {
@@ -183,7 +180,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
                     break;
                 case RunnerMovement.OutAdvance:
                     _baseManager.Advance(ActiveBatter, 1, false);
-                    _baseManager.Out(ActiveBatter);
+                    BaseManager.Out(ActiveBatter);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -192,7 +189,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
             Debug.Log($"Movement: {movement.runnerMovement}");
             if (movement.runnerMovement == RunnerMovement.Stay)
             {
-                _baseManager.Out(ActiveBatter);
+                BaseManager.Out(ActiveBatter);
             }
 
             if (_teamOnField == TeamType.Home)

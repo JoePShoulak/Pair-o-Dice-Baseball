@@ -1,9 +1,7 @@
 using System;
-using FibDev.Baseball.Choreography.Ball;
 using FibDev.Baseball.Choreography.Play;
 using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
-using UnityEngine;
 
 namespace FibDev.Baseball.Engine
 {
@@ -87,24 +85,19 @@ namespace FibDev.Baseball.Engine
                 case Operation.Cleanup:
                     break;
                 case Operation.BasemanAdvance:
-                    Debug.Log("Baseman Advance called");
                     switch (movement)
                     {
                         case RunnerMovement.Stay:
                             movement = RunnerMovement.Single;
-                            Debug.Log("Stay became a single");
                             break;
                         case RunnerMovement.Single:
                             movement = RunnerMovement.Double;
-                            Debug.Log("Single became a double");
                             break;
                         case RunnerMovement.Double:
                             movement = RunnerMovement.Triple;
-                            Debug.Log("Double became a triple");
                             break;
                         case RunnerMovement.Triple:
                             movement = RunnerMovement.HomeRun;
-                            Debug.Log("Triple became a home run");
                             break;
                         case RunnerMovement.HomeRun:
                         case RunnerMovement.Force:

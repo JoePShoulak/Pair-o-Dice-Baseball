@@ -21,8 +21,8 @@ namespace FibDev.UI
         [SerializeField] private Slider skinToneSlider;
         [SerializeField] private Image skinToneImage;
 
-        [SerializeField] private Button upButton;
-        [SerializeField] private Button downButton;
+        // [SerializeField] private Button upButton;
+        // [SerializeField] private Button downButton;
         
         // TODO: Make this ia separate class
         private void Start()

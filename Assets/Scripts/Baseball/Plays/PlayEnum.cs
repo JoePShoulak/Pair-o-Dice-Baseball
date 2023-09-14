@@ -11,11 +11,11 @@ namespace FibDev.Baseball.Plays
         Error,
         StrikeOut,
         FlyOut,
-        FlyOutPlus,
+        // FlyOutPlus,
         PopOut,
         LineOut,
         FoulOut,
-        GroundOut,
-        GroundOut2
+        GroundOut
+        // GroundOut2
     }
 }

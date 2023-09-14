@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using FibDev.Baseball.Choreography.Positions;
 using UnityEngine;
@@ -13,20 +12,15 @@ namespace FibDev.Baseball.Choreography.Ball
         [SerializeField] private Transform strikeDestination;
         [SerializeField] private float pollingRate;
         [SerializeField] private Choreographer.Choreographer choreographer;
-        private Vector3 _destination;
         [HideInInspector] public Animator animator;
-        [HideInInspector] public Messager ballMessager;
         
         private const float tanAngle = 2f;
 
         private void Start()
         {
             animator = GetComponent<Animator>();
-            ballMessager = GetComponent<Messager>();
             animator.enabled = false;
         }
-
-        public Transform Transform => transform;
 
         private readonly AnimationCurve pathCurve = new()
         {
@@ -112,15 +106,9 @@ namespace FibDev.Baseball.Choreography.Ball
         private IEnumerator LerpBall(Vector3 pOrigin, Vector3 pDestination, float pHeight, float pballSpeed = 1f,
             float pAngle = 0f)
         {
-            _destination = pDestination;
-            // var trail = GetComponentInChildren<TrailRenderer>();
-
-            // trail.enabled = false;
-
             transform.position = pOrigin;
             transform.LookAt(pDestination);
 
-            // trail.enabled = true;
             var t = 0f;
             while (t <= 1)
             {

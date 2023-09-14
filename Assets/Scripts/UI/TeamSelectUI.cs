@@ -28,13 +28,5 @@ namespace FibDev.UI
             gameObject.SetActive(false);
             OverlayManager.Instance.gameOverlay.SetActive(true);
         }
-
-        // ReSharper disable once UnusedMember.Local
-        private static void LogTeamData(Team data)
-        {
-            Debug.Log($"  Name: {data.city} {data.name}");
-            Debug.Log($"  P. Color: {data.primary}");
-            Debug.Log($"  S. Color: {data.secondary}");
-        }
     }
 }

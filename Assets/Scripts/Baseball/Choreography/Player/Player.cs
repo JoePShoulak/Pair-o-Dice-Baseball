@@ -2,7 +2,6 @@ using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Player;
 using FibDev.Baseball.Teams;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace FibDev.Baseball.Choreography.Player
 {
@@ -12,7 +11,6 @@ namespace FibDev.Baseball.Choreography.Player
         private Motion _motion;
         public TeamType team;
 
-        public NavMeshAgent Agent => GetComponent<NavMeshAgent>();
         public Motion Motion => GetComponent<Motion>();
 
         private PositionManager _positions;
@@ -56,9 +54,9 @@ namespace FibDev.Baseball.Choreography.Player
             _motion.SetDestination(_motion.IdlePosition);
         }
 
-        public void SetIdlePosition(Vector3 position, bool autoGo = true)
+        public void SetIdlePosition(Vector3 pPosition, bool autoGo = true)
         {
-            _motion.IdlePosition = position;
+            _motion.IdlePosition = pPosition;
             if (autoGo) GoToIdle();
         }
     }
