@@ -45,7 +45,9 @@ namespace FibDev.Baseball.Engine
         public void StartGame(Dictionary<TeamType, Team> teams)
         {
             scoreboard.Reset();
+            scoreboard.SetStadiumName(teams[TeamType.Home].name);
             scoreboard.SetNames(teams[TeamType.Home].name, teams[TeamType.Visiting].name);
+            scoreboard.SetAttendance();
             choreographer.SetupGame(teams);
             
             ScoreOverlay.SetColors(teams[TeamType.Visiting].primary, teams[TeamType.Home].primary);

@@ -1,6 +1,8 @@
 using UnityEngine;
 
 using FibDev.Baseball.Records;
+using TMPro;
+using Random = UnityEngine.Random;
 
 namespace FibDev.Baseball.Rendering.Scoreboard
 {
@@ -8,11 +10,24 @@ namespace FibDev.Baseball.Rendering.Scoreboard
     {
         [SerializeField] private ScoreboardRow visitorScoreboardRow;
         [SerializeField] private ScoreboardRow homeScoreboardRow;
+        [SerializeField] private TMP_Text stadiumName;
+        [SerializeField] private TMP_Text attendance;
 
         public void SetNames(string homeName, string visitorName)
         {
             homeScoreboardRow.SetName(homeName);
             visitorScoreboardRow.SetName(visitorName);
+        }
+
+        public void SetStadiumName(string pName)
+        {
+            stadiumName.text = $"{pName} Stadium";
+        }
+
+        public void SetAttendance()
+        {
+            var randomNum = Random.Range(10000, 30000).ToString("n0");
+            attendance.text = "Tonight's Attendance: " + randomNum;
         }
 
         public void Display(Record record)
