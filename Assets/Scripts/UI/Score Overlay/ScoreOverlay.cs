@@ -1,5 +1,6 @@
-using FibDev.Baseball.Bases;
 using UnityEngine;
+
+using FibDev.Baseball.Bases;
 
 namespace FibDev.UI.Score_Overlay
 {

@@ -1,9 +1,9 @@
 using UnityEngine;
 
-using FibDev.Baseball.Records;
 using TMPro;
 using Random = UnityEngine.Random;
 
+using FibDev.Baseball.Records;
 namespace FibDev.Baseball.Rendering.Scoreboard
 {
     public class Board : MonoBehaviour
