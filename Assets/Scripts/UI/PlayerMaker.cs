@@ -23,19 +23,22 @@ namespace FibDev.UI
 
         // [SerializeField] private Button upButton;
         // [SerializeField] private Button downButton;
-        
+
         // TODO: Make this ia separate class
+        private readonly Color white = new(1f, 0.855f, 0.725f);
+        private readonly Color black = new(0.243f, 0.168f, 0.137f);
+
         private void Start()
         {
-            var white = new Color(1f, 0.855f, 0.725f);
-            var black = new Color(0.243f, 0.168f, 0.137f);
             skinToneImage.color = white;
-            skinToneSlider.value = 0f;
-            
-            skinToneSlider.onValueChanged.AddListener(value =>
-            {
-                skinToneImage.color = Color.Lerp(white, black, value);
-            });
+
+            skinToneSlider.onValueChanged.AddListener(SetSkinToneImageColor);
+            SetSkinToneImageColor(skinToneSlider.value);
+        }
+
+        private void SetSkinToneImageColor(float value)
+        {
+            skinToneImage.color = Color.Lerp(white, black, value);
         }
 
         private static T GetDropdownValueAsEnum<T>(TMP_Dropdown pDropdown) where T : struct
@@ -56,7 +59,6 @@ namespace FibDev.UI
 
         public PlayerStats CreatePlayer()
         {
-
             var stats = new PlayerStats
             {
                 playerName = GetInputFieldValueOrPlaceholder(nameField),

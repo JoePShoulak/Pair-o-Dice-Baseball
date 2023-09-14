@@ -47,6 +47,7 @@ namespace FibDev.Baseball.Choreography.Player
             decorator.SetColor(playerStats.primaryColor, playerStats.secondaryColor, playerStats.skinColor);
             decorator.SetJerseyNumber(playerStats.number);
             decorator.SetName(playerStats.playerName);
+            decorator.SetSize(playerStats.weight, playerStats.height);
         }
 
         private void GoToIdle()
