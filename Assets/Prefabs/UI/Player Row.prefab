@@ -1485,7 +1485,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8012008066362719353}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3866797276854415335}
+        m_TargetAssemblyTypeName: FibDev.UI.PlayerMaker, Assembly-CSharp
+        m_MethodName: MoveRowUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2510319560497176534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,7 +1511,7 @@ GameObject:
   - component: {fileID: 7660948469429608699}
   - component: {fileID: 6277135192799585967}
   m_Layer: 0
-  m_Name: Up Button (1)
+  m_Name: Down Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1607,7 +1619,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7660948469429608699}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3866797276854415335}
+        m_TargetAssemblyTypeName: FibDev.UI.PlayerMaker, Assembly-CSharp
+        m_MethodName: MoveRowDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2534071363800235462
 GameObject:
   m_ObjectHideFlags: 0
@@ -3617,6 +3641,8 @@ MonoBehaviour:
   heightDropdown: {fileID: 25132119169653446}
   skinToneSlider: {fileID: 6269039498735559995}
   skinToneImage: {fileID: 1586638796834528581}
+  upButton: {fileID: 7236710432481836798}
+  downButton: {fileID: 6277135192799585967}
 --- !u!1 &5939080874622488575
 GameObject:
   m_ObjectHideFlags: 0

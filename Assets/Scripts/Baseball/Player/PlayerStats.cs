@@ -17,6 +17,8 @@ namespace FibDev.Baseball.Player
         public Color skinColor;
         public Position position;
 
+        public int battingIndex;
+
         public void Log()
         {
             Debug.Log($"  Name: {playerName}");

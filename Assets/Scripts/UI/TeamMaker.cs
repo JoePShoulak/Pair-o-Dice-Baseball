@@ -18,7 +18,10 @@ namespace FibDev.UI
         [SerializeField] private TeamType type;
 
         [SerializeField] private List<PlayerMaker> playerMakers;
+        [SerializeField] private GameObject players;
 
+        private List<PlayerMaker> PlayerMakers => players.GetComponentsInChildren<PlayerMaker>().ToList();
+        
         private void Start()
         {
             primaryButton.onClick.AddListener(() =>
@@ -56,7 +59,7 @@ namespace FibDev.UI
 
         public Team GetData()
         {
-            var selectedPlayers = playerMakers
+            var selectedPlayers = PlayerMakers
                 .Select(maker => maker.CreatePlayer())
                 .ToDictionary(player => player.position);
 

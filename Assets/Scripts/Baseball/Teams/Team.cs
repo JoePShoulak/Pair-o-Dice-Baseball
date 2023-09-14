@@ -16,17 +16,5 @@ namespace FibDev.Baseball.Teams
         public Dictionary<Position, PlayerStats> players;
 
 
-        // ReSharper disable once UnusedMember.Global
-        public void Log()
-        {
-            
-            Debug.Log($"Name: {city} {name}");
-            Debug.Log($"  P. Color: {primary}");
-            Debug.Log($"  S. Color: {secondary}");
-            Debug.Log($"  Type: {type}");
-
-            Debug.Log("\n  Players:");
-            foreach (var player in players.Values) player.Log();
-        }
     }
 }

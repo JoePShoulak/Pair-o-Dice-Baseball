@@ -17,7 +17,6 @@ namespace FibDev.Baseball.Choreography.Choreographer
     {
         [SerializeField] private TeamPositions homeDugout;
         [SerializeField] private TeamPositions visitorDugout;
-        [SerializeField] private FieldPositions field;
         [SerializeField] private BallMover ball;
 
         private Dictionary<TeamType, Team> _teams;
@@ -81,14 +80,29 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         private TeamType TeamAtBat => _teamOnField == TeamType.Home ? TeamType.Visiting : TeamType.Home;
 
-        private Player.Player ActiveBatter => TeamAtBat == TeamType.Home
-            ? _homeTeam.Values.ToList()[_homeBatterIndex]
-            : _visitorTeam.Values.ToList()[_visitorBatterIndex];
+        private Player.Player ActiveBatter()
+        {
+            List<Player.Player> players;
+            int index;
+
+            if (TeamAtBat == TeamType.Home)
+            {
+                players = _homeTeam.Values.ToList();
+                index = _homeBatterIndex;
+            }
+            else
+            {
+                players = _visitorTeam.Values.ToList();
+                index = _visitorBatterIndex;
+            }
+
+            return players.First(player => player.playerStats.battingIndex == index);
+        }
 
         public void SetupGame(Dictionary<TeamType, Team> pTeams)
         {
             gameEnded = false;
-            
+
             movement.StartMovement();
             _teams = pTeams;
 
@@ -96,13 +110,13 @@ namespace FibDev.Baseball.Choreography.Choreographer
             _visitorTeam = _playerCreator.CreateTeam(_teams[TeamType.Visiting], homeDugout, visitorDugout);
 
             TakeFieldPositions(_homeTeam);
-            _baseManager.CallNewBatter(ActiveBatter);
+            _baseManager.CallNewBatter(ActiveBatter());
         }
 
         private void EndGame()
         {
             gameEnded = true;
-            
+
             var cam = GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>();
             cam.LerpTo(cam.scoreboard, 2f);
             TearDownGame();
@@ -119,7 +133,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
         public void TearDownGame()
         {
             OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().autoRun.isOn = false;
-            
+
             foreach (var player in AllPlayers)
             {
                 if (player == null) return;
@@ -130,12 +144,12 @@ namespace FibDev.Baseball.Choreography.Choreographer
         private void SwitchSides()
         {
             _teamOnField = _teamOnField == TeamType.Home ? TeamType.Visiting : TeamType.Home;
-            
+
             TakeFieldPositions(_teamOnField == TeamType.Home ? _homeTeam : _visitorTeam);
             TakeDugoutPositions(_teamOnField == TeamType.Visiting ? _homeTeam : _visitorTeam);
-            
+
             _baseManager.Reset();
-            _baseManager.CallNewBatter(ActiveBatter);
+            _baseManager.CallNewBatter(ActiveBatter());
         }
 
         private static Button CamButton => OverlayManager.Instance.gameOverlay.GetComponent<GameOverlayUI>().camButton;
@@ -155,25 +169,25 @@ namespace FibDev.Baseball.Choreography.Choreographer
             switch (movement.runnerMovement)
             {
                 case RunnerMovement.Single:
-                    _baseManager.Advance(ActiveBatter);
+                    _baseManager.Advance(ActiveBatter());
                     break;
                 case RunnerMovement.Double:
-                    _baseManager.Advance(ActiveBatter, 2);
+                    _baseManager.Advance(ActiveBatter(), 2);
                     break;
                 case RunnerMovement.Triple:
-                    _baseManager.Advance(ActiveBatter, 3);
+                    _baseManager.Advance(ActiveBatter(), 3);
                     break;
                 case RunnerMovement.HomeRun:
-                    _baseManager.Advance(ActiveBatter, 4);
+                    _baseManager.Advance(ActiveBatter(), 4);
                     break;
                 case RunnerMovement.Force:
-                    _baseManager.AdvanceIfForced(ActiveBatter);
+                    _baseManager.AdvanceIfForced(ActiveBatter());
                     break;
                 case RunnerMovement.Stay:
                     break;
                 case RunnerMovement.OutAdvance:
-                    _baseManager.Advance(ActiveBatter, 1, false);
-                    BaseManager.Out(ActiveBatter);
+                    _baseManager.Advance(ActiveBatter(), 1, false);
+                    BaseManager.Out(ActiveBatter());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -186,14 +200,14 @@ namespace FibDev.Baseball.Choreography.Choreographer
             const float offset = 1f;
             yield return new WaitForSeconds(animationTime - offset);
             CamButton.interactable = true;
-            
+
             movement.StartMovement();
 
             HandleBases();
 
             if (movement.runnerMovement == RunnerMovement.Stay)
             {
-                BaseManager.Out(ActiveBatter);
+                BaseManager.Out(ActiveBatter());
             }
 
             if (_teamOnField == TeamType.Home)
@@ -205,7 +219,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
                 _homeBatterIndex = (_homeBatterIndex + 1) % _homeTeam.Count;
             }
 
-            _baseManager.CallNewBatter(ActiveBatter);
+            _baseManager.CallNewBatter(ActiveBatter());
 
             if (_mustEndGame)
             {
@@ -224,15 +238,15 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         private static void TakeFieldPositions(Dictionary<Position, Player.Player> pDict)
         {
-            foreach (var  playerObj in pDict.Values)
+            foreach (var playerObj in pDict.Values)
             {
                 playerObj.GoToFieldPosition();
             }
-        }  
-        
+        }
+
         private static void TakeDugoutPositions(Dictionary<Position, Player.Player> pDict)
         {
-            foreach (var  playerObj in pDict.Values)
+            foreach (var playerObj in pDict.Values)
             {
                 playerObj.GoToDugout();
             }

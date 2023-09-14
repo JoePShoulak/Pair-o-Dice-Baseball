@@ -21,12 +21,14 @@ namespace FibDev.UI
         [SerializeField] private Slider skinToneSlider;
         [SerializeField] private Image skinToneImage;
 
-        // [SerializeField] private Button upButton;
-        // [SerializeField] private Button downButton;
+        public Button upButton;
+        public Button downButton;
 
         // TODO: Make this ia separate class
         private readonly Color white = new(1f, 0.855f, 0.725f);
         private readonly Color black = new(0.243f, 0.168f, 0.137f);
+
+        public int CurrentIndex => transform.GetSiblingIndex();
 
         private void Start()
         {
@@ -34,6 +36,35 @@ namespace FibDev.UI
 
             skinToneSlider.onValueChanged.AddListener(SetSkinToneImageColor);
             SetSkinToneImageColor(skinToneSlider.value);
+        }
+
+        public void MoveRowUp()
+        {
+            if (CurrentIndex  == 0) return;
+
+            transform.SetSiblingIndex(CurrentIndex - 1);
+
+            UpdateInteractable();
+        }
+
+        public void MoveRowDown()
+        {
+            if (CurrentIndex == transform.parent.childCount - 1) return;
+
+            transform.SetSiblingIndex(CurrentIndex + 1);
+
+            UpdateInteractable();
+        }
+
+        private void UpdateInteractable()
+        {
+            var siblings = transform.parent.GetComponentsInChildren<PlayerMaker>();
+            
+            foreach (var playerMaker in siblings)
+            {
+                playerMaker.upButton.interactable = playerMaker.CurrentIndex > 0;
+                playerMaker.downButton.interactable = playerMaker.CurrentIndex < transform.parent.childCount - 1;
+            }
         }
 
         private void SetSkinToneImageColor(float value)
@@ -63,11 +94,16 @@ namespace FibDev.UI
             {
                 playerName = GetInputFieldValueOrPlaceholder(nameField),
                 number = PadJerseyNumber(GetInputFieldValueOrPlaceholder(numberField)),
+                
                 lefty = leftyToggle.isOn,
+                
                 weight = GetDropdownValueAsEnum<WeightType>(weightDropdown),
                 height = GetDropdownValueAsEnum<HeightType>(heightDropdown),
+                
                 skinColor = skinToneImage.color,
-                position = playerPosition
+                
+                position = playerPosition,
+                battingIndex = CurrentIndex
             };
 
             return stats;

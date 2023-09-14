@@ -9012,6 +9012,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060743656}
   m_CullTransparentMesh: 1
+--- !u!1 &1066075209 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6373271456883943230, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
+  m_PrefabInstance: {fileID: 1092286538264292450}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1077600293
 GameObject:
   m_ObjectHideFlags: 0
@@ -12493,7 +12498,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   homeDugout: {fileID: 547533062}
   visitorDugout: {fileID: 1730195639}
-  field: {fileID: 1577157155}
   ball: {fileID: 158026222}
   gameEnded: 0
 --- !u!114 &1674934048
@@ -14422,6 +14426,10 @@ PrefabInstance:
       propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6787384973346939549, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6804336603196430517, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -14737,6 +14745,10 @@ PrefabInstance:
     - target: {fileID: 7882119297089224146, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
       propertyPath: m_Name
       value: Visitor Team
+      objectReference: {fileID: 0}
+    - target: {fileID: 7941632730239333845, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7997993563272979729, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
       propertyPath: m_text
@@ -15230,7 +15242,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7763699759004989992, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -22569,6 +22582,10 @@ PrefabInstance:
       propertyPath: m_Value
       value: 0.875
       objectReference: {fileID: 0}
+    - target: {fileID: 6787384973346939549, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6804336603196430517, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -22633,6 +22650,10 @@ PrefabInstance:
       propertyPath: m_Value
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 6982356704573908705, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
+      propertyPath: players
+      value: 
+      objectReference: {fileID: 1066075209}
     - target: {fileID: 6982356704573908705, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
       propertyPath: popupPicker
       value: 
@@ -22876,6 +22897,10 @@ PrefabInstance:
     - target: {fileID: 7882119297089224146, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
       propertyPath: m_Name
       value: Home Team
+      objectReference: {fileID: 0}
+    - target: {fileID: 7941632730239333845, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8043767009613213145, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
       propertyPath: m_Value
@@ -23353,7 +23378,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7763699759004989992, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
