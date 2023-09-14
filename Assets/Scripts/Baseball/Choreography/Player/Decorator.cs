@@ -41,7 +41,7 @@ namespace FibDev.Baseball.Choreography.Player
             billRenderer.material.color = pSecondary;
             headRenderer.material.color = pSkin;
         }
-
+        
         private void Update()
         {
             textTransform.LookAt(_cam.position);
