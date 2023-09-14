@@ -35,7 +35,9 @@ namespace FibDev.Baseball.Engine
 
         private void Update()
         {
-            if (gameOverlay.autoRun.isOn && readyForRoll && !_dieCollection.isRolling)
+            if (!readyForRoll) return;
+            
+            if (gameOverlay.autoRun.isOn && !_dieCollection.isRolling)
             {
                 gameOverlay.Roll();
             }

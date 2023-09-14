@@ -48,6 +48,8 @@ namespace FibDev.Baseball.Engine
 
         public void ResetState()
         {
+            if (bases == null) return;
+            
             bases.Reset();
             teamAtBat = TeamType.Visiting;
 
