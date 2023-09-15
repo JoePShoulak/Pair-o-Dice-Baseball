@@ -13362,7 +13362,7 @@ Transform:
   - {fileID: 9188096913321330758}
   - {fileID: 2031107989}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1652831695
 GameObject:
@@ -13662,6 +13662,7 @@ MonoBehaviour:
   homeDugout: {fileID: 547533062}
   visitorDugout: {fileID: 1730195639}
   ball: {fileID: 158026222}
+  scorebook: {fileID: 7728224609430918393}
   gameEnded: 0
 --- !u!114 &1674934048
 MonoBehaviour:
@@ -19431,7 +19432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -19458,7 +19459,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -19641,16 +19642,17 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5384260732104439686}
   m_LocalRotation: {x: -0, y: -0.7053637, z: -0, w: 0.7088456}
-  m_LocalPosition: {x: 1.6463704, y: 1.3699557, z: 1.5035555}
-  m_LocalScale: {x: 0.8621704, y: 0.8621702, z: 0.8621704}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 1094.4062, y: 241.22595, z: -321.44562}
+  m_LocalScale: {x: 581.9651, y: 581.9649, z: 581.9651}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4607911595625710354}
+  - {fileID: 4606616031649750028}
   - {fileID: 3381572551210588375}
   - {fileID: 5137210501428641111}
-  m_Father: {fileID: 3126209822409646449}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: -89.718, z: 0}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &657128611967348782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19699,7 +19701,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -19726,7 +19728,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -20410,7 +20412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5481820644504413071, guid: 7bc43fb8cbf74414c914e97ec7ae0142, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5481820644504413071, guid: 7bc43fb8cbf74414c914e97ec7ae0142, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23813,7 +23815,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -23840,7 +23842,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -23933,7 +23935,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -23960,7 +23962,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24195,7 +24197,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -24222,7 +24224,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24284,7 +24286,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -24311,7 +24313,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24478,7 +24480,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -24505,7 +24507,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24567,7 +24569,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -24594,7 +24596,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -26280,7 +26282,6 @@ Transform:
   m_LocalScale: {x: 675, y: 675, z: 675}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 524554957620302922}
   - {fileID: 1245387702}
   - {fileID: 3126209823837721524}
   - {fileID: 3126209821904687215}
@@ -26294,7 +26295,7 @@ Transform:
   - {fileID: 3126209823715365220}
   - {fileID: 3126209823231259835}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3126209822409646450
 GameObject:
@@ -30484,14 +30485,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4061018028314678285}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0021554208, y: 0.0028453972, z: -4.8455526e-17}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8379042834478533581}
   m_Father: {fileID: 524554957620302922}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &3428192133883057384
 CanvasRenderer:
@@ -30757,7 +30758,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -30784,7 +30785,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -30873,7 +30874,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -30900,7 +30901,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -31092,13 +31093,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4610353243262084650}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -1.3760313e-18, z: -0.0422939}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0.002461612, z: -0, w: 0.999997}
+  m_LocalPosition: {x: -0.296898, y: -0.008859442, z: 0.032347847}
+  m_LocalScale: {x: 0.9966236, y: 0.9966237, z: 0.9966236}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4607911595625710354}
-  m_RootOrder: 0
+  m_Father: {fileID: 524554957620302922}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4607911595625710354
 Transform:
@@ -31107,12 +31108,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4609757393607342570}
-  m_LocalRotation: {x: -0, y: -0.0024616122, z: -0, w: 0.999997}
-  m_LocalPosition: {x: -0.29495016, y: -0.0060141087, z: 0.074498266}
+  m_LocalRotation: {x: -0, y: -0.002461642, z: -0, w: 0.999997}
+  m_LocalPosition: {x: -0.29710552, y: -0.008859442, z: 0.074498534}
   m_LocalScale: {x: 0.99662364, y: 0.9966237, z: 0.99662364}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 4606616031649750028}
+  m_Children: []
   m_Father: {fileID: 524554957620302922}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -31189,7 +31189,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -31216,7 +31216,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -31322,7 +31322,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -31349,7 +31349,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -31430,7 +31430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -31457,7 +31457,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -31526,13 +31526,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7568248045617795512}
-  m_LocalRotation: {x: 0.00000008940696, y: 0.0000000018626449, z: -0.99993217, w: -0.0116459755}
-  m_LocalPosition: {x: 0.0025748815, y: 0.0030564535, z: 1.2181114e-14}
+  m_LocalRotation: {x: 0.00000008940696, y: 0.0000000013969838, z: -0.99993217, w: -0.0116459755}
+  m_LocalPosition: {x: 0.00041941012, y: 0.00021111887, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 524554957620302922}
-  m_RootOrder: 1
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -181.335}
 --- !u!1 &5158011295165525015
 GameObject:
@@ -31776,7 +31776,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -31803,7 +31803,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -32281,7 +32281,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -32308,7 +32308,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -32370,7 +32370,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -32397,7 +32397,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -32451,6 +32451,7 @@ GameObject:
   - component: {fileID: 439708224867912148}
   - component: {fileID: 6997900605425629400}
   - component: {fileID: 4149594092825781699}
+  - component: {fileID: 7728224609430918393}
   m_Layer: 0
   m_Name: ScoreList
   m_TagString: Untagged
@@ -32458,6 +32459,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7728224609430918393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728224609430918392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f09461826818e6448b18163affce938a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7755563433298238945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32478,7 +32491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -32505,7 +32518,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -32643,7 +32656,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -32670,7 +32683,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -32996,7 +33009,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rangers @ Braves: 3-4'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
   m_sharedMaterial: {fileID: 2072925783780958505, guid: 91a1196be7aa947468dcf88f911ce753, type: 2}
@@ -33023,7 +33036,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.7
+  m_fontSize: 65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

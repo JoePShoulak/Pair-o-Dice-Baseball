@@ -11,6 +11,7 @@ using FibDev.Baseball.Plays;
 using FibDev.Baseball.Records;
 using FibDev.Baseball.Rendering.Scoreboard;
 using FibDev.Baseball.Teams;
+using FibDev.Dice;
 
 namespace FibDev.Baseball.Engine
 {
@@ -53,7 +54,6 @@ namespace FibDev.Baseball.Engine
             ScoreOverlay.SetColors(teams[TeamType.Visiting].primary, teams[TeamType.Home].primary);
             ScoreOverlay.SetScores(0, 0);
             choreographer.SetupGame(teams);
-            
         }
 
         public void AddOut() => outs++;

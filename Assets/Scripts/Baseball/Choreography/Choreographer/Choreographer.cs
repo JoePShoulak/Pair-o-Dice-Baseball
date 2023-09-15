@@ -9,6 +9,7 @@ using FibDev.Baseball.Choreography.Play;
 using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Teams;
 using FibDev.Core;
+using FibDev.Dice;
 using FibDev.UI;
 using FibDev.UI.Score_Overlay;
 
@@ -24,6 +25,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         private Dictionary<Position, Player.Player> _homeTeam = new();
         private Dictionary<Position, Player.Player> _visitorTeam = new();
+        [SerializeField] private ScoreBook scorebook;
+
 
         private int _homeBatterIndex;
         private int _visitorBatterIndex;
@@ -43,7 +46,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         public bool gameEnded;
         private Engine.Engine engine;
-        
+
         private static ScoreOverlay ScoreOverlay =>
             OverlayManager.Instance.gameOverlay.GetComponent<GameOverlayUI>().ScoreOverlay;
 
@@ -127,6 +130,13 @@ namespace FibDev.Baseball.Choreography.Choreographer
             TearDownGame();
             OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().rollButton.interactable = false;
             OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().autoRun.interactable = false;
+
+            var awayName = _teams[TeamType.Visiting].name;
+            var homeName = _teams[TeamType.Home].name;
+            var visitorTotalRuns = engine.record.visitorTotal.runs;
+            var homeTotalRuns = engine.record.homeTotal.runs;
+            
+            scorebook.AddRecord(awayName, homeName, visitorTotalRuns, homeTotalRuns);
         }
 
         public void Begin()
