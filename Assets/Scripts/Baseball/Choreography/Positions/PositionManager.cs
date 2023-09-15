@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace FibDev.Baseball.Choreography.Positions
@@ -9,6 +10,8 @@ namespace FibDev.Baseball.Choreography.Positions
          public TeamPositions homeDugout;
          public TeamPositions visitorDugout;
          public FieldPositions field;
+         
+         public List<Transform> bases;
 
         private void Awake()
         {

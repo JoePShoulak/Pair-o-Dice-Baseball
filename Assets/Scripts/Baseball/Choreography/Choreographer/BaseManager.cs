@@ -25,10 +25,10 @@ namespace FibDev.Baseball.Choreography.Choreographer
             _positionManager = PositionManager.Instance;
             var fieldPositionsDictionary = _positionManager.field.positions;
 
-            baseHome = fieldPositionsDictionary[Position.Catcher];
-            baseFirst = fieldPositionsDictionary[Position.Baseman1st];
-            baseSecond = fieldPositionsDictionary[Position.Baseman2nd];
-            baseThird = fieldPositionsDictionary[Position.Baseman3rd];
+            baseHome = fieldPositionsDictionary[Position.Catcher]; // TODO: change this, remove offsets
+            baseFirst = _positionManager.bases[0];
+            baseSecond = _positionManager.bases[1];
+            baseThird = _positionManager.bases[2];
 
             _bases = new List<Transform> { baseHome, baseFirst, baseSecond, baseThird };
         }
