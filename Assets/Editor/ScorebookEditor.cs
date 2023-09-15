@@ -26,7 +26,7 @@ namespace FibDev.Editor
 
             if (GUILayout.Button("Add Dummy Record B"))
             {
-                var recordText = ScoreBook.ComposeRecord("Jim", "Joe", 2, 1);
+                var recordText = ScoreBook.ComposeRecord("Jake", "Sarah", 3, 4);
                 _script.AddRecord(recordText);
             }
 
