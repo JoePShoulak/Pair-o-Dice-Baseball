@@ -150,7 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ad4aeacb911814f9dfc8911248e12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textTransform: {fileID: 0}
   headRenderer: {fileID: 5518878481195404089}
   hatRenderer: {fileID: 4843062587936281033}
   billRenderer: {fileID: 7742515125941260562}

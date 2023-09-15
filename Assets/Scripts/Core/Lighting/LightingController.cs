@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace FibDev.Core
+namespace FibDev.Core.Lighting
 {
-    public class Lighting : MonoBehaviour
+    public class LightingController : MonoBehaviour
     {
+        [SerializeField] private EmissivesController emissives;
+
         [SerializeField] private Light mainLight;
         [SerializeField] private Light posterLight;
         [SerializeField] private Renderer poster;
-        
+
         [SerializeField] private List<Texture2D> dayPosters;
         [SerializeField] private List<Texture2D> nightPosters;
-        
+
         private static bool Daytime => DateTime.Now.Hour > 7 && DateTime.Now.Hour < 19;
-        
+        private const float nightRatio = 1 / 6f;
+
         private void Start()
         {
             if (Daytime) SetDayTime();
@@ -24,19 +27,20 @@ namespace FibDev.Core
 
         private void SetDayTime()
         {
-            mainLight.intensity = 1f;
-            posterLight.intensity = 0.4f;
             poster.material.mainTexture = RandomFrom(dayPosters);
+            posterLight.intensity = 0.4f;
+
+            mainLight.intensity = 1f;
+            emissives.SetIntensity(5f);
         }
 
         private void SetNightTime()
         {
-            const float nightRatio = 1 / 6f;
-            
-            mainLight.intensity = 1 * nightRatio;
-            posterLight.intensity = 0.4f * nightRatio;
-            
             poster.material.mainTexture = RandomFrom(nightPosters);
+            posterLight.intensity = 0.4f * nightRatio;
+
+            mainLight.intensity = 1 * nightRatio;
+            emissives.SetIntensity(1f);
         }
 
         private static T RandomFrom<T>(IReadOnlyList<T> listOfItems)
