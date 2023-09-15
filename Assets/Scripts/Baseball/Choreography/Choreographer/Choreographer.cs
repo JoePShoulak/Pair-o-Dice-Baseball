@@ -9,6 +9,7 @@ using FibDev.Baseball.Choreography.Play;
 using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Teams;
 using FibDev.Core;
+using FibDev.Core.ScoreBook;
 using FibDev.Dice;
 using FibDev.UI;
 using FibDev.UI.Score_Overlay;
@@ -135,8 +136,9 @@ namespace FibDev.Baseball.Choreography.Choreographer
             var homeName = _teams[TeamType.Home].name;
             var visitorTotalRuns = engine.record.visitorTotal.runs;
             var homeTotalRuns = engine.record.homeTotal.runs;
+            var record = ScoreBook.ComposeRecord(awayName, homeName, visitorTotalRuns, homeTotalRuns);
             
-            scorebook.AddRecord(awayName, homeName, visitorTotalRuns, homeTotalRuns);
+            scorebook.AddRecord(record);
         }
 
         public void Begin()
