@@ -21,26 +21,26 @@ namespace FibDev.Core.Lighting
 
         private void Start()
         {
-            if (Daytime) SetDayTime();
+            if (/* Daytime */ false) SetDayTime();
             else SetNightTime();
         }
 
         private void SetDayTime()
         {
             poster.material.mainTexture = RandomFrom(dayPosters);
-            posterLight.intensity = 0.4f;
+            posterLight.intensity = 1f;
 
-            mainLight.intensity = 1f;
-            emissives.SetIntensity(5f);
+            mainLight.intensity = 1.36f;
+            emissives.SetIntensity(1f);
         }
 
         private void SetNightTime()
         {
             poster.material.mainTexture = RandomFrom(nightPosters);
-            posterLight.intensity = 0.4f * nightRatio;
+            posterLight.intensity = 1f * nightRatio;
 
-            mainLight.intensity = 1 * nightRatio;
-            emissives.SetIntensity(1f);
+            mainLight.intensity = 1.36f * nightRatio;
+            emissives.SetIntensity(5f);
         }
 
         private static T RandomFrom<T>(IReadOnlyList<T> listOfItems)
