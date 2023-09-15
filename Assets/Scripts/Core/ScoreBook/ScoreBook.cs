@@ -7,13 +7,12 @@ namespace FibDev.Core.ScoreBook
 {
     public class ScoreBook : MonoBehaviour
     {
-        private IEnumerable<Transform> Records => GetComponentsInChildren<Transform>().ToList();
         private List<TMP_Text> _recordTMPs;
         
         private void Start()
         {
-            LoadAllRecords();
             _recordTMPs = GetComponentsInChildren<TMP_Text>().ToList();
+            LoadAllRecords();
         }
 
         public static string ComposeRecord(string awayName, string homeName, int awayScore, int homeScore)
@@ -23,7 +22,7 @@ namespace FibDev.Core.ScoreBook
 
         public void AddRecord(string recordText)
         {
-            var bottomRecord = Records.Last();
+            var bottomRecord = GetComponentsInChildren<Transform>().Last();
             bottomRecord.SetAsFirstSibling();
             bottomRecord.GetComponent<TMP_Text>().text = recordText;
 
@@ -40,7 +39,7 @@ namespace FibDev.Core.ScoreBook
 
         private string[] GetRecords()
         {
-            return _recordTMPs.Select(tmp => tmp.text).ToArray();
+            return GetComponentsInChildren<TMP_Text>().Select(tmp => tmp.text).ToArray();
         }
 
         public void SaveAllRecords()
@@ -57,7 +56,7 @@ namespace FibDev.Core.ScoreBook
             
             for (var i = 0; i < _recordTMPs.Count; i++)
             {
-                _recordTMPs[i].text = records[i];
+                GetComponentsInChildren<TMP_Text>()[i].text = records[i];
             }
         }
     }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,6 +38,19 @@ namespace FibDev.Core.ScoreBook
             }
 
             return new ScoreData(rawRecords.ToArray());
+        }
+
+        public static void DeleteAllData()
+        {
+            var recordCount = PlayerPrefs.GetInt("recordCount", 0);
+            if (recordCount == 0) return;
+            
+            for (var i = 0; i < recordCount; i++)
+            {
+                PlayerPrefs.DeleteKey(GetRecordName(i));
+            }
+
+            PlayerPrefs.SetInt("recordCount", 0);
         }
     }
 }

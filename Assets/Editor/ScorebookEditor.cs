@@ -43,6 +43,11 @@ namespace FibDev.Editor
             if (GUILayout.Button("Load"))
             {
                 _script.LoadAllRecords();
+            }  
+            
+            if (GUILayout.Button("Delete"))
+            {
+                DataManager.DeleteAllData();
             }
         }
     }
