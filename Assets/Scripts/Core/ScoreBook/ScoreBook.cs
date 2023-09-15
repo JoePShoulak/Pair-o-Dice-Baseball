@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -17,7 +18,11 @@ namespace FibDev.Core.ScoreBook
 
         public static string ComposeRecord(string awayName, string homeName, int awayScore, int homeScore)
         {
-            return $"{awayName} @ {homeName}: {awayScore}-{homeScore}";
+            var date = DateTime.Now;
+            var month = date.Month;
+            var day = date.Day;
+            
+            return $"{awayName} @ {homeName}: {awayScore}-{homeScore} ({month}/{day})";
         }
 
         public void AddRecord(string recordText)

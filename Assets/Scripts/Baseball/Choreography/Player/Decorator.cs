@@ -45,7 +45,6 @@ namespace FibDev.Baseball.Choreography.Player
             var weightScale = GetWeightScale(weight);
 
             transform.localScale = new Vector3(weightScale, heightScale, weightScale);
-            jerseyRenderer.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
         public void SetColor(Color pPrimary, Color pSecondary, Color pSkin)
