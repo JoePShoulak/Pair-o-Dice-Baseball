@@ -43,14 +43,17 @@ namespace FibDev.Baseball.Engine
             }
         }
 
-        private void HandleRoll(int pObj)
+        private void HandleRoll(int rollValue)
         {
             if (!readyForRoll) return;
             if (_choreographer.gameEnded) return;
 
             readyForRoll = false;
 
-            _engine.NextPlay(Play.Random());
+            var playEnum = OddsGrid.grid[rollValue];
+            var play = Play.plays[playEnum];
+
+            _engine.NextPlay(play);
         }
     }
 }

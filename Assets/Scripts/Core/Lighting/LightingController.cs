@@ -21,7 +21,7 @@ namespace FibDev.Core.Lighting
 
         private void Start()
         {
-            if (/* Daytime */ false) SetDayTime();
+            if (Daytime) SetDayTime();
             else SetNightTime();
         }
 
