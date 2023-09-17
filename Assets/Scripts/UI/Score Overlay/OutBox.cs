@@ -20,7 +20,7 @@ namespace FibDev.UI.Score_Overlay
                     firstOut.color = Color.red;
                     secondOut.color = Color.white;
                     break;
-                case 3:
+                case 2:
                     firstOut.color = Color.red;
                     secondOut.color = Color.red;
                     break;

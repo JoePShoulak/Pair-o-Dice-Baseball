@@ -57,7 +57,12 @@ namespace FibDev.Baseball.Choreography.Choreographer
             _baseManager = GetComponent<BaseManager>();
 
             engine = GetComponent<Engine.Engine>();
-            engine.OnInningAdvance += () => _mustChangeSides = true;
+            ScoreOverlay.Reset();
+            engine.OnInningAdvance += () =>
+            {
+                _mustChangeSides = true;
+                ScoreOverlay.AdvanceInning();
+            };
             engine.OnGameEnd += () => _mustEndGame = true;
         }
 

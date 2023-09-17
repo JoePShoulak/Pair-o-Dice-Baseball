@@ -10,11 +10,13 @@ namespace FibDev.UI.Score_Overlay
         [SerializeField] private ScoreBox homeScore;
         private BaseBox bases;
         private OutBox outs;
+        private InningBox innings;
 
         private void Start()
         {
             bases = GetComponentInChildren<BaseBox>();
             outs = GetComponentInChildren<OutBox>();
+            innings = GetComponentInChildren<InningBox>();
         }
 
         public void SetColors(Color awayColor, Color homeColor)
@@ -39,11 +41,21 @@ namespace FibDev.UI.Score_Overlay
             outs.SetOuts(numberOfOuts);
         }
 
+        public void AdvanceInning()
+        {
+            innings.Advance();
+        }
+
+        public void ClearActivity()
+        {
+            bases.Reset();
+        }
+
         public void Reset()
         {
-            awayScore.Reset();
+            innings.Reset();
             homeScore.Reset();
-            bases.Reset();
+            awayScore.Reset();
         }
     }
 }

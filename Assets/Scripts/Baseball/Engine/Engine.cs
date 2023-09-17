@@ -125,7 +125,7 @@ namespace FibDev.Baseball.Engine
 
         private void EndGame()
         {
-            ScoreOverlay.Reset();
+            ScoreOverlay.ClearActivity();
             gameEnded = true;
             OnGameEnd?.Invoke();
             Debug.Log($"{teamAtBat} Won!");
