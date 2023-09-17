@@ -8,15 +8,14 @@ namespace FibDev.UI.Score_Overlay
     {
         [SerializeField] private ScoreBox awayScore;
         [SerializeField] private ScoreBox homeScore;
+        [SerializeField] private InningBox innings;
         private BaseBox bases;
         private OutBox outs;
-        private InningBox innings;
 
         private void Start()
         {
             bases = GetComponentInChildren<BaseBox>();
             outs = GetComponentInChildren<OutBox>();
-            innings = GetComponentInChildren<InningBox>();
         }
 
         public void SetColors(Color awayColor, Color homeColor)

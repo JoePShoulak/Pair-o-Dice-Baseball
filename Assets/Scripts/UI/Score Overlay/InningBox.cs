@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +6,7 @@ namespace FibDev.UI.Score_Overlay
 {
     public class InningBox : MonoBehaviour
     {
-        private TMP_Text inningText;
+        [SerializeField] private TMP_Text inningText;
         [SerializeField] private Image arrow;
 
         private int inning = 1;

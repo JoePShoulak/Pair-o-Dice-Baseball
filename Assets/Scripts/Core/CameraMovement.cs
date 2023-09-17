@@ -15,6 +15,7 @@ namespace FibDev.Core
         public Transform stadiumWaypoint;
         public Transform scoreboard;
         public Transform notebook;
+        public Transform whiteboard;
 
         private const float DEFAULT_DURATION = 0.5f;
 

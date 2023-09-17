@@ -22,7 +22,13 @@ namespace FibDev.UI
         public void Scores()
         {
             gameObject.SetActive(false);
-            cam.MoveTo(cam.notebook, 0.5f, () => OverlayManager.Instance.scoresOverlay.SetActive(true));
+            cam.MoveTo(cam.notebook, 0.5f, () => OverlayManager.Instance.backOverlay.SetActive(true));
+        }
+
+        public void Credits()
+        {
+            gameObject.SetActive(false);
+            cam.MoveTo(cam.whiteboard, 0.5f, () => OverlayManager.Instance.backOverlay.SetActive(true));
         }
     }
 }
