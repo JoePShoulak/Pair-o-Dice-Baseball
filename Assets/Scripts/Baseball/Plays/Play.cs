@@ -53,43 +53,30 @@ namespace FibDev.Baseball.Plays
             },
             {
                 PlayEnum.FlyOut, A.Play.Named("Fly Out")
-                    .BatterHitBall()
+                    .BatterHitBall(false)
                     .Add(Operation.FielderCatchesBall)
             },
-            // {
-            //     PlayEnum.FlyOutPlus, A.Play.Named("Fly Out Plus")
-            //         .BatterHitBall()
-            //         .Add(Operation.FielderCatchesBall)
-            //         .Add(Operation.Baseman3rdRunsHome)
-            // },
             {
                 PlayEnum.PopOut, A.Play.Named("Pop Out")
-                    .BatterHitBall()
+                    .BatterHitBall(false)
                     .Add(Operation.FielderCatchesBall)
             },
             {
                 PlayEnum.LineOut, A.Play.Named("Line Out")
-                    .BatterHitBall()
+                    .BatterHitBall(false)
                     .Add(Operation.FielderCatchesBall)
             },
             {
                 PlayEnum.FoulOut, A.Play.Named("Foul Out")
-                    .BatterHitBall()
+                    .BatterHitBall(false)
                     .Add(Operation.FielderCatchesBall)
             },
-            { // TODO: Don't advance the batter
+            {
                 PlayEnum.GroundOut, A.Play.Named("Ground Out")
-                    .BatterHitBall()
+                    .BatterHitBall(false)
                     .Add(Operation.OutAtFirst)
                     .BasemenAdvance(1, false)
             }
-            // {
-            //     PlayEnum.GroundOut2, A.Play.Named("Ground Out (2)")
-            //         .BatterHitBall()
-            //         .Add(Operation.FizelderCollectsBall)
-            //         .Add(Operation.OutAtSecond)
-            //         .BasemenAdvance(1, false)
-            // }
         };
 
         public static Play Random()

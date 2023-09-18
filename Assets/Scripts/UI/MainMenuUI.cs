@@ -32,5 +32,10 @@ namespace FibDev.UI
             gameObject.SetActive(false);
             cam.MoveTo(cam.whiteboard, 0.5f, () => OverlayManager.Instance.backOverlay.SetActive(true));
         }
+
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
 }
