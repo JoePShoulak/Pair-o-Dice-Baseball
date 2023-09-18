@@ -15,6 +15,7 @@ namespace FibDev.Core.Lighting
 
         [SerializeField] private List<Texture2D> dayPosters;
         [SerializeField] private List<Texture2D> nightPosters;
+        private static readonly int Exposure = Shader.PropertyToID("_Exposure");
 
         private static bool Daytime => DateTime.Now.Hour > 7 && DateTime.Now.Hour < 19;
         private const float nightRatio = 1 / 6f;
@@ -32,6 +33,7 @@ namespace FibDev.Core.Lighting
 
             mainLight.intensity = 1.36f;
             emissives.SetIntensity(1f);
+            RenderSettings.skybox.SetFloat(Exposure, 1f);
         }
 
         private void SetNightTime()
@@ -41,6 +43,7 @@ namespace FibDev.Core.Lighting
 
             mainLight.intensity = 1.36f * nightRatio;
             emissives.SetIntensity(5f);
+            RenderSettings.skybox.SetFloat(Exposure, .33f);
         }
 
         private static T RandomFrom<T>(IReadOnlyList<T> listOfItems)
