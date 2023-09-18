@@ -47,12 +47,13 @@ namespace FibDev.Baseball.Engine
 
         public void StartGame(Dictionary<TeamType, Team> teams)
         {
+            ResetState();
             scoreboard.Reset();
             scoreboard.SetStadiumName(teams[TeamType.Home].name);
             scoreboard.SetNames(teams[TeamType.Home].name, teams[TeamType.Visiting].name);
             scoreboard.SetAttendance();
+            ScoreOverlay.Reset();
             ScoreOverlay.SetColors(teams[TeamType.Visiting].primary, teams[TeamType.Home].primary);
-            ScoreOverlay.SetScores(0, 0);
             choreographer.SetupGame(teams);
         }
 
@@ -104,18 +105,21 @@ namespace FibDev.Baseball.Engine
                 OperationHandler.HandleOperation(this, operation);
             }
             
-            choreographer.InitiateMovement(() => scoreboard.Display(record, teamAtBat == TeamType.Home));
+            choreographer.InitiateMovement(() =>
+            {
+                scoreboard.Display(record, teamAtBat == TeamType.Home);
+                
+                if (outs >= 3 && !gameEnded) AdvanceInning();
 
-            if (outs >= 3 && !gameEnded) AdvanceInning();
-
-            if (CheckForGameEnded()) EndGame();
+                if (CheckForGameEnded()) EndGame();
+            });
         }
 
         private bool CheckForGameEnded()
         {
             if (record.LeadingTeam == null) return false;
 
-            var homeWon = inning > 8 && HomeAtBat && record.HomeWinning;
+            var homeWon = record.HomeWinning && (inning > 9 || (inning == 9 && HomeAtBat));
             var visitorsWon = inning > 9 && VisitorsAtBat && record.VisitorsWinning;
 
             return homeWon || visitorsWon;

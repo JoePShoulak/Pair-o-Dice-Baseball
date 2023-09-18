@@ -1,6 +1,6 @@
 using UnityEngine;
-
 using FibDev.Core;
+using TMPro;
 
 namespace FibDev.UI
 {
@@ -8,10 +8,14 @@ namespace FibDev.UI
     {
         private CameraMovement cam; // Cached
         [SerializeField] private Animator notebookAnimator;
+        [SerializeField] private GameObject quitButton;
 
         private void Start()
         {
             cam = GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>();
+#if UNITY_STANDALONE_WIN
+            quitButton.SetActive(true);
+#endif
         }
 
         public void Play()
@@ -35,7 +39,9 @@ namespace FibDev.UI
 
         public void Quit()
         {
+            Debug.Log("Quit called");
             Application.Quit();
+            quitButton.GetComponent<TMP_Text>().text = "quitting";
         }
     }
 }

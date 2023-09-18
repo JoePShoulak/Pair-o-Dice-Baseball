@@ -44,8 +44,8 @@ namespace FibDev.Baseball.Rendering.Scoreboard
 
         public void Reset()
         {
-            visitorScoreboardRow.Reset();
-            homeScoreboardRow.Reset();
+            visitorScoreboardRow.ResetRow(true);
+            homeScoreboardRow.ResetRow();
         }
     }
 }

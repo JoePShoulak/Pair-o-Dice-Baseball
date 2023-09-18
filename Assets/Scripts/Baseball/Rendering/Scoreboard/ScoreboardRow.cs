@@ -32,12 +32,14 @@ namespace FibDev.Baseball.Rendering.Scoreboard
             teamName.text = pName;
         }
 
-        public void Reset()
+        public void ResetRow(bool showZero = false)
         {
             foreach (var inning in innings)
             {
                 inning.text = "";
             }
+
+            if (showZero) innings[0].text = "0";
 
             teamName.text = "";
             
