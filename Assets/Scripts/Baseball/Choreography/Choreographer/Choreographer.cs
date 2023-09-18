@@ -132,10 +132,11 @@ namespace FibDev.Baseball.Choreography.Choreographer
             gameEnded = true;
 
             var cam = GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>();
-            cam.MoveTo(cam.scoreboard, 2f);
+            
             TearDownGame();
             OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().rollButton.interactable = false;
             OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().autoRun.interactable = false;
+            OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().ToggleCamera();
 
             var awayName = _teams[TeamType.Visiting].name;
             var homeName = _teams[TeamType.Home].name;
