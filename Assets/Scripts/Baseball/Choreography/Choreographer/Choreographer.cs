@@ -220,7 +220,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
         {
             var animationTime = ball.animator.GetCurrentAnimatorStateInfo(0).length;
             const float offset = 1f;
-            yield return new WaitForSeconds(animationTime - offset);
+            yield return new WaitForSeconds((animationTime - offset)*Time.timeScale);
             CamButton.interactable = true;
 
             movement.StartMovement();

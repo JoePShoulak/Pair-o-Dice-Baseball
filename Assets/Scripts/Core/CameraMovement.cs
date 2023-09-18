@@ -29,8 +29,8 @@ namespace FibDev.Core
 
         public void MoveTo(Transform _target, float duration = DEFAULT_DURATION, TweenCallback cb = null)
         {
-            Rotate(_target, duration);
-            transform.DOMove(_target.position, duration).SetEase(Ease.InOutQuad).OnComplete(cb);
+            Rotate(_target, duration * Time.timeScale);
+            transform.DOMove(_target.position, duration * Time.timeScale).SetEase(Ease.InOutQuad).OnComplete(cb);
         }
 
         private void Rotate(Transform _target, float duration)

@@ -33,8 +33,11 @@ namespace FibDev.UI
         {
             _atScoreboard = false;
             rollButton.interactable = false;
+            autoRun.isOn = false;
             autoRun.interactable = false;
             _diceFeed.SetActive(true);
+            fastForward.isOn = false;
+            Time.timeScale = 1f;
             ScoreOverlay.gameObject.SetActive(true);
         }
 
