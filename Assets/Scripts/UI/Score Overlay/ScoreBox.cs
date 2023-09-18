@@ -17,7 +17,6 @@ namespace FibDev.UI.Score_Overlay
 
         public void SetColor(Color pColor)
         {
-            Debug.Log(_image);
             _image.color = pColor;
         }
 
