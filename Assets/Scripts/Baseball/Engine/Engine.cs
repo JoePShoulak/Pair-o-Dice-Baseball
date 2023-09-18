@@ -104,9 +104,7 @@ namespace FibDev.Baseball.Engine
                 OperationHandler.HandleOperation(this, operation);
             }
             
-
-            
-            choreographer.InitiateMovement(() => scoreboard.Display(record));
+            choreographer.InitiateMovement(() => scoreboard.Display(record, teamAtBat == TeamType.Home));
 
             if (outs >= 3 && !gameEnded) AdvanceInning();
 

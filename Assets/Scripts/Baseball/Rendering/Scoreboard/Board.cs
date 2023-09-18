@@ -30,12 +30,12 @@ namespace FibDev.Baseball.Rendering.Scoreboard
             attendance.text = "Tonight's Attendance: " + randomNum;
         }
 
-        public void Display(Record record)
+        public void Display(Record record, bool bottomOfInning)
         {
             for (var i = 0; i < record.innings.Count; i++)
             {
                 visitorScoreboardRow.SetInning(i, record.innings[i].visitorInningStats.runs);
-                homeScoreboardRow.SetInning(i, record.innings[i].homeInningStats.runs);
+                if (bottomOfInning) homeScoreboardRow.SetInning(i, record.innings[i].homeInningStats.runs);
             }
 
             visitorScoreboardRow.SetTotal(record.visitorTotal);
