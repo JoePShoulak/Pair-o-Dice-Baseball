@@ -1,3 +1,4 @@
+using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,7 @@ namespace FibDev.UI
         public Button camButton;
         public Button rollButton;
         public Toggle autoRun;
+        public Toggle fastForward;
         [SerializeField] private Choreographer choreographer;
         [SerializeField] private GameObject _diceFeed;
         public ScoreOverlay ScoreOverlay;
@@ -49,6 +51,11 @@ namespace FibDev.UI
             _dieCollection.Roll();
             rollButton.interactable = false;
             camButton.interactable = false;
+        }
+
+        public void SetTimeRate()
+        {
+            Time.timeScale = fastForward.isOn ? 3f : 1f;
         }
         
         public void Exit()
