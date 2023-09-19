@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-
 using FibDev.UI;
 using FibDev.UI.Score_Overlay;
-
 using FibDev.Baseball.Choreography.Choreographer;
 using FibDev.Baseball.Choreography.Ball;
 using FibDev.Baseball.Plays;
@@ -16,14 +14,14 @@ using FibDev.Dice;
 namespace FibDev.Baseball.Engine
 {
     public class Engine : MonoBehaviour
-    { 
+    {
         public Record record;
         public int inning;
         public TeamType teamAtBat;
         public bool gameEnded;
 
         public int outs;
-        public Bases.Bases bases = new ();
+        public Bases.Bases bases = new();
 
         [SerializeField] private Board scoreboard;
         [HideInInspector] public Choreographer choreographer;
@@ -36,8 +34,8 @@ namespace FibDev.Baseball.Engine
         private static ScoreOverlay ScoreOverlay =>
             OverlayManager.Instance.gameOverlay.GetComponent<GameOverlayUI>().ScoreOverlay;
 
-        public event Action OnInningAdvance; 
-        public event Action OnGameEnd; 
+        public event Action OnInningAdvance;
+        public event Action OnGameEnd;
 
         private void Start()
         {
@@ -62,7 +60,7 @@ namespace FibDev.Baseball.Engine
         public void ResetState()
         {
             if (bases == null) return;
-            
+
             bases.Reset();
             teamAtBat = TeamType.Visiting;
 
@@ -104,15 +102,12 @@ namespace FibDev.Baseball.Engine
             {
                 OperationHandler.HandleOperation(this, operation);
             }
-            
-            choreographer.InitiateMovement(() =>
-            {
-                scoreboard.Display(record, teamAtBat == TeamType.Home);
-                
-                if (outs >= 3 && !gameEnded) AdvanceInning();
 
-                if (CheckForGameEnded()) EndGame();
-            });
+            choreographer.InitiateMovement(() => scoreboard.Display(record, teamAtBat == TeamType.Home));
+
+            if (outs >= 3 && !gameEnded) AdvanceInning();
+
+            if (CheckForGameEnded()) EndGame();
         }
 
         private bool CheckForGameEnded()
