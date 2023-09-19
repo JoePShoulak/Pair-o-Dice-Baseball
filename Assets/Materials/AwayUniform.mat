@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AwayUniform
-  m_Shader: {fileID: -6465566751694194690, guid: b7a34b482baf4df4b9ec60db00f5b8ce, type: 3}
+  m_Shader: {fileID: 4800000, guid: 923de6800ad73f346a766b60a484e7a8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -22,12 +22,22 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _Message:
+        m_Texture: {fileID: 8600000, guid: 64d4849a0e309c149807c6bf0af65570, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _Cutoff: 0.5
     - _Height: 0.08
+    - __dirty: 0
     m_Colors:
     - _Primary: {r: 0, g: 0.47058824, b: 0.038407717, a: 1}
     - _Secondary: {r: 0.8594337, g: 0.8867924, b: 0.08784264, a: 1}
