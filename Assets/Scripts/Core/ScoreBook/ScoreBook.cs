@@ -51,12 +51,12 @@ namespace FibDev.Core.ScoreBook
         {
             var dataToSave = new ScoreData(GetRecords());
             
-            DataManager.SaveData(dataToSave);
+            DataManager.SaveScores(dataToSave);
         }
 
         public void LoadAllRecords()
         {
-            var records = DataManager.LoadData().records;
+            var records = DataManager.LoadScores().records;
             if (records == null) return;
             
             for (var i = 0; i < _recordTMPs.Count; i++)

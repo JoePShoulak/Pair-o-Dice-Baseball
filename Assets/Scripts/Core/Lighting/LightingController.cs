@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FibDev.Core.ScoreBook;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -22,8 +23,27 @@ namespace FibDev.Core.Lighting
 
         private void Start()
         {
-            if (Daytime) SetDayTime();
-            else SetNightTime();
+            UpdateLightMode();
+        }
+
+        public void UpdateLightMode()
+        {
+            var dayMode = DataManager.GetDayMode();
+
+            switch (dayMode)
+            {
+                case "Day":
+                    SetDayTime();
+                    break;
+                case "Night":
+                    SetNightTime();
+                    break;
+                case "Auto":
+                case "Default":
+                    if (Daytime) SetDayTime();
+                    else SetNightTime();
+                    break;
+            };
         }
 
         private void SetDayTime()

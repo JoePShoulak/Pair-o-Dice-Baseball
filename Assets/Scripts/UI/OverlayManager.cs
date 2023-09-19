@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FibDev.UI
 {
@@ -9,6 +8,7 @@ namespace FibDev.UI
         public GameObject teamSelect;
         public GameObject gameOverlay;
         public GameObject backOverlay;
+        public GameObject settings;
 
         public static OverlayManager Instance;
 
@@ -25,6 +25,7 @@ namespace FibDev.UI
             teamSelect.SetActive(false);
             gameOverlay.SetActive(false);
             backOverlay.SetActive(false);
+            settings.SetActive(false);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace FibDev.Core.ScoreBook
             return $"record{i}";
         }
         
-        public static void SaveData(ScoreData data)
+        public static void SaveScores(ScoreData data)
         {
             var recordCount = data.records.Length;
             
@@ -24,7 +24,7 @@ namespace FibDev.Core.ScoreBook
             PlayerPrefs.SetInt("recordCount", data.records.Length);
         }
 
-        public static ScoreData LoadData()
+        public static ScoreData LoadScores()
         {
             var recordCount = PlayerPrefs.GetInt("recordCount", 0);
             if (recordCount == 0) return new ScoreData();
@@ -40,7 +40,7 @@ namespace FibDev.Core.ScoreBook
             return new ScoreData(rawRecords.ToArray());
         }
 
-        public static void DeleteAllData()
+        public static void DeleteAllScores()
         {
             var recordCount = PlayerPrefs.GetInt("recordCount", 0);
             if (recordCount == 0) return;
@@ -51,6 +51,46 @@ namespace FibDev.Core.ScoreBook
             }
 
             PlayerPrefs.SetInt("recordCount", 0);
+        }
+
+        public static void SetMusicVolume(float volume)
+        {
+            PlayerPrefs.SetFloat("MusicVolume", volume);
+        }
+
+        public static void SetAmbientVolume(float volume)
+        {
+            PlayerPrefs.SetFloat("AmbientVolume", volume);
+        }
+
+        public static void SetSoundFXVolume(float volume)
+        {
+            PlayerPrefs.SetFloat("SoundFXVolume", volume);
+        }
+
+        public static void SetDayMode(string mode)
+        {
+            PlayerPrefs.SetString("DayMode", mode);
+        }
+        
+        public static float GetMusicVolume()
+        {
+            return PlayerPrefs.GetFloat("MusicVolume");
+        }
+
+        public static float GetAmbientVolume()
+        {
+            return PlayerPrefs.GetFloat("AmbientVolume");
+        }
+
+        public static float GetSoundFXVolume()
+        {
+            return PlayerPrefs.GetFloat("SoundFXVolume");
+        }
+
+        public static string GetDayMode()
+        {
+            return PlayerPrefs.GetString("DayMode");
         }
     }
 }

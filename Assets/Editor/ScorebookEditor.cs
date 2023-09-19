@@ -47,7 +47,7 @@ namespace FibDev.Editor
             
             if (GUILayout.Button("Delete"))
             {
-                DataManager.DeleteAllData();
+                DataManager.DeleteAllScores();
             }
         }
     }
