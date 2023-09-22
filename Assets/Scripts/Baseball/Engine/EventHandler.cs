@@ -1,3 +1,4 @@
+using FibDev.Audio;
 using FibDev.Baseball.Choreography.Choreographer;
 using FibDev.Baseball.Choreography.Play;
 using FibDev.Baseball.Plays;
@@ -23,6 +24,7 @@ namespace FibDev.Baseball.Engine
             gameOverlay = OverlayManager.Instance.gameOverlay.GetComponent<GameOverlayUI>();
 
             TeamSelectUI.OnTeamsSelected += _engine.StartGame;
+            _dieCollection.OnRollBegin += _ => AudioManager.Instance.Play("Dice");
             Dice.RollProcessor.OnRollProcessed += HandleRoll;
             Movement.OnMovementEnd += _ =>
             {

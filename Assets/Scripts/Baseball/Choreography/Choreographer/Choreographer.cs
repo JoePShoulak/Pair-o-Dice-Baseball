@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FibDev.Audio;
 using UnityEngine;
 using UnityEngine.UI;
 using FibDev.Baseball.Choreography.Ball;
@@ -10,7 +11,6 @@ using FibDev.Baseball.Choreography.Positions;
 using FibDev.Baseball.Teams;
 using FibDev.Core;
 using FibDev.Core.ScoreBook;
-using FibDev.Dice;
 using FibDev.UI;
 using FibDev.UI.Score_Overlay;
 
@@ -224,6 +224,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
             yield return new WaitForSeconds((animationTime - offset)*Time.timeScale);
             CamButton.interactable = true;
 
+            StartCoroutine(PlayBallSound());
+
             movement.StartMovement();
             ScoreOverlay.SetScores(engine.record.visitorTotal.runs, engine.record.homeTotal.runs);
             ScoreOverlay.SetBases(engine.bases);
@@ -260,6 +262,25 @@ namespace FibDev.Baseball.Choreography.Choreographer
             }
 
             callback?.Invoke();
+        }
+
+        private IEnumerator PlayBallSound()
+        {
+            var runnerMovement = movement.runnerMovement;
+            const float delay = 0.5f;
+
+            if (runnerMovement == RunnerMovement.Stay)
+            {
+                AudioManager.Instance.Play("Baseball Out");
+                yield return new WaitForSeconds(delay);
+                AudioManager.Instance.Play("Crowd Negative");
+            }
+            else
+            {
+                AudioManager.Instance.Play("Baseball Hit");
+                yield return new WaitForSeconds(delay);
+                AudioManager.Instance.Play("Crowd Positive");
+            }
         }
 
         private static void TakeFieldPositions(Dictionary<Position, Player.Player> pDict)

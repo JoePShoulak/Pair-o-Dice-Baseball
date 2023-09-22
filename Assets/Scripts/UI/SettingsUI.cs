@@ -1,3 +1,4 @@
+using FibDev.Audio;
 using FibDev.Core.Lighting;
 using FibDev.Core.ScoreBook;
 using TMPro;
@@ -14,18 +15,21 @@ namespace FibDev.UI
         {
             var musicVolume = slider.value;
             DataManager.SetMusicVolume(musicVolume);
+            AudioManager.Instance.SetVolume("Music", musicVolume);
         }
         
         public void SetAmbientVolume(Slider slider)
         {
             var ambientVolume = slider.value;
             DataManager.SetAmbientVolume(ambientVolume);
+            AudioManager.Instance.SetVolume("Ambient", ambientVolume);
         }
         
         public void SetSoundFXVolume(Slider slider)
         {
             var soundFXVolume = slider.value;
             DataManager.SetSoundFXVolume(soundFXVolume);
+            AudioManager.Instance.SetVolume("SoundFX", soundFXVolume);
         }
 
         public void SetDayMode(TMP_Dropdown dropdown)
