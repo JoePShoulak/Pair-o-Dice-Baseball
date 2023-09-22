@@ -219,12 +219,12 @@ namespace FibDev.Baseball.Choreography.Choreographer
 
         private IEnumerator ExecutePlay(Action callback)
         {
+            StartCoroutine(PlayBallSound());
             var animationTime = ball.animator.GetCurrentAnimatorStateInfo(0).length;
             const float offset = 1f;
             yield return new WaitForSeconds((animationTime - offset)*Time.timeScale);
             CamButton.interactable = true;
 
-            StartCoroutine(PlayBallSound());
 
             movement.StartMovement();
             ScoreOverlay.SetScores(engine.record.visitorTotal.runs, engine.record.homeTotal.runs);
@@ -267,8 +267,11 @@ namespace FibDev.Baseball.Choreography.Choreographer
         private IEnumerator PlayBallSound()
         {
             var runnerMovement = movement.runnerMovement;
+            const float preDelay = 3.85f;
             const float delay = 0.5f;
 
+            yield return new WaitForSeconds(preDelay);
+            
             if (runnerMovement == RunnerMovement.Stay)
             {
                 AudioManager.Instance.Play("Baseball Out");

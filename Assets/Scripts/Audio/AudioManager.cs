@@ -33,10 +33,12 @@ namespace FibDev.Audio
             source.volume = sound.volume;
             source.pitch = sound.pitch;
             source.loop = sound.loop;
+            source.outputAudioMixerGroup = sound.audioMixerGroup;
         }
 
         private void Start()
         {
+            SetVolume("Master", DataManager.GetMusicVolume());
             SetVolume("Music", DataManager.GetMusicVolume());
             SetVolume("Ambient", DataManager.GetAmbientVolume());
             SetVolume("SoundFX", DataManager.GetSoundFXVolume());
@@ -57,6 +59,7 @@ namespace FibDev.Audio
             var sound = FindSound(pName);
 
             Debug.Log($"Playing {sound.name}");
+            sound.source.time = sound.offset;
             sound.source.Play();
         }
     }

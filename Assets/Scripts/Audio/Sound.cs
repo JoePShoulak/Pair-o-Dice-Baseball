@@ -16,5 +16,6 @@ namespace FibDev.Audio
         [Range(0.1f, 3f)] public float pitch = 1f;
         public AudioMixerGroup audioMixerGroup;
         public bool loop;
+        public float offset;
     }
 }

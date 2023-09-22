@@ -53,6 +53,11 @@ namespace FibDev.Core.ScoreBook
             PlayerPrefs.SetInt("recordCount", 0);
         }
 
+        public static void SetMasterVolume(float volume)
+        {
+            PlayerPrefs.SetFloat("MasterVolume", volume);
+        }
+
         public static void SetMusicVolume(float volume)
         {
             PlayerPrefs.SetFloat("MusicVolume", volume);
@@ -73,24 +78,29 @@ namespace FibDev.Core.ScoreBook
             PlayerPrefs.SetString("DayMode", mode);
         }
         
+        public static float GetMasterVolume()
+        {
+            return PlayerPrefs.GetFloat("MasterVolume", 0f);
+        }
+        
         public static float GetMusicVolume()
         {
-            return PlayerPrefs.GetFloat("MusicVolume");
+            return PlayerPrefs.GetFloat("MusicVolume", 0f);
         }
 
         public static float GetAmbientVolume()
         {
-            return PlayerPrefs.GetFloat("AmbientVolume");
+            return PlayerPrefs.GetFloat("AmbientVolume", 0f);
         }
 
         public static float GetSoundFXVolume()
         {
-            return PlayerPrefs.GetFloat("SoundFXVolume");
+            return PlayerPrefs.GetFloat("SoundFXVolume", 0f);
         }
 
         public static string GetDayMode()
         {
-            return PlayerPrefs.GetString("DayMode");
+            return PlayerPrefs.GetString("DayMode", "Auto");
         }
     }
 }

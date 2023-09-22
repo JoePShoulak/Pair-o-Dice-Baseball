@@ -65,6 +65,8 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: 41c33e43e8811df4c86c2aeea4451fd4
     name: AmbientVolume
+  - guid: 9992c0a94e55c6d4891905e15ee21024
+    name: MasterVolume
   - guid: ec293e8871a4d4749a994cc00e48c876
     name: MusicVolume
   - guid: 1799375527f50b24da6a204408c653df
