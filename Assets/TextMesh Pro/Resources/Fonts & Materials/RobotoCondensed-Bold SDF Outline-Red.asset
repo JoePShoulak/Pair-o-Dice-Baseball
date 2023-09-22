@@ -58,11 +58,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: RobotoCondensed-Bold SDF Outline
+  m_Name: RobotoCondensed-Bold SDF Outline-Red
   m_EditorClassIdentifier: 
-  hashCode: 1265551021
+  hashCode: 1571156115
   material: {fileID: 4392606691813733909}
-  materialHashCode: 1322134893
+  materialHashCode: 1247425107
   m_Version: 1.1.0
   m_SourceFontFileGUID: 1a959642fea063048abf024eedb64373
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 1a959642fea063048abf024eedb64373, type: 3}
