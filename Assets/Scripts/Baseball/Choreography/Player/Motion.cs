@@ -1,15 +1,19 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using FibDev.Audio;
 using FibDev.Baseball.Choreography.Positions;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace FibDev.Baseball.Choreography.Player
 {
     public class Motion : MonoBehaviour
     {
         private NavMeshAgent _agent;
+        private AudioSource audioSource;
 
         public Vector3 IdlePosition { get; set; }
         [SerializeField] private float idleDetectionRadius = 1f;
@@ -22,22 +26,37 @@ namespace FibDev.Baseball.Choreography.Player
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
+            audioSource = gameObject.AddComponent<AudioSource>();
+            AudioManager.SetSourceValues(audioSource, AudioManager.Instance.FindSound("Footstep"));
         }
 
         public void SetQueue(List<Transform> pDestinationQueue)
         {
             _destinationQueue = pDestinationQueue;
             IdlePosition = pDestinationQueue.Last().position;
-            isIdle = false;
+            BeginMoving();
         }
 
         public void SetDestination(Vector3 pPosition)
         {
             if (_agent == null) return;
             if (!_agent.isOnNavMesh) return;
-            isIdle = false;
+            BeginMoving();
             lookedAtTarget = false;
             _agent.SetDestination(pPosition);
+        }
+
+        private void BeginMoving()
+        {
+            isIdle = false;
+            audioSource.time = Random.Range(0f, audioSource.clip.length);
+            audioSource.Play();
+        }
+
+        private void StopMoving()
+        {
+            isIdle = true;
+            audioSource.Stop();
         }
 
         private void RotateBodyToTarget(Transform target)
@@ -79,7 +98,7 @@ namespace FibDev.Baseball.Choreography.Player
             var isAtIdlePosition = Vector3.Distance(transform.position, IdlePosition) < idleDetectionRadius;
             if (isAtIdlePosition)
             {
-                isIdle = true;
+                StopMoving();
             }
         }
     }

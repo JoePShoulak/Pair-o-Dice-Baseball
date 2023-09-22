@@ -11735,43 +11735,50 @@ MonoBehaviour:
     name: 
     volume: 1
     pitch: 1
-    audioMixerGroup: {fileID: 5931754629800328724, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    audioMixerGroup: {fileID: 1331600224379061001, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    loop: 0
   - clip: {fileID: 8300000, guid: 97107c9849fb4384fadd923b59941b9d, type: 3}
     source: {fileID: 0}
     name: 
     volume: 1
     pitch: 1
-    audioMixerGroup: {fileID: 5931754629800328724, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    audioMixerGroup: {fileID: 1331600224379061001, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    loop: 0
   - clip: {fileID: 8300000, guid: 2037226b88d2ce84cacacec41576d8a1, type: 3}
     source: {fileID: 0}
     name: 
     volume: 1
     pitch: 1
-    audioMixerGroup: {fileID: 702026373448640689, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    audioMixerGroup: {fileID: 1331600224379061001, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    loop: 0
   - clip: {fileID: 8300000, guid: bbe3007dcdd805a4fba70197d0f8ba12, type: 3}
     source: {fileID: 0}
     name: 
     volume: 1
     pitch: 1
-    audioMixerGroup: {fileID: 6577335604567392870, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    audioMixerGroup: {fileID: -2051714105738943761, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    loop: 0
   - clip: {fileID: 8300000, guid: 089e3d419d4c48f439b28e9ce9d4ee8e, type: 3}
     source: {fileID: 0}
     name: 
     volume: 1
     pitch: 1
-    audioMixerGroup: {fileID: 6577335604567392870, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    audioMixerGroup: {fileID: -2051714105738943761, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    loop: 0
   - clip: {fileID: 8300000, guid: 3fd50be8cffb5ea44b6d115e34b38b49, type: 3}
     source: {fileID: 0}
     name: 
     volume: 1
     pitch: 1
-    audioMixerGroup: {fileID: 7907696588734317981, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    audioMixerGroup: {fileID: 1331600224379061001, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    loop: 0
   - clip: {fileID: 8300000, guid: c05fdb4958564b54a8c10d6df3213e43, type: 3}
     source: {fileID: 0}
     name: 
-    volume: 1
+    volume: 0.044
     pitch: 1
-    audioMixerGroup: {fileID: 2061076764031279270, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    audioMixerGroup: {fileID: 1331600224379061001, guid: 6a4e19caaf1800845a843affe0921f5b, type: 2}
+    loop: 1
 --- !u!4 &930309274
 Transform:
   m_ObjectHideFlags: 0
@@ -27241,7 +27248,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lighting: {fileID: 1966253811}
-  audioMixer: {fileID: 0}
 --- !u!114 &1917705971 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4786120087412921897, guid: 7ae8b1aaef2e7374abec79b8e4087ef7, type: 3}

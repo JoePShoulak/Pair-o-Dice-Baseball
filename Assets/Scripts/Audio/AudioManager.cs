@@ -22,12 +22,17 @@ namespace FibDev.Audio
             foreach (var sound in sounds)
             {
                 sound.source = gameObject.AddComponent<AudioSource>();
-                sound.name = sound.clip.name;
 
-                sound.source.clip = sound.clip;
-                sound.source.volume = sound.volume;
-                sound.source.pitch = sound.pitch;
+                SetSourceValues(sound.source, sound);
             }
+        }
+
+        public static void SetSourceValues(AudioSource source, Sound sound)
+        {
+            source.clip = sound.clip;
+            source.volume = sound.volume;
+            source.pitch = sound.pitch;
+            source.loop = sound.loop;
         }
 
         private void Start()
@@ -42,9 +47,14 @@ namespace FibDev.Audio
             mixer.SetFloat($"{group}Volume", value);
         }
 
+        public Sound FindSound(string pName)
+        {
+            return sounds.First(iSound => iSound.clip.name == pName);
+        }
+
         public void Play(string pName)
         {
-            var sound = sounds.First(iSound => iSound.name == pName);
+            var sound = FindSound(pName);
 
             Debug.Log($"Playing {sound.name}");
             sound.source.Play();
