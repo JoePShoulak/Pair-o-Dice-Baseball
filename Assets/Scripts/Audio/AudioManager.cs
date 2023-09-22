@@ -38,10 +38,10 @@ namespace FibDev.Audio
 
         private void Start()
         {
-            SetVolume("Master", DataManager.GetMusicVolume());
-            SetVolume("Music", DataManager.GetMusicVolume());
-            SetVolume("Ambient", DataManager.GetAmbientVolume());
-            SetVolume("SoundFX", DataManager.GetSoundFXVolume());
+            SetVolume("Master", DataManager.GetVolume("Master"));
+            SetVolume("Music", DataManager.GetVolume("Music"));
+            SetVolume("Ambient", DataManager.GetVolume("Ambient"));
+            SetVolume("SoundFX", DataManager.GetVolume("SoundFX"));
         }
 
         public void SetVolume(string group, float value)

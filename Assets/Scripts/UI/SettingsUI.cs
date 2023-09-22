@@ -27,38 +27,37 @@ namespace FibDev.UI
             
             dayDropdown.value = optionsList.IndexOf(dayMode);
 
-            masterSlider.value = DataManager.GetMasterVolume();
-            musicSlider.value = DataManager.GetMusicVolume();
-            ambientSlider.value = DataManager.GetAmbientVolume();
-            soundFXSlider.value = DataManager.GetSoundFXVolume();
+            masterSlider.value = DataManager.GetVolume("Master");
+            musicSlider.value = DataManager.GetVolume("Music");
+            ambientSlider.value = DataManager.GetVolume("Ambient");
+            soundFXSlider.value = DataManager.GetVolume("SoundFX");
         }
 
         public void SetMasterVolume(Slider slider)
         {
-            var volume = slider.value;
-            DataManager.SetMasterVolume(volume);
-            AudioManager.Instance.SetVolume("Master", volume);
+            SetVolume("Master", slider);
         }
         
         public void SetMusicVolume(Slider slider)
         {
-            var volume = slider.value;
-            DataManager.SetMusicVolume(volume);
-            AudioManager.Instance.SetVolume("Music", volume);
+            SetVolume("Music", slider);
         }
         
         public void SetAmbientVolume(Slider slider)
         {
-            var volume = slider.value;
-            DataManager.SetAmbientVolume(volume);
-            AudioManager.Instance.SetVolume("Ambient", volume);
+            SetVolume("Ambient", slider);
         }
         
         public void SetSoundFXVolume(Slider slider)
         {
+            SetVolume("SoundFX", slider);
+        }
+
+        private static void SetVolume(string group, Slider slider)
+        {
             var volume = slider.value;
-            DataManager.SetSoundFXVolume(volume);
-            AudioManager.Instance.SetVolume("SoundFX", volume);
+            DataManager.SetVolume(group, volume);
+            AudioManager.Instance.SetVolume(group, volume);
         }
 
         public void SetDayMode(TMP_Dropdown dropdown)
