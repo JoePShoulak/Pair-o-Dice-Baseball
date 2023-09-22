@@ -267,8 +267,8 @@ namespace FibDev.Baseball.Choreography.Choreographer
         private IEnumerator PlayBallSound()
         {
             var runnerMovement = movement.runnerMovement;
-            const float preDelay = 3.85f;
-            const float delay = 0.5f;
+            var preDelay = 3.85f / 3f * Time.timeScale;
+            var delay = 0.5f / 3f * Time.timeScale;
 
             yield return new WaitForSeconds(preDelay);
             
