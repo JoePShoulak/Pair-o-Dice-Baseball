@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using FibDev.Core.ScoreBook;
 using UnityEngine;
@@ -10,6 +9,7 @@ namespace FibDev.Audio
     {
         public AudioMixer mixer;
         public Sound[] sounds;
+        public CrowdAudioManager crowdAudioManager;
 
         public static AudioManager Instance;
 

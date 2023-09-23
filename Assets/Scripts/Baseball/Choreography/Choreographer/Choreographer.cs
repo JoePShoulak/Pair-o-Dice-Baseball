@@ -132,7 +132,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
             gameEnded = true;
 
             var cam = GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>();
-            
+
             TearDownGame();
             OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().rollButton.interactable = false;
             OverlayManager.Instance.GetComponentInChildren<GameOverlayUI>().autoRun.interactable = false;
@@ -143,7 +143,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
             var visitorTotalRuns = engine.record.visitorTotal.runs;
             var homeTotalRuns = engine.record.homeTotal.runs;
             var record = ScoreBook.ComposeRecord(awayName, homeName, visitorTotalRuns, homeTotalRuns);
-            
+
             scorebook.AddRecord(record);
         }
 
@@ -222,7 +222,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
             StartCoroutine(PlayBallSound());
             var animationTime = ball.animator.GetCurrentAnimatorStateInfo(0).length;
             const float offset = 1f;
-            yield return new WaitForSeconds((animationTime - offset)*Time.timeScale);
+            yield return new WaitForSeconds((animationTime - offset) * Time.timeScale);
             CamButton.interactable = true;
 
 
@@ -268,21 +268,22 @@ namespace FibDev.Baseball.Choreography.Choreographer
         {
             var runnerMovement = movement.runnerMovement;
             var preDelay = 3.85f / 3f * Time.timeScale;
-            var delay = 0.5f / 3f * Time.timeScale;
+            var delay = 1f / 3f * Time.timeScale;
+            var goodHit = runnerMovement != RunnerMovement.Stay;
 
             yield return new WaitForSeconds(preDelay);
-            
-            if (runnerMovement == RunnerMovement.Stay)
+            AudioManager.Instance.Play(goodHit ? "Baseball Hit" : "Baseball Out");
+            yield return new WaitForSeconds(delay);
+
+            var homeDidWell = goodHit && TeamAtBat == TeamType.Home;
+            var visitorsDidPoorly = !goodHit && TeamAtBat == TeamType.Visiting;
+            if (homeDidWell || visitorsDidPoorly)
             {
-                AudioManager.Instance.Play("Baseball Out");
-                yield return new WaitForSeconds(delay);
-                AudioManager.Instance.Play("Crowd Negative");
+                AudioManager.Instance.crowdAudioManager.PlayHomePositive();
             }
             else
             {
-                AudioManager.Instance.Play("Baseball Hit");
-                yield return new WaitForSeconds(delay);
-                AudioManager.Instance.Play("Crowd Positive");
+                AudioManager.Instance.crowdAudioManager.PlayHomeNegative();
             }
         }
 
