@@ -22,12 +22,13 @@ namespace FibDev.Baseball.Choreography.Player
 
         private List<Transform> _destinationQueue = new();
 
-
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
             audioSource = gameObject.AddComponent<AudioSource>();
+            var footPitch = Random.Range(0.7f, 1.3f);
             AudioManager.SetSourceValues(audioSource, AudioManager.Instance.FindSound("Footstep"));
+            audioSource.pitch = footPitch;
         }
 
         public void SetQueue(List<Transform> pDestinationQueue)

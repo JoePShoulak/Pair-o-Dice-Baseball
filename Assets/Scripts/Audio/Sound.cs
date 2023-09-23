@@ -13,7 +13,7 @@ namespace FibDev.Audio
         [HideInInspector] public string name;
 
         [Range(0f, 1f)] public float volume = 1f;
-        [Range(0.1f, 3f)] public float pitch = 1f;
+        [Range(-2f, 2f)] public float pitch = 1f;
         public AudioMixerGroup audioMixerGroup;
         public bool loop;
         public float offset;
