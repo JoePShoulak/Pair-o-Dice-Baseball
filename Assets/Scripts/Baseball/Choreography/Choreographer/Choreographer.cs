@@ -118,6 +118,7 @@ namespace FibDev.Baseball.Choreography.Choreographer
             gameEnded = false;
 
             movement.StartMovement();
+            _teamOnField = TeamType.Home;
             _teams = pTeams;
 
             _homeTeam = _playerCreator.CreateTeam(_teams[TeamType.Home], homeDugout, visitorDugout);
